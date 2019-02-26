@@ -1,89 +1,140 @@
 <!doctype html>
 <html>
-
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,initial-scale=1.0,width=device-width" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
     <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
-    <title>Hello APP</title>
-    <link rel="stylesheet" type="text/css" href="./css/api.css" />
-    <style type="text/css">
-        html,
-        body {
-            height: 100%;
-        }
-
-        .wrap {
-            display: -webkit-box;
-            -webkit-box-orient: vertical;
-            -webkit-flex-flow: column;
-        }
-
-        header {
-            height: 44px;
-            width: 100%;
-            text-align: center;
-            background-color: #81a9c3;
-            color: #fff;
-            line-height: 44px;
-            font-size: 20px;
-        }
-
-        .flex-1 {
-            -webkit-box-flex: 1;
-            -webkit-flex: 1;
-        }
-
-        footer {
-            height: 30px;
-            width: 100%;
-            background-color: #81a9c3;
-            color: white;
-            line-height: 30px;
-            text-align: center;
+    <title>底部导航</title>
+    <link rel="stylesheet" type="text/css" href="./css/api.css"/>
+    <link rel="stylesheet" type="text/css" href="./css/style.css"/>
+    <link rel="stylesheet" type="text/css" href="./css/aui.css"/>
+    <style>
+        header{ background-color: #f2f2f2; }
+        header ul li { height: 50px; line-height: 50px; text-align: center; display: none; color: #323237; position: relative;font-size: 18px;  }
+        header ul li.active{ display: block; }
+        #footer{  background-color: #f2f2f2; }
+        #footer ul li{  padding-top: 36px; padding-bottom: 4px; background: url() no-repeat center 2px; background-size: auto 30px; text-align: center; }
+        #footer ul li.active{ color: #6ab494; }
+        #footer ul li:nth-child(1){ background-image: url(./image/bottombtn0101.png); }
+        #footer ul li:nth-child(2){ background-image: url(./image/bottombtn0201.png); }
+        #footer ul li:nth-child(3){ background-image: url(./image/bottombtn0301.png); }
+        #footer ul li:nth-child(4){ background-image: url(./image/bottombtn0401.png); }
+        #footer ul li:nth-child(1).active{ background-image: url(./image/bottombtn0102.png); }
+        #footer ul li:nth-child(2).active{ background-image: url(./image/bottombtn0202.png); }
+        #footer ul li:nth-child(3).active{ background-image: url(./image/bottombtn0302.png); }
+        #footer ul li:nth-child(4).active{ background-image: url(./image/bottombtn0402.png); }
+        .flex-con{
+          overflow: auto
         }
     </style>
 </head>
+<body>
+    <header id="aui-header" class="aui-bar aui-bar-nav">顶部导航栏</header>
+    <div id="main" class="flex-con">
 
-<body class="wrap">
-    <header>APICloud</header>
-    <section class="flex-1">
-
-    </section>
-    <footer>Copyright &copy;<span id="year"></span></footer>
+    </div>
+    <footer class="aui-bar aui-bar-tab" id="footer">
+    <div id="tabbar1" class="aui-bar-tab-item aui-active" tapmode onclick="randomSwitchBtn(this,'云API',0)">
+        <i class="aui-iconfont aui-icon-home"></i>
+        <div class="aui-bar-tab-label">云API</div>
+    </div>
+    <div id="tabbar2" class="aui-bar-tab-item" tapmode onclick="randomSwitchBtn(this,'端API',1)">
+        <i class="aui-iconfont aui-icon-star"></i>
+        <div class="aui-bar-tab-label">端API</div>
+    </div>
+    <div id="tabbar3" class="aui-bar-tab-item" tapmode onclick="randomSwitchBtn(this,'开发',2)">
+        <div class="aui-badge">99</div>
+        <i class="aui-iconfont aui-icon-cart"></i>
+        <div class="aui-bar-tab-label">开发</div>
+    </div>
+    <div id="tabbar4" class="aui-bar-tab-item" tapmode onclick="randomSwitchBtn(this,'文档',3)">
+        <div class="aui-dot"></div>
+        <i class="aui-iconfont aui-icon-my"></i>
+        <div class="aui-bar-tab-label">文档</div>
+    </div>
+</footer>
 </body>
-<script type="text/javascript" src="./script/api.js"></script>
+</html>
+<script type="text/javascript" src="script/api.js"></script>
 <script type="text/javascript">
-    apiready = function() {
-        //输出Log，Log将显示在APICloud Studio控制台
-        console.log("Hello World! Hello APICloud!");
+apiready = function(){
+      api.parseTapmode();
+      var header = $api.byId('aui-header');
+      var footer =　$api.byId('footer')
+      $api.fixStatusBar(header);
+      var headerPos = $api.offset(header);
+      var body_h = api.winHeight;
+      var footer_h = $api.offset(footer).h;
 
-        var header = $api.dom('header'); // 获取 header 标签元素
-        var footer = $api.dom('footer'); // 获取 footer 标签元素
+      api.openFrameGroup ({
+          name: 'footer_tab_demo',
+          scrollEnabled:true,
+          rect:{
+          x:0,
+          y:headerPos.h,
+          w:'auto',
+          h:body_h - headerPos.h - footer_h
+          },
+          index:0,
+          preload:3,
+          frames:
+          [{
+              name: 'footer_tab_2',
+              url: 'html/frame0.html',
+              bounces:false
+          },{
+              name: 'footer_tab_3',
+              url: 'html/frame1.html',
+              bounces:false
+          },{
+              name: 'footer_tab_4',
+              url: 'html/frame2.html',
+              bounces:false
+          },{
+              name: 'footer_tab_5',
+              url: 'html/frame3.html',
+              bounces:false
+          }]
+      }, function(ret, err){
+          var footer = $api.byId('footer');
+          var footerAct = $api.dom(footer, '.aui-bar-tab-item.aui-active');
+  $api.removeCls(footerAct, 'aui-active');
 
-        // 1.修复开启沉浸式效果带来的顶部Header与手机状态栏重合的问题，最新api.js方法已支持适配iPhoneX；
-        // 2.默认已开启了沉浸式效果 config.xml中 <preference name="statusBarAppearance" value="true"/>
-        // 3.沉浸式效果适配支持iOS7+，Android4.4+以上版本
-        var headerH = $api.fixStatusBar(header);
-        // 最新api.js为了适配iPhoneX增加的方法，修复底部Footer部分与iPhoneX的底部虚拟横条键重叠的问题；
-        var footerH = $api.fixTabBar(footer);
+          var name = ret.name;
+          var index = ret.index;
+          var moviePlayer = api.require('moviePlayer');
+            moviePlayer.hide();
+          if(index==0){
+              $api.text($api.byId('aui-header'),'云API');
+              $api.addCls($api.byId('tabbar1'), 'aui-active');
+          }else if(index==1){
+              $api.text($api.byId('aui-header'),'端API');
+              $api.addCls($api.byId('tabbar2'), 'aui-active');
+          }else if(index==2){
+              $api.text($api.byId('aui-header'),'开发');
+              $api.addCls($api.byId('tabbar3'), 'aui-active');
+          }else if(index==3){
+              $api.text($api.byId('aui-header'),'文档');
+              $api.addCls($api.byId('tabbar4'), 'aui-active');
 
-        api.openFrame({
-            name: 'main',
-            url: 'html/main.html',
-            bounces: true,
-            rect: { // 推荐使用Margin布局，用于适配屏幕的动态变化
-                marginTop: headerH, // main页面距离win顶部的高度
-                marginBottom: footerH, // main页面距离win底部的高度
-                w: 'auto' // main页面的宽度 自适应屏幕宽度
-            }
-        });
+          }
+      })
+  }
+  function closeWin(){
+      api.closeWin();
+  }
+  function randomSwitchBtn(obj, name, index) {
+      $api.text($api.byId('aui-header'),name);
+var footer = $api.byId('footer');
+var footerAct = $api.dom(footer, '.aui-bar-tab-item.aui-active');
+      $api.removeCls(footerAct, 'aui-active');
+      $api.addCls(obj, 'aui-active');
+      api.setFrameGroupIndex({
+          name: 'footer_tab_demo',
+          index: index,
+          scroll:true
+      });
 
-        // 获取当前年份时间，并加载显示到页面
-        var year = $api.byId('year');
-        year.innerHTML = new Date().getFullYear();
-    };
+  }
 
 </script>
-
-</html>
