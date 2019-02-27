@@ -1,140 +1,369 @@
 <!doctype html>
 <html>
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
     <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
     <title>底部导航</title>
-    <link rel="stylesheet" type="text/css" href="./css/api.css"/>
-    <link rel="stylesheet" type="text/css" href="./css/style.css"/>
-    <link rel="stylesheet" type="text/css" href="./css/aui.css"/>
+    <link rel="stylesheet" type="text/css" href="./css/api.css" />
+    <link rel="stylesheet" type="text/css" href="./css/style.css" />
+    <link rel="stylesheet" type="text/css" href="./css/aui.css" />
     <style>
-        header{ background-color: #f2f2f2; }
-        header ul li { height: 50px; line-height: 50px; text-align: center; display: none; color: #323237; position: relative;font-size: 18px;  }
-        header ul li.active{ display: block; }
-        #footer{  background-color: #f2f2f2; }
-        #footer ul li{  padding-top: 36px; padding-bottom: 4px; background: url() no-repeat center 2px; background-size: auto 30px; text-align: center; }
-        #footer ul li.active{ color: #6ab494; }
-        #footer ul li:nth-child(1){ background-image: url(./image/bottombtn0101.png); }
-        #footer ul li:nth-child(2){ background-image: url(./image/bottombtn0201.png); }
-        #footer ul li:nth-child(3){ background-image: url(./image/bottombtn0301.png); }
-        #footer ul li:nth-child(4){ background-image: url(./image/bottombtn0401.png); }
-        #footer ul li:nth-child(1).active{ background-image: url(./image/bottombtn0102.png); }
-        #footer ul li:nth-child(2).active{ background-image: url(./image/bottombtn0202.png); }
-        #footer ul li:nth-child(3).active{ background-image: url(./image/bottombtn0302.png); }
-        #footer ul li:nth-child(4).active{ background-image: url(./image/bottombtn0402.png); }
-        .flex-con{
-          overflow: auto
+        .aui-bar-nav {
+            background: -webkit-linear-gradient(#969696, rgba(255, 255, 255, 0.12));
+            /* Safari 5.1 - 6.0 */
+            background: -o-linear-gradient(#969696, rgba(255, 255, 255, 0.12));
+            /* Opera 11.1 - 12.0 */
+            background: -moz-linear-gradient(#969696, rgba(255, 255, 255, 0.12));
+            /* Firefox 3.6 - 15 */
+            background: linear-gradient(#969696, rgba(255, 255, 255, 0.12));
+            /* 标准的语法 */
+        }
+
+        #footer {
+            background-color: #000 !important;
+            position: fixed;
+            bottom: 0;
+            z-index: 999999;
+        }
+
+        #aui-header>.aui-pull-left>.camera-text {
+            font-size: 10px;
+            padding-left: .5vh;
+            padding-top: .5vh;
+            font-family: '微软雅黑';
+        }
+
+        #aui-header>.aui-title>.aui-tab {
+            background-color: rgba(0, 0, 0, 0);
+        }
+
+        #aui-header>.aui-title>.aui-tab>.aui-tab-item {
+            color: #989898;
+        }
+
+        #aui-header>.aui-title>.aui-tab>.aui-active {
+            border-bottom: none;
+            font-weight: bold;
+            color: #fff;
+        }
+
+        #aui-header>.aui-title>.aui-tab>#page_aui {
+            height: 2vh;
+            width: .7vh;
+            margin-top: 3vh;
+            background: #fff;
+        }
+
+        .center-nav {
+            border: .5px solid #fff;
+            padding: 1.5vh;
+            border-radius: 35%;
+            background-color: #000000;
+            font-weight: bold;
+            color: #fff;
+            z-index: 99999 !important;
+        }
+
+        #footer>.aui-active {
+            color: #fff;
+            padding-right: .3vh;
+        }
+
+        #footer>.aui-active>.aui-bar-tab-label>span {
+            border-bottom: 1px solid #fff;
+            padding-bottom: 1vh;
+        }
+
+        #footer>#tabbar5>.aui-iconfont {
+            position: relative;
+            background-color: #fff;
+            z-index: 20;
+            top: 0.1rem;
+            height: 1.2rem;
+            font-size: 1rem;
+            line-height: 1rem;
+            color: #000;
+            font-weight: bold;
+        }
+
+        #main {
+            z-index: -1;
         }
     </style>
 </head>
+
 <body>
-    <header id="aui-header" class="aui-bar aui-bar-nav">顶部导航栏</header>
+    <header id="aui-header" class="aui-bar aui-bar-nav">
+        <div class="aui-pull-left aui-btn" onclick="openCamera()">
+            <span class="aui-iconfont aui-icon-camera"></span>
+            <span class="camera-text">随拍</span>
+        </div>
+        <div class="aui-title">
+            <div class="aui-tab">
+                <div class="aui-tab-item tapmode aui-active">推荐</div>
+                <span id="page_aui"></span>
+                <div class="aui-tab-item tapmode">广州</div>
+            </div>
+        </div>
+        <div class="aui-pull-right aui-btn">
+            <span class="aui-iconfont aui-icon-cart"></span> &nbsp; &nbsp; &nbsp;
+            <span class="aui-iconfont aui-icon-video"></span> &nbsp;&nbsp;
+        </div>
+    </header>
     <div id="main" class="flex-con">
 
     </div>
-    <footer class="aui-bar aui-bar-tab" id="footer">
-    <div id="tabbar1" class="aui-bar-tab-item aui-active" tapmode onclick="randomSwitchBtn(this,'云API',0)">
-        <i class="aui-iconfont aui-icon-home"></i>
-        <div class="aui-bar-tab-label">云API</div>
-    </div>
-    <div id="tabbar2" class="aui-bar-tab-item" tapmode onclick="randomSwitchBtn(this,'端API',1)">
-        <i class="aui-iconfont aui-icon-star"></i>
-        <div class="aui-bar-tab-label">端API</div>
-    </div>
-    <div id="tabbar3" class="aui-bar-tab-item" tapmode onclick="randomSwitchBtn(this,'开发',2)">
-        <div class="aui-badge">99</div>
-        <i class="aui-iconfont aui-icon-cart"></i>
-        <div class="aui-bar-tab-label">开发</div>
-    </div>
-    <div id="tabbar4" class="aui-bar-tab-item" tapmode onclick="randomSwitchBtn(this,'文档',3)">
-        <div class="aui-dot"></div>
-        <i class="aui-iconfont aui-icon-my"></i>
-        <div class="aui-bar-tab-label">文档</div>
-    </div>
-</footer>
+    <footer class="aui-bar aui-bar-tab nav-dom" id="footer">
+        <div id="tabbar1" class="aui-bar-tab-item aui-active" tapmode onclick="randomSwitchBtn(this,'html/frame1.html',0)">
+            <!-- <i class="aui-iconfont aui-icon-home"></i> -->
+            <div class="aui-bar-tab-label"><span>云API</span></div>
+        </div>
+        <div id="tabbar2" class="aui-bar-tab-item" tapmode onclick="randomSwitchBtn(this,'html/frame1.html',1)">
+            <!-- <i class="aui-iconfont aui-icon-star"></i> -->
+            <div class="aui-bar-tab-label"><span>端API</span></div>
+        </div>
+        <div id="tabbar5" class="aui-bar-tab-item" tapmode>
+            <i class="aui-iconfont aui-icon-plus center-nav"></i>
+        </div>
+        <div id="tabbar3" class="aui-bar-tab-item" tapmode onclick="randomSwitchBtn(this,'html/frame1.html',2)">
+            <div class="aui-badge">99</div>
+            <!-- <i class="aui-iconfont aui-icon-cart"></i> -->
+            <div class="aui-bar-tab-label"><span>开发</span></div>
+        </div>
+        <div id="tabbar4" class="aui-bar-tab-item" tapmode onclick="randomSwitchBtn(this,'html/frame1.html',3)">
+            <div class="aui-dot"></div>
+            <!-- <i class="aui-iconfont aui-icon-my"></i> -->
+            <div class="aui-bar-tab-label"><span>文档</span></div>
+        </div>
+    </footer>
 </body>
+
 </html>
 <script type="text/javascript" src="script/api.js"></script>
 <script type="text/javascript">
-apiready = function(){
-      api.parseTapmode();
-      var header = $api.byId('aui-header');
-      var footer =　$api.byId('footer')
-      $api.fixStatusBar(header);
-      var headerPos = $api.offset(header);
-      var body_h = api.winHeight;
-      var footer_h = $api.offset(footer).h;
+    apiready = function() {
+        api.parseTapmode();
+        var header = $api.byId('aui-header');
+        var footer = 　$api.byId('footer')
+        $api.fixStatusBar(header);
+        var headerPos = $api.offset(header);
+        var body_h = api.winHeight;
+        var footer_h = $api.offset(footer).h;
+        // var main = $api.first($api.dom('#main'));
+        // console.log(JSON.stringify(main));
+        //body_h - headerPos.h - footer_h
+        var NVTabBar = api.require('NVTabBar');
+NVTabBar.open({
+    styles: {
+        bg: '#333',
+        //bg:"widget://image/NVTabBar/tabbar_bg.png",
+        h: 65,
+        dividingLine: {
+            width: 0,
+            color: '#000'
+        },
+        badge: {
+            bgColor: '#ff0',
+            numColor: '#fff',
+            size: 6.0,
+            centerX: 40,
+            centerY: 6
+        }
+    },
+    items: [{
+        w: api.winWidth / 5.0,
+        bg: {
+            marginB: 0,
+            image: 'rgba(200,200,200,0.6)'
+        },
+        iconRect: {
+            w: 25.0,
+            h: 25.0,
+        },
+        icon: {
+            normal: 'widget://image/NVTabBar/acti.png',
+            highlight: 'widget://image/NVTabBar/actied.png',
+            selected: 'widget://image/NVTabBar/actied.png'
+        },
+        title: {
+            text: '动态',
+            size: 12.0,
+            normal: '#696969',
+            selected: '#eb4f38',
+            marginB: 6.0
+        }
+    }, {
+        w: api.winWidth / 5.0,
+        bg: {
+            marginB: 0,
+            image: 'rgba(200,200,200,0.7)'
+        },
+        iconRect: {
+            w: 25.0,
+            h: 25.0,
+        },
+        icon: {
+            normal: 'widget://image/NVTabBar/guan.png',
+            highlight: 'widget://image/NVTabBar/guaned.png',
+            selected: 'widget://image/NVTabBar/guaned.png'
+        },
+        title: {
+            text: '发现',
+            size: 12.0,
+            normal: '#696969',
+            selected: '#eb4f38',
+            marginB: 6.0
+        }
+    }, {
+        w: api.winWidth / 5.0,
+        bg: {
+            marginB: 10,
+            image: 'widget://image/NVTabBar/yyuan.png' //中间背景图
+        },
+        iconRect: {
+            w: 32,
+            h: 32,
+        },
+        icon: {
+            normal: 'widget://image/NVTabBar/mai.png',
+            highlight: 'widget://image/NVTabBar/mai.png',
+            selected: 'widget://image/NVTabBar/mai.png'
+        },
+        title: {
+            //text : '333',
+            size: 0.0,
+            normal: '#696969',
+            selected: '#eb4f38',
+            marginB: 0
+        }
+    }, {
+        w: api.winWidth / 5.0,
+        bg: {
+            marginB: 0,
+            image: 'rgba(200,20,0,0.6)'
+        },
+        iconRect: {
+            w: 25.0,
+            h: 25.0,
+        },
+        icon: {
+            normal: 'widget://image/NVTabBar/fav.png',
+            highlight: 'widget://image/NVTabBar/faved.png',
+            selected: 'widget://image/NVTabBar/faved.png'
+        },
+        title: {
+            text: '消息',
+            size: 12.0,
+            normal: '#696969',
+            selected: '#eb4f38',
+            marginB: 6.0
+        }
+    }, {
+        w: api.winWidth / 5.0,
+        bg: {
+            marginB: 0,
+            image: 'rgba(220,0,220,0.7)'
+        },
+        iconRect: {
+            w: 25.0,
+            h: 25.0,
+        },
+        icon: {
+            normal: 'widget://image/NVTabBar/bir.png',
+            highlight: 'widget://image/NVTabBar/bired.png',
+            selected: 'widget://image/NVTabBar/bired.png'
+        },
+        title: {
+            text: '我的',
+            size: 12.0,
+            normal: '#696969',
+            selected: '#eb4f38',
+            marginB: 6.0
+        }
+    }],
+    selectedIndex: 0
+}, function(ret, err) {
 
-      api.openFrameGroup ({
-          name: 'footer_tab_demo',
-          scrollEnabled:true,
-          rect:{
-          x:0,
-          y:headerPos.h,
-          w:'auto',
-          h:body_h - headerPos.h - footer_h
-          },
-          index:0,
-          preload:3,
-          frames:
-          [{
-              name: 'footer_tab_2',
-              url: 'html/frame0.html',
-              bounces:false
-          },{
-              name: 'footer_tab_3',
-              url: 'html/frame1.html',
-              bounces:false
-          },{
-              name: 'footer_tab_4',
-              url: 'html/frame2.html',
-              bounces:false
-          },{
-              name: 'footer_tab_5',
-              url: 'html/frame3.html',
-              bounces:false
-          }]
-      }, function(ret, err){
-          var footer = $api.byId('footer');
-          var footerAct = $api.dom(footer, '.aui-bar-tab-item.aui-active');
-  $api.removeCls(footerAct, 'aui-active');
+});
+        api.openFrame({
+            name: 'home',
+            url: 'html/frame0.html',
+            rect: {
+                x: 0,
+                y: headerPos.h,
+                w: 'auto',
+                h: body_h - headerPos.h - footer_h
+            },
+            pageParam: {
+                top: headerPos.h,
+                height: body_h - headerPos.h - footer_h
+            },
+            bounces: true,
+            bgColor: 'rgba(0,0,0,0)',
+            vScrollBarEnabled: true,
+            hScrollBarEnabled: true
+        });
 
-          var name = ret.name;
-          var index = ret.index;
-          var moviePlayer = api.require('moviePlayer');
-            moviePlayer.hide();
-          if(index==0){
-              $api.text($api.byId('aui-header'),'云API');
-              $api.addCls($api.byId('tabbar1'), 'aui-active');
-          }else if(index==1){
-              $api.text($api.byId('aui-header'),'端API');
-              $api.addCls($api.byId('tabbar2'), 'aui-active');
-          }else if(index==2){
-              $api.text($api.byId('aui-header'),'开发');
-              $api.addCls($api.byId('tabbar3'), 'aui-active');
-          }else if(index==3){
-              $api.text($api.byId('aui-header'),'文档');
-              $api.addCls($api.byId('tabbar4'), 'aui-active');
+    }
 
-          }
-      })
-  }
-  function closeWin(){
-      api.closeWin();
-  }
-  function randomSwitchBtn(obj, name, index) {
-      $api.text($api.byId('aui-header'),name);
-var footer = $api.byId('footer');
-var footerAct = $api.dom(footer, '.aui-bar-tab-item.aui-active');
-      $api.removeCls(footerAct, 'aui-active');
-      $api.addCls(obj, 'aui-active');
-      api.setFrameGroupIndex({
-          name: 'footer_tab_demo',
-          index: index,
-          scroll:true
-      });
+    function closeWin() {
+        api.closeWin();
+    }
 
-  }
+    function openCamera() {
+        api.getPicture({
+            sourceType: 'camera',
+            // encodingType: 'jpg',
+            mediaValue: 'video',
+            destinationType: 'url',
+            allowEdit: true,
+            quality: 50,
+            targetWidth: 100,
+            targetHeight: 100,
+            saveToPhotoAlbum: false
+        }, function(ret, err) {
+            if (ret) {
+                alert(JSON.stringify(ret));
+            } else {
+                alert(JSON.stringify(err));
+            }
+        });
+    }
+    $api.dom(footer, '.aui-bar-tab-item')
 
+    function randomSwitchBtn(obj, url, index) {
+        // $api.text($api.byId('aui-header'), name);
+        var frames = api.frames();
+        for (var i = 0; i < frames.length; i++) {
+            api.closeFrame({
+                name: frames[i].name,
+            })
+        }
+        var footer = $api.byId('footer');
+        var footerAct = $api.dom(footer, '.aui-bar-tab-item.aui-active');
+        $api.removeCls(footerAct, 'aui-active');
+        $api.addCls(obj, 'aui-active');
+        api.openFrame({
+            name: index,
+            url: url,
+            rect: {
+                x: 0,
+                y: 0,
+                w: 'auto',
+                h: 'auto'
+            },
+            // pageParam: {
+            //     name: 'test'
+            // },
+            bounces: true,
+            bgColor: 'rgba(0,0,0,0)',
+            vScrollBarEnabled: true,
+            hScrollBarEnabled: true
+        });
+
+
+
+    }
 </script>
