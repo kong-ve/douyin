@@ -313,6 +313,14 @@ NVTabBar.open({
     }
 
     function openCamera() {
+      api.requestPermission({
+    list:['camera','contacts'],
+    code:1
+}, function(ret, err){
+    api.alert({
+        msg:JSON.stringify(ret)
+    });
+});
         api.getPicture({
             sourceType: 'camera',
             // encodingType: 'jpg',
