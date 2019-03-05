@@ -10,16 +10,6 @@
     <link rel="stylesheet" type="text/css" href="./css/style.css" />
     <link rel="stylesheet" type="text/css" href="./css/aui.css" />
     <style>
-        .aui-bar-nav {
-            background: -webkit-linear-gradient(#969696, rgba(255, 255, 255, 0.12));
-            /* Safari 5.1 - 6.0 */
-            background: -o-linear-gradient(#969696, rgba(255, 255, 255, 0.12));
-            /* Opera 11.1 - 12.0 */
-            background: -moz-linear-gradient(#969696, rgba(255, 255, 255, 0.12));
-            /* Firefox 3.6 - 15 */
-            background: linear-gradient(#969696, rgba(255, 255, 255, 0.12));
-            /* 标准的语法 */
-        }
 
         #footer {
             background-color: #000 !important;
@@ -40,30 +30,33 @@
         }
 
         #aui-header>.aui-title>.aui-tab>.aui-tab-item {
-            color: #989898;
+            color: #fff;
         }
 
         #aui-header>.aui-title>.aui-tab>.aui-active {
             border-bottom: none;
             font-weight: bold;
+            font-size: 18px;
             color: #fff;
         }
 
         #aui-header>.aui-title>.aui-tab>#page_aui {
             height: 2vh;
             width: .7vh;
-            margin-top: 3vh;
+            margin-top: 2vh;
             background: #fff;
         }
 
-        .center-nav {
-            border: .5px solid #fff;
-            padding: 1.5vh;
-            border-radius: 35%;
-            background-color: #000000;
-            font-weight: bold;
-            color: #fff;
-            z-index: 99999 !important;
+        #footer>#tabbar5>.center-nav {
+          border: .5px solid #fff;
+  padding: .1vh 2.5vh;
+  border-radius: 18%;
+  background-color: #ffffff;
+  font-size: larger;
+  font-weight: bold;
+  color: #000;
+  z-index: 99999 !important;
+  max-width: 1vh;
         }
 
         #footer>.aui-active {
@@ -102,9 +95,9 @@
         </div>
         <div class="aui-title">
             <div class="aui-tab">
-                <div class="aui-tab-item tapmode aui-active">推荐</div>
+                <div class="aui-tab-item tapmode aui-active" onclick="switchLoading(this,'html/frame0.html','homelist')">推荐</div>
                 <span id="page_aui"></span>
-                <div class="aui-tab-item tapmode">广州</div>
+                <div class="aui-tab-item tapmode" onclick="switchLoading(this,'html/local.html','localList')">广州</div>
             </div>
         </div>
         <div class="aui-pull-right aui-btn">
@@ -116,7 +109,7 @@
 
     </div>
     <footer class="aui-bar aui-bar-tab nav-dom" id="footer">
-        <div id="tabbar1" class="aui-bar-tab-item aui-active" tapmode onclick="randomSwitchBtn(this,'html/frame1.html',0)">
+        <div id="tabbar1" class="aui-bar-tab-item aui-active" tapmode onclick="randomSwitchBtn(this,'html/frame0.html',0)">
             <!-- <i class="aui-iconfont aui-icon-home"></i> -->
             <div class="aui-bar-tab-label"><span>云API</span></div>
         </div>
@@ -125,15 +118,15 @@
             <div class="aui-bar-tab-label"><span>端API</span></div>
         </div>
         <div id="tabbar5" class="aui-bar-tab-item" tapmode>
-            <i class="aui-iconfont aui-icon-plus center-nav"></i>
+            <i class="center-nav">+</i>
         </div>
         <div id="tabbar3" class="aui-bar-tab-item" tapmode onclick="randomSwitchBtn(this,'html/frame1.html',2)">
-            <div class="aui-badge">99</div>
+            <!-- <div class="aui-badge">99</div> -->
             <!-- <i class="aui-iconfont aui-icon-cart"></i> -->
             <div class="aui-bar-tab-label"><span>开发</span></div>
         </div>
         <div id="tabbar4" class="aui-bar-tab-item" tapmode onclick="randomSwitchBtn(this,'html/frame1.html',3)">
-            <div class="aui-dot"></div>
+            <!-- <div class="aui-dot"></div> -->
             <!-- <i class="aui-iconfont aui-icon-my"></i> -->
             <div class="aui-bar-tab-label"><span>文档</span></div>
         </div>
@@ -154,147 +147,15 @@
         // var main = $api.first($api.dom('#main'));
         // console.log(JSON.stringify(main));
         //body_h - headerPos.h - footer_h
-        var NVTabBar = api.require('NVTabBar');
-NVTabBar.open({
-    styles: {
-        bg: '#333',
-        //bg:"widget://image/NVTabBar/tabbar_bg.png",
-        h: 65,
-        dividingLine: {
-            width: 0,
-            color: '#000'
-        },
-        badge: {
-            bgColor: '#ff0',
-            numColor: '#fff',
-            size: 6.0,
-            centerX: 40,
-            centerY: 6
-        }
-    },
-    items: [{
-        w: api.winWidth / 5.0,
-        bg: {
-            marginB: 0,
-            image: 'rgba(200,200,200,0.6)'
-        },
-        iconRect: {
-            w: 25.0,
-            h: 25.0,
-        },
-        icon: {
-            normal: 'widget://image/NVTabBar/acti.png',
-            highlight: 'widget://image/NVTabBar/actied.png',
-            selected: 'widget://image/NVTabBar/actied.png'
-        },
-        title: {
-            text: '动态',
-            size: 12.0,
-            normal: '#696969',
-            selected: '#eb4f38',
-            marginB: 6.0
-        }
-    }, {
-        w: api.winWidth / 5.0,
-        bg: {
-            marginB: 0,
-            image: 'rgba(200,200,200,0.7)'
-        },
-        iconRect: {
-            w: 25.0,
-            h: 25.0,
-        },
-        icon: {
-            normal: 'widget://image/NVTabBar/guan.png',
-            highlight: 'widget://image/NVTabBar/guaned.png',
-            selected: 'widget://image/NVTabBar/guaned.png'
-        },
-        title: {
-            text: '发现',
-            size: 12.0,
-            normal: '#696969',
-            selected: '#eb4f38',
-            marginB: 6.0
-        }
-    }, {
-        w: api.winWidth / 5.0,
-        bg: {
-            marginB: 10,
-            image: 'widget://image/NVTabBar/yyuan.png' //中间背景图
-        },
-        iconRect: {
-            w: 32,
-            h: 32,
-        },
-        icon: {
-            normal: 'widget://image/NVTabBar/mai.png',
-            highlight: 'widget://image/NVTabBar/mai.png',
-            selected: 'widget://image/NVTabBar/mai.png'
-        },
-        title: {
-            //text : '333',
-            size: 0.0,
-            normal: '#696969',
-            selected: '#eb4f38',
-            marginB: 0
-        }
-    }, {
-        w: api.winWidth / 5.0,
-        bg: {
-            marginB: 0,
-            image: 'rgba(200,20,0,0.6)'
-        },
-        iconRect: {
-            w: 25.0,
-            h: 25.0,
-        },
-        icon: {
-            normal: 'widget://image/NVTabBar/fav.png',
-            highlight: 'widget://image/NVTabBar/faved.png',
-            selected: 'widget://image/NVTabBar/faved.png'
-        },
-        title: {
-            text: '消息',
-            size: 12.0,
-            normal: '#696969',
-            selected: '#eb4f38',
-            marginB: 6.0
-        }
-    }, {
-        w: api.winWidth / 5.0,
-        bg: {
-            marginB: 0,
-            image: 'rgba(220,0,220,0.7)'
-        },
-        iconRect: {
-            w: 25.0,
-            h: 25.0,
-        },
-        icon: {
-            normal: 'widget://image/NVTabBar/bir.png',
-            highlight: 'widget://image/NVTabBar/bired.png',
-            selected: 'widget://image/NVTabBar/bired.png'
-        },
-        title: {
-            text: '我的',
-            size: 12.0,
-            normal: '#696969',
-            selected: '#eb4f38',
-            marginB: 6.0
-        }
-    }],
-    selectedIndex: 0
-}, function(ret, err) {
-
-});
         api.openFrame({
             name: 'home',
-            url: 'html/frame0.html',
+            url: 'html/header_local.html',
             rect: {
                 x: 0,
                 y: headerPos.h,
                 w: 'auto',
-                h: body_h - headerPos.h - footer_h
+                h: body_h - headerPos.h - footer_h,
+                'z-index':1
             },
             pageParam: {
                 top: headerPos.h,
@@ -302,9 +163,18 @@ NVTabBar.open({
             },
             bounces: true,
             bgColor: 'rgba(0,0,0,0)',
-            vScrollBarEnabled: true,
-            hScrollBarEnabled: true
+            vScrollBarEnabled: false,
+            hScrollBarEnabled: false
         });
+        setTimeout(function() {
+           var frames = api.frames();
+            // console.log(JSON.stringify(frames))
+            // for (var i = 0; i < frames.length; i++) {
+             // console.log(window.childNode)
+            api.sendFrameToBack({ from: 'home' });
+            // }
+           },1000)
+
 
     }
 
@@ -313,18 +183,10 @@ NVTabBar.open({
     }
 
     function openCamera() {
-      api.requestPermission({
-    list:['camera','contacts'],
-    code:1
-}, function(ret, err){
-    api.alert({
-        msg:JSON.stringify(ret)
-    });
-});
         api.getPicture({
             sourceType: 'camera',
-            // encodingType: 'jpg',
-            mediaValue: 'video',
+            encodingType: 'jpg',
+            mediaValue: 'pic',
             destinationType: 'url',
             allowEdit: true,
             quality: 50,
@@ -339,7 +201,49 @@ NVTabBar.open({
             }
         });
     }
-    $api.dom(footer, '.aui-bar-tab-item')
+    function switchLoading(obj,url,text){
+      var frames = api.frames();
+      for (var i = 0; i < frames.length; i++) {
+          api.closeFrame({
+              name: frames[i].name,
+          })
+      }
+      var header = $api.byId('aui-header');
+      var footer = 　$api.byId('footer')
+      var headerPos = $api.offset(header);
+      var body_h = api.winHeight;
+      var footer_h = $api.offset(footer).h;
+      var headerAct = $api.dom(header, '.aui-bar-tab-item.aui-active');
+      $api.removeCls(headerAct, 'aui-active');
+      $api.addCls(obj, 'aui-active');
+      api.openFrame({
+          name: text,
+          url: url,
+          rect: {
+            x: 0,
+            y: headerPos.h,
+            w: 'auto',
+            h: body_h - headerPos.h - footer_h
+          },
+          pageParam: {
+              top: headerPos.h,
+              height: body_h - headerPos.h - footer_h
+          },
+          bounces: true,
+          bgColor: 'rgba(0,0,0,0)',
+          vScrollBarEnabled: true,
+          hScrollBarEnabled: true
+      });
+      setTimeout(function() {
+         var frames = api.frames();
+          console.log(JSON.stringify(frames))
+          // for (var i = 0; i < frames.length; i++) {
+
+          api.sendFrameToBack({ from: text });
+          console.log(JSON.stringify(frames))
+          // }
+         },1000)
+    }
 
     function randomSwitchBtn(obj, url, index) {
         // $api.text($api.byId('aui-header'), name);
@@ -349,7 +253,11 @@ NVTabBar.open({
                 name: frames[i].name,
             })
         }
-        var footer = $api.byId('footer');
+        var header = $api.byId('aui-header');
+        var footer = 　$api.byId('footer')
+        var headerPos = $api.offset(header);
+        var body_h = api.winHeight;
+        var footer_h = $api.offset(footer).h;
         var footerAct = $api.dom(footer, '.aui-bar-tab-item.aui-active');
         $api.removeCls(footerAct, 'aui-active');
         $api.addCls(obj, 'aui-active');
@@ -357,21 +265,27 @@ NVTabBar.open({
             name: index,
             url: url,
             rect: {
-                x: 0,
-                y: 0,
-                w: 'auto',
-                h: 'auto'
+              x: 0,
+              y: headerPos.h,
+              w: 'auto',
+              h: body_h - headerPos.h - footer_h
             },
-            // pageParam: {
-            //     name: 'test'
-            // },
+            pageParam: {
+                top: headerPos.h,
+                height: body_h - headerPos.h - footer_h
+            },
             bounces: true,
             bgColor: 'rgba(0,0,0,0)',
             vScrollBarEnabled: true,
             hScrollBarEnabled: true
         });
-
-
-
+        setTimeout(function() {
+           var frames = api.frames();
+            console.log(JSON.stringify(frames))
+            // for (var i = 0; i < frames.length; i++) {
+             // console.log(window.childNode)
+            api.sendFrameToBack({ from: text });
+            // }
+           },1000)
     }
 </script>

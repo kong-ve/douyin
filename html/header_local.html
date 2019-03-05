@@ -1,0 +1,136 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>底部导航</title>
+    <link rel="stylesheet" type="text/css" href="../css/api.css" />
+    <link rel="stylesheet" type="text/css" href="../css/style.css" />
+    <link rel="stylesheet" type="text/css" href="../css/aui.css" />
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+        /*框架*/
+        #slip{
+          ransform: translate3d(0px, 0px, 0px)
+        }
+        .swipe-wrap {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .swipe {
+            position: absolute;
+            width: 100%;
+            height: auto;
+        }
+
+        .swipe-box {
+            width: 100%;
+            overflow: hidden;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <div class="swipe-wrap" id="slip">
+        <article class="swipe">
+
+            <div class="swipe-box" style="background-color: gray;">
+                第1屏
+            </div>
+
+            <div class="swipe-box" style="background-color: green;">
+                第2屏
+            </div>
+
+            <div class="swipe-box" style="background-color: orange;">
+                第3屏
+            </div>
+
+            <div class="swipe-box" style="background-color: blue;">
+                第4屏
+            </div>
+
+        </article>
+    </div>
+
+</body>
+</html>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/slip.js"></script>
+<script type="text/javascript">
+var container = document.getElementById('slip');
+var pages = document.querySelectorAll('.swipe-box');
+var index = 0;
+var y = 0;
+  // var slip = Slip(container, 'y').webapp(pages);
+  // slip.start(function(event) {
+  //     console.log('start');
+  //
+  //     // 事件对象
+  //     console.log(JSON.stringify(event));
+  //     // 当前坐标值
+  //     console.log(JSON.stringify(this.coord));
+  //   })
+  //   .move(function(event) {
+  //     console.log('move');
+  //   })
+  //   .end(function() {
+  //     console.log('end');
+  //   console.log(JSON.stringify(this.coord));
+  //
+  //     // 滑动方向
+  //     console.log(JSON.stringify(this.orient));
+  //   });
+apiready = function(){
+  // var silpList = $api.byId('slip');
+    container.setAttribute('height',(pages.length-1)*api.frameHeight);
+    // container.style.height=(pages.length-1)*api.frameHeight;
+      // $api.attr(container,'height',(pages.length-1)*api.frameHeight);
+  console.log(container.getAttribute('height'));
+  for(var i =0;i<pages.length;i++){
+    pages[i].setAttribute('height',api.frameHeight);
+    // $api.attr(pages[i],'height',api.frameHeight);
+    console.log(pages[i].getAttribute('height'));
+
+  }
+
+  api.addEventListener({
+      name:'swipeup'
+  }, function(ret, err){
+    console.log('swipeup')
+    index++
+    if(index == 0){debugger
+      $api.css(slip,'ransform: translate3d(0px, 0px, 0px);height:'+(pages.length-1)*api.frameHeight+';transition: all 400ms ease-in;')
+    }else{
+       y-=api.frameHeight;
+      $api.css(slip,'ransform: translate3d(0px, '+y+'px, 0px);height:'+(pages.length-1)*api.frameHeight+';transition: all 400ms ease-in;')
+    }
+
+  });
+  api.addEventListener({
+      name:'swipedown'
+  }, function(ret, err){
+    console.log('swipedown')
+    index--
+    if(index == 0){
+      $api.css(slip,'ransform: translate3d(0px, 0px, 0px);height:'+(pages.length-1)*api.frameHeight+';transition: all 400ms ease-in;')
+    }else{
+       y+=api.frameHeight;
+      $api.css(slip,'ransform: translate3d(0px, '+y+'px, 0px);height:'+(pages.length-1)*api.frameHeight+';transition: all 400ms ease-in;')
+    }
+
+  });
+}
+
+
+</script>

@@ -10,15 +10,14 @@
     <style>
         .empty{ text-align: center; padding: 120px 0; }
         #main{
-          position: fixed;
-          z-index:auto;
+          z-index: -1;
         }
     </style>
 </head>
 <body>
     <!-- <div class="empty">云API</div> -->
     <div id="main" class="flex-con">
-      <button class="action_tou">max</button>
+
     </div>
 </body>
 </html>
@@ -40,7 +39,7 @@
       userData : [{
           uid : new Date().getTime()+1,
           imageUrl :'http://7z2dc9.com1.z0.glb.clouddn.com/apicloud/bc281dfcaf750de7acd9c8e9224e237b.png',
-          videoUrl : 'http://7z2dc9.com1.z0.glb.clouddn.com/apicloud/abb9595e74647defe21d748e12f7a7c9.mp4',
+          videoUrl : 'fs://res/src/test.mp4',
       },{
           uid : new Date().getTime()+2,
           imageUrl :'http://7z2dc9.com1.z0.glb.clouddn.com/apicloud/1a73dd6a90a52b2aad1aafefbf977e4c.png',
@@ -59,16 +58,28 @@
           videoUrl : 'http://7z2dc9.com1.z0.glb.clouddn.com/apicloud/dc811d2c4d88b409063c7ea2065fe6a0.mp4',
       }],
   },function(ret, err){
+
     // console.log(JSON.stringify(ret)+"   "+JSON.stringify(err))
       // alert(JSON.stringify(ret)+"   "+JSON.stringify(err));
   });
+  demo.showScrollVideo(function(ref,err) {
+    console.log(JSON.stringify(ret)+"   "+JSON.stringify(err))
+  })
   demo.pause(function(ret,err){
-    // console.log(JSON.stringify(ret,err));
-});
-demo.play(function(ret,err){
-  // console.log(JSON.stringify(ret,err));
-});
-
+  // if(ref.status == true){
+  //   demo.pause();
+  // }else{
+  //   demo.play();
+  // }
+  });
+// demo.play(function(ret,err){
+//   console.log(JSON.stringify(ret,err));
+// });
+// demo.addEventListener(function(ret,err) {
+//   if(ret.evenType == 'onSingleTapUp'){
+//     // console.log(JSON.stringify(ret))
+//   }
+// })
   }
 
 </script>
