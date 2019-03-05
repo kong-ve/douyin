@@ -18,34 +18,7 @@
             z-index: 999999;
         }
 
-        #aui-header>.aui-pull-left>.camera-text {
-            font-size: 10px;
-            padding-left: .5vh;
-            padding-top: .5vh;
-            font-family: '微软雅黑';
-        }
 
-        #aui-header>.aui-title>.aui-tab {
-            background-color: rgba(0, 0, 0, 0);
-        }
-
-        #aui-header>.aui-title>.aui-tab>.aui-tab-item {
-            color: #fff;
-        }
-
-        #aui-header>.aui-title>.aui-tab>.aui-active {
-            border-bottom: none;
-            font-weight: bold;
-            font-size: 18px;
-            color: #fff;
-        }
-
-        #aui-header>.aui-title>.aui-tab>#page_aui {
-            height: 2vh;
-            width: .7vh;
-            margin-top: 2vh;
-            background: #fff;
-        }
 
         #footer>#tabbar5>.center-nav {
           border: .5px solid #fff;
@@ -88,28 +61,12 @@
 </head>
 
 <body>
-    <header id="aui-header" class="aui-bar aui-bar-nav">
-        <div class="aui-pull-left aui-btn" onclick="openCamera()">
-            <span class="aui-iconfont aui-icon-camera"></span>
-            <span class="camera-text">随拍</span>
-        </div>
-        <div class="aui-title">
-            <div class="aui-tab">
-                <div class="aui-tab-item tapmode aui-active" onclick="switchLoading(this,'html/frame0.html','homelist')">推荐</div>
-                <span id="page_aui"></span>
-                <div class="aui-tab-item tapmode" onclick="switchLoading(this,'html/local.html','localList')">广州</div>
-            </div>
-        </div>
-        <div class="aui-pull-right aui-btn">
-            <span class="aui-iconfont aui-icon-cart"></span> &nbsp; &nbsp; &nbsp;
-            <span class="aui-iconfont aui-icon-video"></span> &nbsp;&nbsp;
-        </div>
-    </header>
+
     <div id="main" class="flex-con">
 
     </div>
     <footer class="aui-bar aui-bar-tab nav-dom" id="footer">
-        <div id="tabbar1" class="aui-bar-tab-item aui-active" tapmode onclick="randomSwitchBtn(this,'html/frame0.html',0)">
+        <div id="tabbar1" class="aui-bar-tab-item aui-active" tapmode onclick="randomSwitchBtn(this,'html/header_local.html',0)">
             <!-- <i class="aui-iconfont aui-icon-home"></i> -->
             <div class="aui-bar-tab-label"><span>云API</span></div>
         </div>
@@ -138,10 +95,10 @@
 <script type="text/javascript">
     apiready = function() {
         api.parseTapmode();
-        var header = $api.byId('aui-header');
+        // var header = $api.byId('aui-header');
         var footer = 　$api.byId('footer')
-        $api.fixStatusBar(header);
-        var headerPos = $api.offset(header);
+        // $api.fixStatusBar(header);
+        // var headerPos = $api.offset(header);
         var body_h = api.winHeight;
         var footer_h = $api.offset(footer).h;
         // var main = $api.first($api.dom('#main'));
@@ -152,16 +109,16 @@
             url: 'html/header_local.html',
             rect: {
                 x: 0,
-                y: headerPos.h,
+                y: 0,
                 w: 'auto',
-                h: body_h - headerPos.h - footer_h,
+                h: body_h - footer_h,
                 'z-index':1
             },
             pageParam: {
-                top: headerPos.h,
-                height: body_h - headerPos.h - footer_h
+                // top: headerPos.h,
+                height: body_h - footer_h
             },
-            bounces: true,
+            bounces: false,
             bgColor: 'rgba(0,0,0,0)',
             vScrollBarEnabled: false,
             hScrollBarEnabled: false
@@ -201,49 +158,6 @@
             }
         });
     }
-    function switchLoading(obj,url,text){
-      var frames = api.frames();
-      for (var i = 0; i < frames.length; i++) {
-          api.closeFrame({
-              name: frames[i].name,
-          })
-      }
-      var header = $api.byId('aui-header');
-      var footer = 　$api.byId('footer')
-      var headerPos = $api.offset(header);
-      var body_h = api.winHeight;
-      var footer_h = $api.offset(footer).h;
-      var headerAct = $api.dom(header, '.aui-bar-tab-item.aui-active');
-      $api.removeCls(headerAct, 'aui-active');
-      $api.addCls(obj, 'aui-active');
-      api.openFrame({
-          name: text,
-          url: url,
-          rect: {
-            x: 0,
-            y: headerPos.h,
-            w: 'auto',
-            h: body_h - headerPos.h - footer_h
-          },
-          pageParam: {
-              top: headerPos.h,
-              height: body_h - headerPos.h - footer_h
-          },
-          bounces: true,
-          bgColor: 'rgba(0,0,0,0)',
-          vScrollBarEnabled: true,
-          hScrollBarEnabled: true
-      });
-      setTimeout(function() {
-         var frames = api.frames();
-          console.log(JSON.stringify(frames))
-          // for (var i = 0; i < frames.length; i++) {
-
-          api.sendFrameToBack({ from: text });
-          console.log(JSON.stringify(frames))
-          // }
-         },1000)
-    }
 
     function randomSwitchBtn(obj, url, index) {
         // $api.text($api.byId('aui-header'), name);
@@ -253,9 +167,7 @@
                 name: frames[i].name,
             })
         }
-        var header = $api.byId('aui-header');
         var footer = 　$api.byId('footer')
-        var headerPos = $api.offset(header);
         var body_h = api.winHeight;
         var footer_h = $api.offset(footer).h;
         var footerAct = $api.dom(footer, '.aui-bar-tab-item.aui-active');
@@ -266,13 +178,13 @@
             url: url,
             rect: {
               x: 0,
-              y: headerPos.h,
+              y: 0,
               w: 'auto',
-              h: body_h - headerPos.h - footer_h
+              h: body_h  - footer_h
             },
             pageParam: {
-                top: headerPos.h,
-                height: body_h - headerPos.h - footer_h
+                // top: headerPos.h,
+                footer: body_h  - footer_h
             },
             bounces: true,
             bgColor: 'rgba(0,0,0,0)',
