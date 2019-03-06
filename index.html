@@ -140,23 +140,23 @@
     }
 
     function openCamera() {
-        api.getPicture({
-            sourceType: 'camera',
-            encodingType: 'jpg',
-            mediaValue: 'pic',
-            destinationType: 'url',
-            allowEdit: true,
-            quality: 50,
-            targetWidth: 100,
-            targetHeight: 100,
-            saveToPhotoAlbum: false
-        }, function(ret, err) {
-            if (ret) {
-                alert(JSON.stringify(ret));
-            } else {
-                alert(JSON.stringify(err));
-            }
-        });
+      var meisheVideo = api.require('meisheVideo');
+meisheVideo.open({
+  rect:{
+      x:0,
+      y:0,
+      w:320,
+      h:300
+  },
+  fixedOn:api.frameName,
+  fixed:true
+},function(ret){
+   if (ret.status) {
+      api.alert(ret.eventType);
+  } else {
+      api.alert({ msg:JSON.stringify(err)});
+  }
+})
     }
 
     function randomSwitchBtn(obj, url, index) {

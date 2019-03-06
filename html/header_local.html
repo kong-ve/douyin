@@ -9,6 +9,7 @@
     <link rel="stylesheet" type="text/css" href="../css/api.css" />
     <link rel="stylesheet" type="text/css" href="../css/style.css" />
     <link rel="stylesheet" type="text/css" href="../css/aui.css" />
+    <link rel="stylesheet"type="text/css" href="../feature/fonts/iconfont.css"/>
     <style>
         * {
             padding: 0;
@@ -85,6 +86,17 @@
             margin-top: 2vh;
             background: #fff;
         }
+        #showPlay{
+          height: 100%;
+          background: rgba(0, 0, 0, 0.3);
+          z-index:45
+        }
+        #showPlay>span{
+          margin-top: 60%;
+    margin-left: 40%;
+    line-height: 8vh;
+    font-size: 5rem;
+        }
     </style>
 
 </head>
@@ -107,8 +119,8 @@
           <span class="aui-iconfont aui-icon-video"></span> &nbsp;&nbsp;
       </div>
   </header>
-  <div id="showPlay">
-    <span></span>
+  <div id="showPlay" style="display:none" onclick="showPlay()">
+    <span class="iconfont icon-douyinkuaishou"></span>
   </div>
     <div class="swipe-wrap" id="slip">
         <article class="swipe">
@@ -148,6 +160,10 @@ var  userData = [{
       videoUrl : '../res/src/test.mp4',
   }];
   var page = 0;
+  function showPlay(){
+    document.getElementById('showPlay').style.display = 'none';
+    document.getElementById(userData[page].uid).play();
+  }
 apiready = function(){
   var header = $api.byId('aui-header');
   $api.fixStatusBar(header)
@@ -172,14 +188,17 @@ slip = Slip(container, 'y').webapp(pages);
 api.addEventListener({
     name:'tap'
 }, function(ret, err){
-   console.log(ret)
-   document.getElementById(userData[page].uid).controls = true;
-   if(!document.getElementById(userData[page].uid).paused)
+   console.log(document.getElementById(userData[page].uid).paused)
+  //  document.getElementById(userData[page].uid).controls = true;
+   if(!document.getElementById(userData[page].uid).paused){
    document.getElementById(userData[page].uid).pause();
-   else {
-     document.getElementById(userData[page].uid).play();
-     document.getElementById(userData[page].uid).controls = false;
-   }
+     document.getElementById('showPlay').style.display = 'block';
+ }
+ // else {
+ //     document.getElementById(userData[page].uid).play();
+ //     document.getElementById('showPlay').style.display = 'none';
+    //  document.getElementById(userData[page].uid).controls = false;
+  //  }
 });
 slip.start(function(event) {
       // console.log('start');
