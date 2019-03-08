@@ -344,12 +344,12 @@
     }
 
     function switchLoading(obj, url, text) {
-        // var frames = api.frames();
-        // for (var i = 0; i < frames.length; i++) {
-        //     api.closeFrame({
-        //         name: frames[i].name,
-        //     })
-        // }
+        var frames = api.frames();
+        for (var i = 0; i < frames.length; i++) {
+            api.closeFrame({
+                name: frames[i].name,
+            })
+        }
         console.log(url)
         var header = $api.byId('aui-header');
         var param = api.pageParam;
@@ -384,7 +384,7 @@
             var frames = api.frames();
             console.log(JSON.stringify(frames))
                 // for (var i = 0; i < frames.length; i++) {
-  api.bringFrameToFront({ from:text ,to:param.name });
+  api.bringFrameToFront({ from:text });
             // api.setFrameAttr({
             //     // from: text,
             //     name:api.pageParam.name,
