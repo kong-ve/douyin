@@ -30,6 +30,7 @@
   color: #000;
   z-index: 99999 !important;
   max-width: 1vh;
+  font-style:normal
         }
 
         #footer>.aui-active {
@@ -66,26 +67,26 @@
 
     </div>
     <footer class="aui-bar aui-bar-tab nav-dom" id="footer">
-        <div id="tabbar1" class="aui-bar-tab-item aui-active" tapmode onclick="randomSwitchBtn(this,'html/header_local.html',0)">
+        <div id="tabbar1" class="aui-bar-tab-item" tapmode onclick="randomSwitchBtn(this,'html/header_local.html','home')">
             <!-- <i class="aui-iconfont aui-icon-home"></i> -->
-            <div class="aui-bar-tab-label"><span>云API</span></div>
+            <div class="aui-bar-tab-label"><span>首页</span></div>
         </div>
-        <div id="tabbar2" class="aui-bar-tab-item" tapmode onclick="randomSwitchBtn(this,'html/frame1.html',1)">
+        <div id="tabbar2" class="aui-bar-tab-item aui-active" tapmode onclick="randomSwitchBtn(this,'html/frame1.html','friend')">
             <!-- <i class="aui-iconfont aui-icon-star"></i> -->
-            <div class="aui-bar-tab-label"><span>端API</span></div>
+            <div class="aui-bar-tab-label"><span>好友</span></div>
         </div>
         <div id="tabbar5" class="aui-bar-tab-item" tapmode>
             <i class="center-nav">+</i>
         </div>
-        <div id="tabbar3" class="aui-bar-tab-item" tapmode onclick="randomSwitchBtn(this,'html/frame1.html',2)">
+        <div id="tabbar3" class="aui-bar-tab-item" tapmode onclick="randomSwitchBtn(this,'html/frame2.html','message')">
             <!-- <div class="aui-badge">99</div> -->
             <!-- <i class="aui-iconfont aui-icon-cart"></i> -->
-            <div class="aui-bar-tab-label"><span>开发</span></div>
+            <div class="aui-bar-tab-label"><span>消息</span></div>
         </div>
-        <div id="tabbar4" class="aui-bar-tab-item" tapmode onclick="randomSwitchBtn(this,'html/frame1.html',3)">
+        <div id="tabbar4" class="aui-bar-tab-item" tapmode onclick="randomSwitchBtn(this,'html/frame3.html','my')">
             <!-- <div class="aui-dot"></div> -->
             <!-- <i class="aui-iconfont aui-icon-my"></i> -->
-            <div class="aui-bar-tab-label"><span>文档</span></div>
+            <div class="aui-bar-tab-label"><span>我</span></div>
         </div>
     </footer>
 </body>
@@ -93,6 +94,7 @@
 </html>
 <script type="text/javascript" src="script/api.js"></script>
 <script type="text/javascript">
+var index = 'home';
     apiready = function() {
         api.parseTapmode();
         // var header = $api.byId('aui-header');
@@ -116,7 +118,8 @@
             },
             pageParam: {
                 // top: headerPos.h,
-                height: body_h - footer_h
+                height: body_h - footer_h,
+                name:index
             },
             bounces: false,
             bgColor: 'rgba(0,0,0,0)',
@@ -128,7 +131,7 @@
             // console.log(JSON.stringify(frames))
             // for (var i = 0; i < frames.length; i++) {
              // console.log(window.childNode)
-            api.sendFrameToBack({ from: 'home' });
+            api.bringFrameToFront({ from: index });
             // }
            },1000)
 
@@ -139,27 +142,9 @@
         api.closeWin();
     }
 
-    function openCamera() {
-      var meisheVideo = api.require('meisheVideo');
-meisheVideo.open({
-  rect:{
-      x:0,
-      y:0,
-      w:320,
-      h:300
-  },
-  fixedOn:api.frameName,
-  fixed:true
-},function(ret){
-   if (ret.status) {
-      api.alert(ret.eventType);
-  } else {
-      api.alert({ msg:JSON.stringify(err)});
-  }
-})
-    }
 
-    function randomSwitchBtn(obj, url, index) {
+
+    function randomSwitchBtn(obj, url, i) {
         // $api.text($api.byId('aui-header'), name);
         var frames = api.frames();
         for (var i = 0; i < frames.length; i++) {
@@ -167,6 +152,7 @@ meisheVideo.open({
                 name: frames[i].name,
             })
         }
+        index = i;
         var footer = 　$api.byId('footer')
         var body_h = api.winHeight;
         var footer_h = $api.offset(footer).h;
@@ -184,19 +170,20 @@ meisheVideo.open({
             },
             pageParam: {
                 // top: headerPos.h,
-                footer: body_h  - footer_h
+                footer: body_h  - footer_h,
+                name:index
             },
-            bounces: true,
+            bounces: false,
             bgColor: 'rgba(0,0,0,0)',
             vScrollBarEnabled: true,
             hScrollBarEnabled: true
         });
         setTimeout(function() {
            var frames = api.frames();
-            console.log(JSON.stringify(frames))
+            // console.log(JSON.stringify(frames))
             // for (var i = 0; i < frames.length; i++) {
              // console.log(window.childNode)
-            api.sendFrameToBack({ from: text });
+            api.bringFrameToFront({ from: index });
             // }
            },1000)
     }

@@ -9,23 +9,23 @@
     <link rel="stylesheet" type="text/css" href="../css/api.css" />
     <link rel="stylesheet" type="text/css" href="../css/style.css" />
     <link rel="stylesheet" type="text/css" href="../css/aui.css" />
-    <link rel="stylesheet"type="text/css" href="../feature/fonts/iconfont.css"/>
+    <link rel="stylesheet" type="text/css" href="../feature/fonts/iconfont.css" />
     <style>
         * {
             padding: 0;
             margin: 0;
-
         }
-        body{
-          height: 100%;
-          overflow: hidden;
+
+        body {
+            height: 100%;
+            overflow: hidden;
         }
         /*框架*/
-        #slip{
-          transform: translate3d(0px, 0px, 0px);
 
-
+        #slip {
+            transform: translate3d(0px, 0px, 0px);
         }
+
         .swipe-wrap {
             width: 100%;
             height: 100%;
@@ -43,21 +43,104 @@
             width: 100%;
             overflow: hidden;
         }
-        .video_max{
-          display: block;
-     width: 100%;
-     height: 100%;
-     /*object-fit: fill;*/
-     object-fit: cover;
+
+        .video_max {
+            display: block;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            /*object-fit: fill;*/
+            object-fit: cover;
         }
-        #aui-header{
-         background: -webkit-linear-gradient(rgba(0, 0, 0, 0.3), rgba(255,255,255,0.1)); /* Safari 5.1 - 6.0 */
-  background: -o-linear-gradient(rgba(0, 0, 0, 0.3), rgba(255,255,255,0.1)); /* Opera 11.1 - 12.0 */
-  background: -moz-linear-gradient(rgba(0, 0, 0, 0.3), rgba(255,255,255,0.1)); /* Firefox 3.6 - 15 */
-  background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(255,255,255,0.1)); /* 标准的语法 */
-  position: fixed;
-  top:0
+
+        #aui-header {
+            background: -webkit-linear-gradient(rgba(0, 0, 0, 0.3), rgba(255, 255, 255, 0.1));
+            /* Safari 5.1 - 6.0 */
+            background: -o-linear-gradient(rgba(0, 0, 0, 0.3), rgba(255, 255, 255, 0.1));
+            /* Opera 11.1 - 12.0 */
+            background: -moz-linear-gradient(rgba(0, 0, 0, 0.3), rgba(255, 255, 255, 0.1));
+            /* Firefox 3.6 - 15 */
+            background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(255, 255, 255, 0.1));
+            /* 标准的语法 */
+            position: fixed;
+            top: 0
         }
+
+        .swipe-box>#fixmessage_info {
+            width: 3em;
+            position: relative;
+            right: 0;
+            float: right;
+            top: -22em;
+            z-index: 99;
+            height: 15em;
+        }
+
+        .swipe-box>#fixmessage_info>.username {
+            margin: 0;
+            float: right;
+            margin-right: 0.25em;
+            margin-bottom: 2em;
+            right: 0;
+            position: absolute;
+        }
+
+        .swipe-box>#fixmessage_info>.username>.userimg {
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            border: 1px solid #fff;
+            margin-right: 0;
+        }
+
+        .swipe-box>#fixmessage_info>.username>.alink_s {
+            position: relative;
+            background: red;
+            border-radius: 50%;
+            padding: 2px;
+            padding-bottom: .1em;
+            margin-top: .3em;
+            width: 1em;
+            height: 1em;
+            text-align: center;
+            color: #fff;
+            top: -0.5em;
+            right: -0.7em;
+            display: table-cell;
+            vertical-align: middle;
+        }
+
+        .swipe-box>#fixmessage_info>.username>.alink_s>.alink_s_action {
+            width: 1em;
+            height: 1em;
+            position: absolute;
+            top: -0.25em;
+            left: .05em;
+        }
+
+        .swipe-box>#fixmessage_info>.link {
+            position: absolute;
+            right: 0;
+            color: #fff;
+            margin-top: 3.5em;
+            text-align: center;
+        }
+
+        .swipe-box>#fixmessage_info>.link>.in_ac {
+            position: absolute;
+            text-align: center;
+            right: 0.6em;
+            font-size: x-large;
+        }
+
+        .swipe-box>#fixmessage_info>.link>.number_h {
+            margin-top: 3em;
+            text-align: center;
+            right: 2.15em;
+            font-size: x-small;
+            position: absolute;
+        }
+
         #aui-header>.aui-pull-left>.camera-text {
             font-size: 10px;
             padding-left: .5vh;
@@ -81,47 +164,49 @@
         }
 
         #aui-header>.aui-title>.aui-tab>#page_aui {
-            height: 2vh;
-            width: .7vh;
-            margin-top: 2vh;
+            height: .9em;
+            width: .2em;
+            margin-top: .9em;
             background: #fff;
         }
-        #showPlay{
-          height: 100%;
-          background: rgba(0, 0, 0, 0.3);
-          z-index:45
+
+        #showPlay {
+            height: 100%;
+            background: rgba(0, 0, 0, 0.3);
+            z-index: 45
         }
-        #showPlay>span{
-          margin-top: 60%;
-    margin-left: 40%;
-    line-height: 8vh;
-    font-size: 5rem;
+
+        #showPlay>span {
+            margin-top: 60%;
+            margin-left: 40%;
+            line-height: 8vh;
+            font-size: 5rem;
         }
     </style>
 
 </head>
 
 <body>
-  <header id="aui-header" class="aui-bar aui-bar-nav">
-      <div class="aui-pull-left aui-btn" onclick="openCamera()">
-          <span class="aui-iconfont aui-icon-camera"></span>
-          <span class="camera-text">随拍</span>
-      </div>
-      <div class="aui-title">
-          <div class="aui-tab">
-              <div class="aui-tab-item tapmode aui-active" onclick="switchLoading(this,'html/frame0.html','homelist')">推荐</div>
-              <span id="page_aui"></span>
-              <div class="aui-tab-item tapmode" onclick="switchLoading(this,'html/local.html','localList')">广州</div>
-          </div>
-      </div>
-      <div class="aui-pull-right aui-btn">
-          <span class="aui-iconfont aui-icon-cart"></span> &nbsp; &nbsp; &nbsp;
-          <span class="aui-iconfont aui-icon-video"></span> &nbsp;&nbsp;
-      </div>
-  </header>
-  <div id="showPlay" style="display:none" onclick="showPlay()">
-    <span class="iconfont icon-douyinkuaishou"></span>
-  </div>
+    <header id="aui-header" class="aui-bar aui-bar-nav">
+        <div class="aui-pull-left aui-btn" onclick="openCamera()">
+            <span class="aui-iconfont aui-icon-camera"></span>
+            <span class="camera-text">随拍</span>
+        </div>
+        <div class="aui-title">
+            <div class="aui-tab">
+                <div class="aui-tab-item tapmode aui-active" onclick="switchLoading(this,'./header_local.html','home')">推荐</div>
+                <span id="page_aui"></span>
+                <div class="aui-tab-item tapmode" onclick="switchLoading(this,'./frame2.html','localList')">广州</div>
+            </div>
+        </div>
+        <div class="aui-pull-right aui-btn">
+            <span class="aui-iconfont aui-icon-cart"></span> &nbsp; &nbsp; &nbsp;
+            <span class="aui-iconfont aui-icon-video"></span> &nbsp;&nbsp;
+        </div>
+    </header>
+    <div id="showPlay" style="display:none" onclick="showPlay()">
+        <span class="iconfont icon-douyinkuaishou"></span>
+    </div>
     <div class="swipe-wrap" id="slip">
         <article class="swipe">
 
@@ -131,146 +216,202 @@
     </div>
 
 </body>
+
 </html>
 <script type="text/javascript" src="../script/api.js"></script>
 <script type="text/javascript" src="../script/slip.js"></script>
 <script type="text/javascript">
-var container = document.getElementById('slip');
-var pages;
-  var slip;
-var  userData = [{
-      uid : new Date().getTime()+1,
-      imageUrl :'http://7z2dc9.com1.z0.glb.clouddn.com/apicloud/bc281dfcaf750de7acd9c8e9224e237b.png',
-      videoUrl : 'http://7z2dc9.com1.z0.glb.clouddn.com/apicloud/abb9595e74647defe21d748e12f7a7c9.mp4',
-  },{
-      uid : new Date().getTime()+2,
-      imageUrl :'http://7z2dc9.com1.z0.glb.clouddn.com/apicloud/1a73dd6a90a52b2aad1aafefbf977e4c.png',
-      videoUrl : 'http://7z2dc9.com1.z0.glb.clouddn.com/apicloud/00b2141bff87cfaa75498f66214aeb9e.mp4',
-  },{
-      uid : new Date().getTime()+3,
-      imageUrl :'http://7z2dc9.com1.z0.glb.clouddn.com/apicloud/ec65083dbdc6bb18a6318591ac6c15a5.png',
-      videoUrl : 'http://7z2dc9.com1.z0.glb.clouddn.com/apicloud/9d9906ba474152307d7edca6bd72fbe2.mp4',
-  },{
-      uid : new Date().getTime()+4,
-      imageUrl :'http://7z2dc9.com1.z0.glb.clouddn.com/apicloud/51fc1ddde9790c96a6986b74342a15e3.png',
-      videoUrl : 'http://7z2dc9.com1.z0.glb.clouddn.com/apicloud/dc811d2c4d88b409063c7ea2065fe6a0.mp4',
-  },{
-      uid : new Date().getTime()+5,
-      imageUrl :'http://7z2dc9.com1.z0.glb.clouddn.com/apicloud/51fc1ddde9790c96a6986b74342a15e3.png',
-      videoUrl : '../res/src/test.mp4',
-  }];
-  var page = 0;
-  function showPlay(){
-    document.getElementById('showPlay').style.display = 'none';
-    document.getElementById(userData[page].uid).play();
-  }
-apiready = function(){
-  var header = $api.byId('aui-header');
-  $api.fixStatusBar(header)
-  userData.map(function(v,i) {
-    var el = document.createElement('div');
-    el.className = 'swipe-box';
-    var el_child=document.createElement('video');
-    el_child.src = v.videoUrl;
-    el_child.id=v.uid;
-    el_child.prop = v.imageUrl;
-    el_child.autoplay = i==0?true:false;
-    el_child.loop = true;
-    el_child.className ='video_max';
-    // el_child.onclick='this.paused = !this.paused';
-      // el_child.onclick='showC(this)';
-      // el.onclick='showC(this)';
-    el.appendChild(el_child);
-    container.appendChild(el);
-  })
-pages=document.querySelectorAll('.swipe-box')
-slip = Slip(container, 'y').webapp(pages);
-api.addEventListener({
-    name:'tap'
-}, function(ret, err){
-   console.log(document.getElementById(userData[page].uid).paused)
-  //  document.getElementById(userData[page].uid).controls = true;
-   if(!document.getElementById(userData[page].uid).paused){
-   document.getElementById(userData[page].uid).pause();
-     document.getElementById('showPlay').style.display = 'block';
- }
- // else {
- //     document.getElementById(userData[page].uid).play();
- //     document.getElementById('showPlay').style.display = 'none';
-    //  document.getElementById(userData[page].uid).controls = false;
-  //  }
-});
-slip.start(function(event) {
-      // console.log('start');
-      page = this.page;
-      // 事件对象
-      // console.log(JSON.stringify(event));
-      // 当前坐标值
-      // console.log(JSON.stringify(userData[this.page]));
-      if(!document.getElementById(userData[this.page].uid).paused)
-      document.getElementById(userData[this.page].uid).pause();
+    var container = document.getElementById('slip');
+    var pages;
+    var slip;
+    var userData = [{
+        uid: new Date().getTime() + 1,
+        imageUrl: 'http://7z2dc9.com1.z0.glb.clouddn.com/apicloud/bc281dfcaf750de7acd9c8e9224e237b.png',
+        videoUrl: 'http://7z2dc9.com1.z0.glb.clouddn.com/apicloud/abb9595e74647defe21d748e12f7a7c9.mp4',
+    }, {
+        uid: new Date().getTime() + 2,
+        imageUrl: 'http://7z2dc9.com1.z0.glb.clouddn.com/apicloud/1a73dd6a90a52b2aad1aafefbf977e4c.png',
+        videoUrl: 'http://7z2dc9.com1.z0.glb.clouddn.com/apicloud/00b2141bff87cfaa75498f66214aeb9e.mp4',
+    }, {
+        uid: new Date().getTime() + 3,
+        imageUrl: 'http://7z2dc9.com1.z0.glb.clouddn.com/apicloud/ec65083dbdc6bb18a6318591ac6c15a5.png',
+        videoUrl: 'http://7z2dc9.com1.z0.glb.clouddn.com/apicloud/9d9906ba474152307d7edca6bd72fbe2.mp4',
+    }, {
+        uid: new Date().getTime() + 4,
+        imageUrl: 'http://7z2dc9.com1.z0.glb.clouddn.com/apicloud/51fc1ddde9790c96a6986b74342a15e3.png',
+        videoUrl: 'http://7z2dc9.com1.z0.glb.clouddn.com/apicloud/dc811d2c4d88b409063c7ea2065fe6a0.mp4',
+    }, {
+        uid: new Date().getTime() + 5,
+        imageUrl: 'http://7z2dc9.com1.z0.glb.clouddn.com/apicloud/51fc1ddde9790c96a6986b74342a15e3.png',
+        videoUrl: '../res/src/test.mp4',
+    }];
+    var page = 0;
+    userData.map(function(v, i) {
+        var el = document.createElement('div');
+        var el_child = document.createElement('video');
+        var fix_message = document.createElement('div');
+        var fix_message_in = document.createElement('div');
+        var fix_message_alink = document.createElement('div');
+        var fix_message_repick = document.createElement('div');
+        el.className = 'swipe-box';
+        el_child.src = v.videoUrl;
+        el_child.id = v.uid;
+        el_child.poster = v.imageUrl;
+        el_child.autoplay = false;
+        el_child.loop = true;
+        el_child.controls = true;
+        el_child.setAttribute('playsinline', 'true');
+        el_child.setAttribute('webkit-playsinline','true');
+        el_child.className = 'video_max';
+        fix_message.id = "fixmessage_info";
+        fix_message_in.className = "username";
+        // fix_message.style.top = 15 + (i * 35) + 'em';
+        fix_message_in.innerHTML = '<div style="background:url(' + v.imageUrl + ') 40% 45%" class="userimg"></div><span class="alink_s"><span class="alink_s_action">+</span></span>'
+        fix_message_alink.className = "link";
+        fix_message_alink.innerHTML = "<span class='aui-iconfont aui-icon-qq in_ac'></span><span class='number_h'>15</span>"
+        fix_message.appendChild(fix_message_in)
+        fix_message.appendChild(fix_message_alink)
+        fix_message.appendChild(fix_message_repick)
+        el.appendChild(el_child);
+        el.appendChild(fix_message);
+        // el_child.onclick='this.paused = !this.paused';
+        // el_child.onclick='showC(this)';
+        // el.onclick='showC(this)';
+        container.querySelector('.swipe').appendChild(el);
     })
-    .move(function(event) {
-      // console.log('move');
-    })
-    .end(function() {
-        page = this.page;
-      // console.log('end');
-      // console.log(JSON.stringify(this.page));
-      if(document.getElementById(userData[this.page].uid).paused)
-        document.getElementById(userData[this.page].uid).play();
+    pages = document.querySelectorAll('.swipe-box');
+    // console.log(JSON.stringify(pages[0].querySelector('#fixmessage_info').getElementsByTagName('div').length))
+    document.getElementById(userData[0].uid).play();
+    // setTimeout(function(){document.getElementById(userData[0].uid).pause()},40);
+    // setTimeout(function(){document.getElementById(userData[0].uid).play()},60);
+    slip = Slip(container, 'y').webapp(pages);
 
-      // 滑动方向
-      // console.log(this.orient);
-    });
-}
-function showC(d){
-  console.log(d.childNode)
-  d.controls = true;
-  d.paused = !d.pasused;
-}
-function switchLoading(obj,url,text){
-  var frames = api.frames();
-  for (var i = 0; i < frames.length; i++) {
-      api.closeFrame({
-          name: frames[i].name,
-      })
-  }
-  var header = $api.byId('aui-header');
-var param = api.pageParam.footer;
-  var headerPos = $api.offset(header);
-  var body_h = api.winHeight;
-  var footer_h = param;
-  var headerAct = $api.dom(header, '.aui-bar-tab-item.aui-active');
-  $api.removeCls(headerAct, 'aui-active');
-  $api.addCls(obj, 'aui-active');
-  api.openFrame({
-      name: text,
-      url: url,
-      rect: {
-        x: 0,
-        y: headerPos.h,
-        w: 'auto',
-        h: body_h - headerPos.h - footer_h
-      },
-      pageParam: {
-          top: headerPos.h,
-          height: body_h - headerPos.h - footer_h
-      },
-      bounces: true,
-      bgColor: 'rgba(0,0,0,0)',
-      vScrollBarEnabled: true,
-      hScrollBarEnabled: true
-  });
-  setTimeout(function() {
-     var frames = api.frames();
-      console.log(JSON.stringify(frames))
-      // for (var i = 0; i < frames.length; i++) {
+    function showPlay() {
+        document.getElementById('showPlay').style.display = 'none';
+        document.getElementById(userData[page].uid).play();
+    }
+    apiready = function() {
+      api.parseTapmode();
+        var header = $api.byId('aui-header');
+        $api.fixStatusBar(header)
+        api.addEventListener({
+            name: 'tap'
+        }, function(ret, err) {
+            // console.log(JSON.stringify(document.getElementById(userData[page].uid)))
 
-      api.sendFrameToBack({ from: text });
-      console.log(JSON.stringify(frames))
-      // }
-     },1000)
-}
+            if (document.getElementById(userData[page].uid).paused) {
+                document.getElementById(userData[page].uid).controls = false;
+                document.getElementById(userData[page].uid).play();
+                //  document.getElementById('showPlay').style.display = 'none';
+            } else {
+                document.getElementById(userData[page].uid).controls = true;
+                document.getElementById(userData[page].uid).pause();
+                //  document.getElementById('showPlay').style.display = 'block';
 
+            }
+        });
+        slip.start(function(event) {
+                // console.log('start');
+                page = this.page;
+                // 事件对象
+                // console.log(JSON.stringify(event));
+                // 当前坐标值
+                // console.log(JSON.stringify(userData[this.page]));
+                if (!document.getElementById(userData[this.page].uid).paused)
+                    document.getElementById(userData[this.page].uid).pause();
+            })
+            .move(function(event) {
+                // console.log('move');
+            })
+            .end(function() {
+                page = this.page;
+                // console.log('end');
+                // console.log(JSON.stringify(this.page));
+                if (document.getElementById(userData[this.page].uid).paused){
+                    document.getElementById(userData[this.page].uid).play();
+                    document.getElementById(userData[this.page].uid).pause();
+                    document.getElementById(userData[this.page].uid).play();
+                  }
+                // 滑动方向
+                // console.log(this.orient);
+            });
+    }
+
+    function showC(d) {
+        // console.log(d.childNode)
+        d.controls = true;
+        d.paused = !d.pasused;
+    }
+
+    function switchLoading(obj, url, text) {
+        // var frames = api.frames();
+        // for (var i = 0; i < frames.length; i++) {
+        //     api.closeFrame({
+        //         name: frames[i].name,
+        //     })
+        // }
+        console.log(url)
+        var header = $api.byId('aui-header');
+        var param = api.pageParam;
+        var headerPos = $api.offset(header);
+        var body_h = api.frameHeight;
+        var footer_h = param.height;
+        var headerAct = $api.dom(header,'.aui-active');
+        console.log(JSON.stringify(headerAct.length))
+        $api.removeCls(headerAct, 'aui-active');
+        $api.addCls(obj, 'aui-active');
+        api.openFrame({
+            name: text,
+            url: url,
+            rect: {
+                x: 0,
+                y: headerPos.h,
+                w: 'auto',
+                h: body_h - headerPos.h
+            },
+            pageParam: {
+                top: headerPos.h,
+                height: body_h - headerPos.h - footer_h,
+                name:text,
+                parentsname:api.pageParam.name
+            },
+            bounces: true,
+            bgColor: 'rgba(0,0,0,0)',
+            vScrollBarEnabled: true,
+            hScrollBarEnabled: true
+        });
+        setTimeout(function() {
+            var frames = api.frames();
+            console.log(JSON.stringify(frames))
+                // for (var i = 0; i < frames.length; i++) {
+  api.bringFrameToFront({ from:text ,to:param.name });
+            // api.setFrameAttr({
+            //     // from: text,
+            //     name:api.pageParam.name,
+            //     hidden:true
+            // });
+            console.log(JSON.stringify(param.name))
+                // }
+        }, 1000)
+    }
+
+    function openCamera() {
+        var param = {
+            minDuration: 2,
+            maxDuration: 20,
+            isBackCamera: true,
+            flashText: '闪光灯',
+            cameraText: '翻转',
+            recordText: '按住拍',
+            recordHint: '提示',
+            exitDialogMessage: '是否放弃这段视频？',
+            dialogYes: '确定',
+            dialogNo: '取消',
+            progressMessage: '准备中…'
+        };
+        var demo = api.require('miniQuPaiPlus');
+        demo.record(param, function(ret, err) {
+            console.log(JSON.stringify(ret));
+        });
+    }
 </script>

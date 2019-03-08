@@ -1,22 +1,378 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
     <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
-    <title>端API</title>
-    <link rel="stylesheet" type="text/css" href="../css/api.css"/>
-    <link rel="stylesheet" type="text/css" href="../css/style.css"/>
-    <style>
-        .empty{ text-align: center; padding: 120px 0; }
+    <title>好友</title>
+    <link rel="stylesheet" type="text/css" href="../css/api.css" />
+    <link rel="stylesheet" type="text/css" href="../css/aui.css" />
+    <link rel="stylesheet" type="text/css" href="../css/style.css" />
+    <style type="text/css">
+    * {
+        padding: 0;
+        margin: 0;
+    }
+
+    body {
+        height: 100%;
+        overflow: hidden;
+          background: rgba(0, 0, 0, 0.85);
+    }
+
+        .aui-text-parmary {
+            color: #aeaeae;
+        }
+
+        #aui-header {
+            background: -webkit-linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.2));
+            /* Safari 5.1 - 6.0 */
+            background: -o-linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.2));
+            /* Opera 11.1 - 12.0 */
+            background: -moz-linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.2));
+            /* Firefox 3.6 - 15 */
+            background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.2));
+            /* 标准的语法 */
+            position: fixed;
+            top: 0;
+            width: 100%;
+        }
+          #aui-header>.aui-btn{
+            background: rgba(0,0,0,0);
+            color:#fff;
+          }
+          #aui-header>.aui-btn>.aui-btn{
+            background: rgba(0,0,0,0);
+            color:#fff;
+          }
+        #main{
+          padding-top: 5em;
+        }
+        #aui-header>.aui-pull-left>.camera-text {
+            font-size: 10px;
+            padding-left: .5vh;
+            padding-top: .5vh;
+            font-family: '微软雅黑';
+        }
+
+        #aui-header>.aui-title>.aui-tab {
+            background-color: rgba(0, 0, 0, 0);
+        }
+
+        #aui-header>.aui-title>.aui-tab>.aui-tab-item {
+            color: #fff;
+        }
+
+        #aui-header>.aui-title>.aui-tab>.aui-active {
+            border-bottom-color: #fff;
+            font-weight: bold;
+            font-size: 18px;
+            color: #fff;
+        }
+
+        #main>#myInfo {
+            min-height: 15em;
+        }
+
+        #main>#friendsInfo {
+            min-height: 5em;
+        }
+
+        #main>#seeNewFriend>.aui-card-list,
+        #main>#seeNewFriend>.aui-card-list-content {
+            background: rgba(0, 0, 0, 0);
+            color: #fff;
+        }
+
+        .aui-list {
+            background-color: rgba(0, 0, 0, 0) !important;
+            color: #fff;
+            background-image: linear-gradient(0, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0) 50%, transparent 50%);
+        }
+
+        .aui-list .aui-list-item {
+            background-image: linear-gradient(0, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0) 50%, transparent 50%);
+            background-image: -webkit-linear-gradient(90deg, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0) 50%, transparent 50%);
+        }
+
+        .color-snow {
+            color: #fff !important;
+        }
+
+        #main>#seeNewFriend>.aui-card-list>.aui-list {
+            background-color: rgba(0, 0, 0, 0.85) !important;
+            color: #fff;
+            background-image: -webkit-linear-gradient(0, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 0) 50%);
+        }
+
+        #main>#seeNewFriend>.aui-card-list>.aui-list>.aui-list-item {
+            background-image: grba(0, 0, 0, 0.85)
+        }
+
+        .aui-suipai {
+            width: 100%;
+            height: 100%;
+            min-height: 15em;
+            background-color: rgba(0, 0, 0, 0);
+            display: table;
+            table-layout: fixed;
+        }
+
+        .aui-suipai>.aui-row {
+            height: 100%;
+        }
+
+        .sui-xs-4 {
+            width: 33%;
+            height: 100%;
+            margin: .5em;
+        }
+
+        .suipai1 {
+            background: url('../image/suipai/suipai1.png');
+        }
+
+        .suipai2 {
+            background: url('../image/suipai/suipai2.png');
+        }
+
+        .f-suipai {
+            width: 4em;
+            height: 4em;
+            color: #fff;
+            bottom: 2.5em;
+            border-radius: 50%;
+            background: #fff;
+            position: absolute;
+            left: 3em;
+        }
+
+        .flex-m-1 {
+            background: url('../image/suipai/suipai1.png');
+            width: 100%;
+            height: 100%;
+            filter: blur(20px);
+            -webkit-filter: blur(20px);
+            -moz-filter: blur(20px);
+            -o-filter: blur(20px);
+            -ms-filter: blur(20px);
+        }
+        .flex-m-2 {
+            background: url('../image/suipai/suipai2.png');
+            width: 100%;
+            height: 100%;
+            filter: blur(20px);
+            -webkit-filter: blur(20px);
+            -moz-filter: blur(20px);
+            -o-filter: blur(20px);
+            -ms-filter: blur(20px);
+        }
+
+        .f-suipai>i {
+            color: #000;
+            position: relative;
+            top: .5em;
+            left: .7em;
+            font-weight: 900;
+            font-size: x-large;
+        }
+
+        .suipai-title {
+            position: absolute;
+            bottom: .7em;
+            left: 3em;
+            color: #fff;
+        }
+
+        .sui-xs-1,
+        .sui-xs-2,
+        .sui-xs-3,
+        .sui-xs-4,
+        .sui-xs-5,
+        .sui-xs-6,
+        .sui-xs-7,
+        .sui-xs-8,
+        .sui-xs-9,
+        .sui-xs-10,
+        .sui-xs-11,
+        .sui-5 {
+            position: relative;
+            float: left;
+            border-radius: 7%
+
+        }
+        #aui-header>.aui-title{
+          min-height: 2.25rem;
+    position: absolute;
+    margin: 0;
+    text-align: center;
+    white-space: nowrap;
+    right: 5rem;
+    left: 5rem;
+    width: auto;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    z-index: 2;
+        }
     </style>
 </head>
+
 <body>
-    <div class="empty">端API</div>
+    <header id="aui-header" class="aui-bar aui-bar-nav">
+        <div class="aui-pull-left aui-btn" onclick="openCamera()">
+            <span class="aui-iconfont aui-icon-camera"></span>
+            <span class="camera-text">随拍</span>
+        </div>
+        <div class="aui-title">
+            <div class="aui-tab">
+                <div class="aui-tab-item tapmode aui-active" onclick="switchLoading(this,'./frame1.html','homelist')">好友</div>
+                <div class="aui-tab-item tapmode" onclick="switchLoading(this,'./main.html','localList')">关注</div>
+            </div>
+        </div>
+        <div class="aui-pull-right aui-btn">
+            <div class="aui-pull-right aui-btn" onclick="">
+                <span class="camera-text">好友列表</span>
+            </div>
+        </div>
+    </header>
+    <div id="main">
+        <div id="myInfo">
+            <section class="aui-suipai">
+                <div class="aui-row">
+                    <div class="sui-xs-4 suipai1">
+                        <div class="flex-m-1">
+                        </div>
+                        <div class="f-suipai">
+                            <i class="aui-iconfont aui-icon-plus"></i>
+                        </div>
+                        <div class="suipai-title">添加随拍</div>
+                    </div>
+                    <div class="sui-xs-4 suipai2">
+                      <div class="flex-m-2">
+                      </div>
+                        <div class="f-suipai">
+                        <i class="aui-iconfont aui-icon-gear"></i>
+                      </div>
+                        <div class="suipai-title">随拍功能</div>
+                    </div>
+
+                </div>
+            </section>
+        </div>
+        <div id="friendsInfo"></div>
+        <div id="seeNewFriend">
+            <div class="aui-card-list">
+                <div class="aui-card-list-header">
+                    <div><span class="aui-text-parmary"> 发现好友</span></div>
+                    <i class="aui-iconfont aui-icon-more"></i>
+                </div>
+                <div class="aui-card-list-content">
+                    <ul class="aui-list aui-media-list">
+                        <li class="aui-list-item aui-list-item-middle">
+                            <div class="aui-media-list-item-inner">
+                                <div class="aui-list-item-media" style="width: 3rem;">
+                                    <img src="../image/demo/i2.png" class="aui-img-round">
+                                </div>
+                                <div class="aui-list-item-inner aui-list-item-arrow">
+                                    <div class="aui-list-item-text">
+                                        <div class="aui-list-item-title aui-font-size-18 color-snow">查看通讯录好友</div>
+
+                                    </div>
+                                    <div class="aui-list-item-text">
+                                        看看谁在抖音
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="aui-list-item aui-list-item-middle">
+                            <div class="aui-media-list-item-inner">
+                                <div class="aui-list-item-media" style="width: 3rem;">
+                                    <img src="../image/share/wx.png" class="aui-img-round">
+                                </div>
+                                <div class="aui-list-item-text aui-font-size-18">
+                                    快速添加微信好友
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </div>
 </body>
+
 </html>
-<script src="script/api.js"></script>
+<script src="../script/api.js"></script>
 <script>
-  apiready = function(){
-    console.log('frame1');
-  }
+    apiready = function() {
+      var header = document.querySelector('#aui-header');
+      $api.fixStatusBar(header);
+    }
+    function switchLoading(obj, url, text) {
+        var frames = api.frames();
+        for (var i = 0; i < frames.length; i++) {
+            api.closeFrame({
+                name: frames[i].name,
+            })
+        }
+        var header = $api.byId('aui-header');
+        var param = api.pageParam;
+        var headerPos = $api.offset(header);
+        var body_h = api.winHeight;
+        var footer_h = param.height;
+        var headerAct = $api.dom(header, '.aui-tab-item.aui-active');
+        $api.removeCls(headerAct, 'aui-active');
+        $api.addCls(obj, 'aui-active');
+        api.openFrame({
+            name: text,
+            url: url,
+            rect: {
+                x: 0,
+                y: headerPos.h,
+                w: 'auto',
+                h: body_h - headerPos.h - footer_h
+            },
+            pageParam: {
+                top: headerPos.h,
+                height: body_h - headerPos.h - footer_h
+            },
+            bounces: true,
+            bgColor: 'rgba(0,0,0,0)',
+            vScrollBarEnabled: true,
+            hScrollBarEnabled: true
+        });
+        setTimeout(function() {
+            // var frames = api.frames();
+            // console.log(JSON.stringify(frames))
+                // for (var i = 0; i < frames.length; i++) {
+
+            api.bringFrameToFront({
+                from: text
+            });
+            // console.log(JSON.stringify(frames))
+                // }
+        }, 1000)
+    }
+
+    function openCamera() {
+        var param = {
+            minDuration: 2,
+            maxDuration: 20,
+            isBackCamera: true,
+            flashText: '闪光灯',
+            cameraText: '翻转',
+            recordText: '按住拍',
+            recordHint: '提示',
+            exitDialogMessage: '是否放弃这段视频？',
+            dialogYes: '确定',
+            dialogNo: '取消',
+            progressMessage: '准备中…'
+        };
+        var demo = api.require('miniQuPaiPlus');
+        demo.record(param, function(ret, err) {
+            console.log(JSON.stringify(ret));
+        });
+    }
+</script>
