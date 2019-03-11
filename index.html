@@ -30,7 +30,6 @@
   color: #000;
   z-index: 99999 !important;
   max-width: 1vh;
-  font-style:normal
         }
 
         #footer>.aui-active {
@@ -67,26 +66,26 @@
 
     </div>
     <footer class="aui-bar aui-bar-tab nav-dom" id="footer">
-        <div id="tabbar1" class="aui-bar-tab-item aui-active" tapmode onclick="randomSwitchBtn(this,'html/header_local.html','home')">
+        <div id="tabbar1" class="aui-bar-tab-item aui-active" tapmode onclick="randomSwitchBtn(this,'html/header_local.html',0)">
             <!-- <i class="aui-iconfont aui-icon-home"></i> -->
-            <div class="aui-bar-tab-label"><span>首页</span></div>
+            <div class="aui-bar-tab-label"><span>云API</span></div>
         </div>
-        <div id="tabbar2" class="aui-bar-tab-item" tapmode onclick="randomSwitchBtn(this,'html/frame1.html','friend')">
+        <div id="tabbar2" class="aui-bar-tab-item" tapmode onclick="randomSwitchBtn(this,'html/frame1.html',1)">
             <!-- <i class="aui-iconfont aui-icon-star"></i> -->
-            <div class="aui-bar-tab-label"><span>好友</span></div>
+            <div class="aui-bar-tab-label"><span>端API</span></div>
         </div>
         <div id="tabbar5" class="aui-bar-tab-item" tapmode>
             <i class="center-nav">+</i>
         </div>
-        <div id="tabbar3" class="aui-bar-tab-item" tapmode onclick="randomSwitchBtn(this,'html/frame2.html','message')">
+        <div id="tabbar3" class="aui-bar-tab-item" tapmode onclick="randomSwitchBtn(this,'html/frame1.html',2)">
             <!-- <div class="aui-badge">99</div> -->
             <!-- <i class="aui-iconfont aui-icon-cart"></i> -->
-            <div class="aui-bar-tab-label"><span>消息</span></div>
+            <div class="aui-bar-tab-label"><span>开发</span></div>
         </div>
-        <div id="tabbar4" class="aui-bar-tab-item" tapmode onclick="randomSwitchBtn(this,'html/frame3.html','my')">
+        <div id="tabbar4" class="aui-bar-tab-item" tapmode onclick="randomSwitchBtn(this,'html/frame1.html',3)">
             <!-- <div class="aui-dot"></div> -->
             <!-- <i class="aui-iconfont aui-icon-my"></i> -->
-            <div class="aui-bar-tab-label"><span>我</span></div>
+            <div class="aui-bar-tab-label"><span>文档</span></div>
         </div>
     </footer>
 </body>
@@ -94,7 +93,6 @@
 </html>
 <script type="text/javascript" src="script/api.js"></script>
 <script type="text/javascript">
-var index = 'home';
     apiready = function() {
         api.parseTapmode();
         // var header = $api.byId('aui-header');
@@ -107,7 +105,7 @@ var index = 'home';
         // console.log(JSON.stringify(main));
         //body_h - headerPos.h - footer_h
         api.openFrame({
-            name: 'home1',
+            name: 'home',
             url: 'html/header_local.html',
             rect: {
                 x: 0,
@@ -118,8 +116,7 @@ var index = 'home';
             },
             pageParam: {
                 // top: headerPos.h,
-                height: body_h - footer_h,
-                name:index
+                height: body_h - footer_h
             },
             bounces: false,
             bgColor: 'rgba(0,0,0,0)',
@@ -131,7 +128,7 @@ var index = 'home';
             // console.log(JSON.stringify(frames))
             // for (var i = 0; i < frames.length; i++) {
              // console.log(window.childNode)
-            api.bringFrameToFront({ from: index });
+            api.sendFrameToBack({ from: 'home' });
             // }
            },1000)
 
@@ -142,9 +139,27 @@ var index = 'home';
         api.closeWin();
     }
 
+    function openCamera() {
+        api.getPicture({
+            sourceType: 'camera',
+            encodingType: 'jpg',
+            mediaValue: 'pic',
+            destinationType: 'url',
+            allowEdit: true,
+            quality: 50,
+            targetWidth: 100,
+            targetHeight: 100,
+            saveToPhotoAlbum: false
+        }, function(ret, err) {
+            if (ret) {
+                alert(JSON.stringify(ret));
+            } else {
+                alert(JSON.stringify(err));
+            }
+        });
+    }
 
-
-    function randomSwitchBtn(obj, url, v) {
+    function randomSwitchBtn(obj, url, index) {
         // $api.text($api.byId('aui-header'), name);
         var frames = api.frames();
         for (var i = 0; i < frames.length; i++) {
@@ -152,8 +167,6 @@ var index = 'home';
                 name: frames[i].name,
             })
         }
-        index = v;
-        console.log(v,index);
         var footer = 　$api.byId('footer')
         var body_h = api.winHeight;
         var footer_h = $api.offset(footer).h;
@@ -171,20 +184,19 @@ var index = 'home';
             },
             pageParam: {
                 // top: headerPos.h,
-                footer: body_h  - footer_h,
-                name:index
+                footer: body_h  - footer_h
             },
-            bounces: false,
+            bounces: true,
             bgColor: 'rgba(0,0,0,0)',
             vScrollBarEnabled: true,
             hScrollBarEnabled: true
         });
         setTimeout(function() {
            var frames = api.frames();
-            // console.log(JSON.stringify(frames))
+            console.log(JSON.stringify(frames))
             // for (var i = 0; i < frames.length; i++) {
              // console.log(window.childNode)
-            api.bringFrameToFront({ from: index });
+            api.sendFrameToBack({ from: text });
             // }
            },1000)
     }

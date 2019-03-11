@@ -224,6 +224,7 @@
     var container = document.getElementById('slip');
     var pages;
     var slip;
+    var moveIsTrue = false;
     var userData = [{
         uid: new Date().getTime() + 1,
         imageUrl: 'http://7z2dc9.com1.z0.glb.clouddn.com/apicloud/bc281dfcaf750de7acd9c8e9224e237b.png',
@@ -296,19 +297,28 @@
         $api.fixStatusBar(header)
 
         slip.start(function(event) {
-                // console.log('start');
+            console.log('start');
+                console.log(JSON.stringify(this));
                 page = this.page;
                 // 事件对象
-
+                moveIsTrue = false;
                 // 当前坐标值
                 // console.log(JSON.stringify(userData[this.page]));
                 if (!document.getElementById(userData[this.page].uid).paused)
                     document.getElementById(userData[this.page].uid).pause();
             })
             .move(function(event) {
-                // console.log('move');
+                console.log('move');
+                moveIsTrue = true;
+                    console.log(JSON.stringify(this));
             })
             .end(function() {
+              console.log('end');
+                  console.log(JSON.stringify(this));
+
+                if(this.finger == null){
+                  document.getElementById(userData[page].uid).pause();
+                }
                 page = this.page;
                 // console.log('end');
                 // console.log(JSON.stringify(this.page));
