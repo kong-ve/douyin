@@ -107,7 +107,7 @@ var index = 'home';
         // console.log(JSON.stringify(main));
         //body_h - headerPos.h - footer_h
         api.openFrame({
-            name: 'home',
+            name: 'home1',
             url: 'html/header_local.html',
             rect: {
                 x: 0,
@@ -144,7 +144,7 @@ var index = 'home';
 
 
 
-    function randomSwitchBtn(obj, url, i) {
+    function randomSwitchBtn(obj, url, v) {
         // $api.text($api.byId('aui-header'), name);
         var frames = api.frames();
         for (var i = 0; i < frames.length; i++) {
@@ -152,7 +152,8 @@ var index = 'home';
                 name: frames[i].name,
             })
         }
-        index = i;
+        index = v;
+        console.log(v,index);
         var footer = 　$api.byId('footer')
         var body_h = api.winHeight;
         var footer_h = $api.offset(footer).h;

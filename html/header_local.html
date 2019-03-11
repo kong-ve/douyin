@@ -261,7 +261,7 @@
         el_child.loop = true;
         el_child.controls = true;
         el_child.setAttribute('playsinline', 'true');
-        el_child.setAttribute('webkit-playsinline','true');
+        el_child.setAttribute('webkit-playsinline', 'true');
         el_child.className = 'video_max';
         fix_message.id = "fixmessage_info";
         fix_message_in.className = "username";
@@ -291,30 +291,15 @@
         document.getElementById(userData[page].uid).play();
     }
     apiready = function() {
-      api.parseTapmode();
+        api.parseTapmode();
         var header = $api.byId('aui-header');
         $api.fixStatusBar(header)
-        api.addEventListener({
-            name: 'tap'
-        }, function(ret, err) {
-            // console.log(JSON.stringify(document.getElementById(userData[page].uid)))
 
-            if (document.getElementById(userData[page].uid).paused) {
-                document.getElementById(userData[page].uid).controls = false;
-                document.getElementById(userData[page].uid).play();
-                //  document.getElementById('showPlay').style.display = 'none';
-            } else {
-                document.getElementById(userData[page].uid).controls = true;
-                document.getElementById(userData[page].uid).pause();
-                //  document.getElementById('showPlay').style.display = 'block';
-
-            }
-        });
         slip.start(function(event) {
                 // console.log('start');
                 page = this.page;
                 // 事件对象
-                // console.log(JSON.stringify(event));
+
                 // 当前坐标值
                 // console.log(JSON.stringify(userData[this.page]));
                 if (!document.getElementById(userData[this.page].uid).paused)
@@ -327,13 +312,30 @@
                 page = this.page;
                 // console.log('end');
                 // console.log(JSON.stringify(this.page));
-                if (document.getElementById(userData[this.page].uid).paused){
+                if (document.getElementById(userData[this.page].uid).paused) {
                     document.getElementById(userData[this.page].uid).play();
-                    document.getElementById(userData[this.page].uid).pause();
-                    document.getElementById(userData[this.page].uid).play();
-                  }
+                }else{
+                  document.getElementById(userData[this.page].uid).pause();
+                }
                 // 滑动方向
                 // console.log(this.orient);
+            });
+            api.addEventListener({
+                name: 'tap'
+            }, function(ret, err) {
+                // console.log(JSON.stringify(document.getElementById(userData[page].uid)))
+
+                if (document.getElementById(userData[page].uid).paused) {
+                    document.getElementById(userData[page].uid).controls = false;
+                    document.getElementById(userData[page].uid).play();
+                    //  document.getElementById('showPlay').style.display = 'none';
+                } else {
+                  console.error(JSON.stringify(!document.getElementById(userData[page].uid).paused));
+                    document.getElementById(userData[page].uid).controls = true;
+                    document.getElementById(userData[page].uid).pause();
+                    //  document.getElementById('showPlay').style.display = 'block';
+
+                }
             });
     }
 
@@ -345,21 +347,23 @@
 
     function switchLoading(obj, url, text) {
         var frames = api.frames();
-        for (var i = 0; i < frames.length; i++) {
-            api.closeFrame({
-                name: frames[i].name,
-            })
-        }
-        console.log(url)
         var header = $api.byId('aui-header');
         var param = api.pageParam;
         var headerPos = $api.offset(header);
         var body_h = api.frameHeight;
         var footer_h = param.height;
-        var headerAct = $api.dom(header,'.aui-active');
+        var headerAct = $api.dom(header, '.aui-active');
         console.log(JSON.stringify(headerAct.length))
         $api.removeCls(headerAct, 'aui-active');
         $api.addCls(obj, 'aui-active');
+        for (var i = 0; i < frames.length; i++) {
+            if (frames[i].name == text) {
+                api.bringFrameToFront({
+                    from: text
+                });
+                return;
+            }
+        }
         api.openFrame({
             name: text,
             url: url,
@@ -372,8 +376,8 @@
             pageParam: {
                 top: headerPos.h,
                 height: body_h - headerPos.h - footer_h,
-                name:text,
-                parentsname:api.pageParam.name
+                name: text,
+                parentsname: api.pageParam.name
             },
             bounces: true,
             bgColor: 'rgba(0,0,0,0)',
@@ -384,7 +388,9 @@
             var frames = api.frames();
             console.log(JSON.stringify(frames))
                 // for (var i = 0; i < frames.length; i++) {
-  api.bringFrameToFront({ from:text });
+            api.bringFrameToFront({
+                from: text
+            });
             // api.setFrameAttr({
             //     // from: text,
             //     name:api.pageParam.name,
@@ -396,22 +402,23 @@
     }
 
     function openCamera() {
-        var param = {
-            minDuration: 2,
-            maxDuration: 20,
-            isBackCamera: true,
-            flashText: '闪光灯',
-            cameraText: '翻转',
-            recordText: '按住拍',
-            recordHint: '提示',
-            exitDialogMessage: '是否放弃这段视频？',
-            dialogYes: '确定',
-            dialogNo: '取消',
-            progressMessage: '准备中…'
-        };
-        var demo = api.require('miniQuPaiPlus');
-        demo.record(param, function(ret, err) {
-            console.log(JSON.stringify(ret));
+        var cocoVideo = api.require('cocoVideo');
+        var params = {
+            mode: 'all',
+            min_time: '1',
+            max_time: '15',
+            img_num: '1'
+        }
+        cocoVideo.openCamera(params, function(ret, err) {
+          console.log(JSON.stringify(ret))
+            if (ret) {
+
+                ret.video_path;
+                ret.image_path;
+            }
+            if (err) {
+                alert(err.msg);
+            }
         });
     }
 </script>
