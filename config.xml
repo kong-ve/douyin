@@ -8,6 +8,11 @@
     </author>
     <content src="index.html" />
     <access origin="*" />
+    <feature name="qiniuUpfile">
+       <param name="bucket" value="test"/>
+       <param name="SecretKey" value="QrFcgs8Z69cyqGD-seCC8PbJ7FgWQ8TlLcqdzAPO"/>
+       <param name="AccessKey" value="JbfFnWoGASeaESnavF1wqsUU_GZv8fg4vj8LyWPB"/>
+      </feature>
     <preference name="pageBounce" value="false"/>
 	<preference name="appBackground" value="rgba(0,0,0,0.0)"/>
 	<preference name="windowBackground" value="rgba(0,0,0,0.0)"/>

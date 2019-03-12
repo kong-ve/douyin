@@ -1,0 +1,138 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <link rel="stylesheet" type="text/css" href="../css/aui.css" />
+    <style type="text/css">
+        .aui-list .aui-list-item-media {
+            width: 3rem;
+        }
+        .notes-add {
+            position: fixed;
+            left: 0.5rem;
+            bottom: 0.5rem;
+            width: 3rem;
+            z-index: 99;
+        }
+        textarea {
+            height: 8rem;
+            background-color: #ffffff;
+            padding: 0.5rem;
+        }
+        .photos img {
+            display: block;
+            width: 100%;
+        }
+        .add-photos > div {
+            width: 100%;
+            height:5.15rem;
+            line-height: 5.15rem;
+        }
+        .add-photos > div .aui-iconfont {
+            font-size: 2rem;
+            color: #ccc;
+        }
+        .image-item {
+            position: relative;
+            height: 5.3rem;
+            overflow: hidden;
+            background-color: #f0f0f0;
+        }
+        .image-item img {
+            display: block;
+            margin: 0 auto;
+            width: auto;
+            height: 100%;
+        }
+        .image-item .delete-btn {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            width: 28px;
+            height: 28px;
+            background-color: rgba(0,0,0,0.7);
+            margin-left: -14px;
+            margin-top: -14px;
+            color: #ffffff;
+            text-align: center;
+            border-radius: 50%;
+        }
+    </style>
+</head>
+<body>
+    <p class="aui-text-center aui-margin-t-15">内容发布</p>
+    <section class="aui-content-padded">
+        <textarea placeholder="在这里输入内容..."></textarea>
+    </section>
+    <p class="aui-text-center aui-margin-t-15">美图更精彩</p>
+    <section class="aui-content-padded">
+        <div class="aui-row aui-row-padded">
+          <div class="aui-col-xs-4 image-item">
+              <input type="hidden" >
+              <img src="../image/demo1.png" class="notes-image">
+              <div class="delete-btn">
+                  <i class="aui-iconfont aui-icon-trash"></i>
+              </div>
+          </div>
+            <div class="aui-col-xs-4 add-photos">
+                <div class="aui-border aui-text-center">
+                    <i class="aui-iconfont aui-icon-plus"></i>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="aui-content-padded aui-clearfix">
+        <div class="aui-info">
+            <div class="aui-info-item aui-padded-r-10" style="width: 13rem">
+                <div>
+                    <i class="aui-iconfont aui-icon-location"></i>
+                    <span id="location" class="aui-ellipsis">北京市海淀区</span>
+                </div>
+            </div>
+            <div class="aui-info-item" style="width: 80px;" tapmode id="ChangeLocation">
+                <i class="aui-iconfont aui-icon-refresh aui-text-info aui-margin-r-5"></i>
+                <span class="aui-text-info">重新定位</span>
+            </div>
+        </div>
+    </section>
+<footer class="aui-bar aui-bar-tab">
+<div class="aui-bar-tab-item aui-bg-danger aui-text-white" tapmode style="width: auto;" onclick="saveFile()">确定</div>
+</footer>
+</body>
+</html>
+<script>
+  var qiniuStorage,params,localList;
+  apiready = function () {
+    api.parseTapmode();
+    qiniuStorage = api.require("qiniuStorage");
+   qiniuStorage.configUploader({
+       params: {
+           "x:foo": "fooval"
+       },
+       checkCrc: false,
+       mimeType: ''
+   });
+   api.getLocation(function(ret, err) {
+    if (ret && ret.status) {
+        //获取位置信息成功
+        localList = ret;
+    } else {
+        alert(JSON.stringify(err));
+    }
+});
+    params = api.pageParam;
+   console.log(JSON.stringify(params));
+   $api.addEvt($api.dom('#ChangeLocation'), 'click', function(){
+
+});
+  }
+  function saveFile() {
+    qiniuSstorage.start({
+    token:new Date().getTime(),
+    path: 'fs://'+params.videoUrl || params.imageUrl,
+    // key: ''
+});
+  }
+</script>
