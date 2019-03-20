@@ -328,18 +328,18 @@
             d.nextSibling.className.replace('show-video', 'hide-video');
         }
     }
-      var cocoVideo;
-      var params = {
-          mode: 'all',
-          min_time: '1',
-          max_time: '15',
-          img_num: '1'
-      };
+    var cocoVideo;
+    var params = {
+        mode: 'all',
+        min_time: '1',
+        max_time: '15',
+        img_num: '1'
+    };
     apiready = function() {
             api.parseTapmode();
             var header = $api.byId('aui-header');
             $api.fixStatusBar(header)
-             cocoVideo = api.require('cocoVideo');
+            cocoVideo = api.require('cocoVideo');
             cocoVideo.config(params, function(ret) {
                 if (ret.status == 'error') {
                     alert(ret.msg);
@@ -449,19 +449,18 @@
             url: url,
             rect: {
                 x: 0,
-                y: headerPos.h,
+                y: 0,
                 w: 'auto',
-                h: body_h - headerPos.h-footer_h
+                h: body_h
             },
             pageParam: {
                 top: headerPos.h,
                 height: body_h - headerPos.h - footer_h,
                 name: text,
-                footer:footer_h,
                 parentsname: api.pageParam.name
             },
             bounces: false,
-            bgColor: 'rgba(0,0,0)',
+            bgColor: 'rgba(0,0,0,0)',
             vScrollBarEnabled: true,
             hScrollBarEnabled: true
         });
@@ -483,24 +482,39 @@
     }
 
     function openCamera() {
-        cocoVideo.openCamera(params, function(ret, err) {
+        var param = {
+            resolutionMode: 2,
+            ratioMode: 1,
+            recordMode: 3,
+            beautyStatus: true,
+            beautyLevel: 80,
+            isCameraBack: false,
+            isNeedClip: true,
+            minDuration: 2,
+            maxDuration: 30,
+            videoQuality: 2,
+            gop: 5,
+            frameRate: 25
+        };
+        var demo = api.require('quPaiModule');
+        demo.record(param, function(ret, err) {
             console.log(JSON.stringify(ret))
             if (ret) {
                 api.openWin({
                     name: 'addmyinfo',
                     url: './addMyimageInfo_win.html',
                     pageParam: {
-                        img: ret.image_path,
-                        video: ret.video_path
+                        img: ret.thumbnailPath,
+                        video: ret.videoPath
                     }
                 });
 
-                ret.video_path;
+                ret.videoPath;
                 ret.image_path;
             }
             if (err) {
                 alert(err.msg);
             }
         });
-    }
+      }
 </script>

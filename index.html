@@ -10,7 +10,6 @@
     <link rel="stylesheet" type="text/css" href="./css/style.css" />
     <link rel="stylesheet" type="text/css" href="./css/aui.css" />
     <style>
-
         #footer {
             background-color: #000 !important;
             position: fixed;
@@ -18,18 +17,17 @@
             z-index: 999999;
         }
 
-
-
         #footer>#tabbar5>.center-nav {
-          border: .5px solid #fff;
-  padding: .1vh 2.5vh;
-  border-radius: 18%;
-  background-color: #ffffff;
-  font-size: larger;
-  font-weight: bold;
-  color: #000;
-  z-index: 99999 !important;
-  max-width: 1vh;
+            border: .5px solid #fff;
+            padding: .1vh 2.5vh;
+            border-radius: 18%;
+            background-color: #ffffff;
+            font-size: larger;
+            font-weight: bold;
+            color: #000;
+            z-index: 99999 !important;
+            max-width: 1vh;
+            font-style: normal
         }
 
         #footer>.aui-active {
@@ -66,26 +64,26 @@
 
     </div>
     <footer class="aui-bar aui-bar-tab nav-dom" id="footer">
-        <div id="tabbar1" class="aui-bar-tab-item aui-active" tapmode onclick="randomSwitchBtn(this,'html/header_local.html',0)">
+        <div id="tabbar1" class="aui-bar-tab-item aui-active" tapmode onclick="randomSwitchBtn(this,'html/header_local.html','home')">
             <!-- <i class="aui-iconfont aui-icon-home"></i> -->
-            <div class="aui-bar-tab-label"><span>云API</span></div>
+            <div class="aui-bar-tab-label"><span>首页</span></div>
         </div>
-        <div id="tabbar2" class="aui-bar-tab-item" tapmode onclick="randomSwitchBtn(this,'html/frame1.html',1)">
+        <div id="tabbar2" class="aui-bar-tab-item" tapmode onclick="randomSwitchBtn(this,'html/frame1.html','friend')">
             <!-- <i class="aui-iconfont aui-icon-star"></i> -->
-            <div class="aui-bar-tab-label"><span>端API</span></div>
+            <div class="aui-bar-tab-label"><span>好友</span></div>
         </div>
         <div id="tabbar5" class="aui-bar-tab-item" tapmode>
             <i class="center-nav">+</i>
         </div>
-        <div id="tabbar3" class="aui-bar-tab-item" tapmode onclick="randomSwitchBtn(this,'html/frame1.html',2)">
+        <div id="tabbar3" class="aui-bar-tab-item" tapmode onclick="randomSwitchBtn(this,'html/frame2.html','message')">
             <!-- <div class="aui-badge">99</div> -->
             <!-- <i class="aui-iconfont aui-icon-cart"></i> -->
-            <div class="aui-bar-tab-label"><span>开发</span></div>
+            <div class="aui-bar-tab-label"><span>消息</span></div>
         </div>
-        <div id="tabbar4" class="aui-bar-tab-item" tapmode onclick="randomSwitchBtn(this,'html/frame1.html',3)">
+        <div id="tabbar4" class="aui-bar-tab-item" tapmode onclick="randomSwitchBtn(this,'html/frame3.html','my')">
             <!-- <div class="aui-dot"></div> -->
             <!-- <i class="aui-iconfont aui-icon-my"></i> -->
-            <div class="aui-bar-tab-label"><span>文档</span></div>
+            <div class="aui-bar-tab-label"><span>我的</span></div>
         </div>
     </footer>
 </body>
@@ -97,8 +95,8 @@
         api.parseTapmode();
         // var header = $api.byId('aui-header');
         var footer = 　$api.byId('footer')
-        // $api.fixStatusBar(header);
-        // var headerPos = $api.offset(header);
+            // $api.fixStatusBar(header);
+            // var headerPos = $api.offset(header);
         var body_h = api.winHeight;
         var footer_h = $api.offset(footer).h;
         // var main = $api.first($api.dom('#main'));
@@ -112,7 +110,7 @@
                 y: 0,
                 w: 'auto',
                 h: body_h - footer_h,
-                'z-index':1
+                'z-index': 1
             },
             pageParam: {
                 // top: headerPos.h,
@@ -124,13 +122,15 @@
             hScrollBarEnabled: false
         });
         setTimeout(function() {
-           var frames = api.frames();
+            var frames = api.frames();
             // console.log(JSON.stringify(frames))
             // for (var i = 0; i < frames.length; i++) {
-             // console.log(window.childNode)
-            api.sendFrameToBack({ from: 'home' });
+            // console.log(window.childNode)
+            api.sendFrameToBack({
+                from: 'home'
+            });
             // }
-           },1000)
+        }, 1000)
 
 
     }
@@ -177,14 +177,14 @@
             name: index,
             url: url,
             rect: {
-              x: 0,
-              y: 0,
-              w: 'auto',
-              h: body_h  - footer_h
+                x: 0,
+                y: 0,
+                w: 'auto',
+                h: body_h - footer_h
             },
             pageParam: {
                 // top: headerPos.h,
-                footer: body_h  - footer_h
+                footer: body_h - footer_h
             },
             bounces: true,
             bgColor: 'rgba(0,0,0,0)',
@@ -192,12 +192,14 @@
             hScrollBarEnabled: true
         });
         setTimeout(function() {
-           var frames = api.frames();
+            var frames = api.frames();
             console.log(JSON.stringify(frames))
-            // for (var i = 0; i < frames.length; i++) {
-             // console.log(window.childNode)
-            api.sendFrameToBack({ from: index });
+                // for (var i = 0; i < frames.length; i++) {
+                // console.log(window.childNode)
+            api.sendFrameToBack({
+                from: index
+            });
             // }
-           },1000)
+        }, 1000)
     }
 </script>

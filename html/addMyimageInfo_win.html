@@ -11,7 +11,10 @@
         <a class="aui-btn aui-pull-left" tapmode onclick="closeWin()">
             <span class="aui-iconfont aui-icon-left"></span>
         </a>
-        <div class="aui-title">内容发布</div>
+        <a class="aui-btn aui-pull-left" tapmode onclick="save()">
+            <span>确定</span>
+        </a>
+        <div class="aui-title">随拍发布</div>
     </header>
 </body>
 <script type="text/javascript" src="../script/api.js"></script>
@@ -31,6 +34,11 @@
                 y: headerPos.h,
                 w: 'auto',
                 h: 'auto'
+            },
+            pageParam:{
+              name:api.frameName,
+              img: api.pageParam.thumbnailPath ,
+              video: api.pageParam.videoPath
             }
         })
     };
