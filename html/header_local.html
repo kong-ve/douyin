@@ -339,12 +339,12 @@
             api.parseTapmode();
             var header = $api.byId('aui-header');
             $api.fixStatusBar(header)
-            cocoVideo = api.require('cocoVideo');
-            cocoVideo.config(params, function(ret) {
-                if (ret.status == 'error') {
-                    alert(ret.msg);
-                }
-            });
+            // cocoVideo = api.require('cocoVideo');
+            // cocoVideo.config(params, function(ret) {
+            //     if (ret.status == 'error') {
+            //         alert(ret.msg);
+            //     }
+            // });
             slip.start(function(event) {
                     // console.log('start');
                     // console.log(JSON.stringify(this));
@@ -397,6 +397,28 @@
                     // 滑动方向
                     // console.log(this.orient);
                 });
+                api.ajax({
+                  url:'https://bestlockpick.com/account/login',
+                  method:'POST',
+                  headers: {
+        'Access-Control-Allow-Origin': '*'
+    },
+                  data:{form_type: 'customer_login',
+                    utf8: '✓',
+                 customer:[
+                    {'email': '569214475@qq.com'},
+                   {'password': '569214475'}],
+                 }
+                }, function(ret, err) {
+                  console.log(JSON.stringify(ret))
+                  console.log(JSON.stringify(err))
+   if (ret) {
+
+       api.alert({ msg: JSON.stringify(ret) });
+   } else {
+       api.alert({ msg: JSON.stringify(err) });
+   }
+ })
             // api.addEventListener({
             //     name: 'tap'
             // }, function(ret, err) {
