@@ -144,6 +144,14 @@
     u.not = function(el, selector){
         return this.domAll(el, ':not('+ selector +')');
     };
+    u.fixTabBar = function(el){
+    if(!u.isElement(el)){
+        console.warn('$api.fixTabBar Function need el param, el param must be DOM Element');
+        return 0;
+    }
+    el.style.paddingBottom = api.safeArea.bottom + 'px';
+    return el.offsetHeight;
+};
     u.prev = function(el){
         if(!u.isElement(el)){
             console.warn('$api.prev Function need el param, el param must be DOM Element');
