@@ -357,13 +357,13 @@
     slip = Slip(container, 'y').webapp(pages);
     var link_list = document.querySelectorAll('.link');
     console.log(JSON.stringify(link_list));
-    // link_list.map(function(els,index){
-    //   if(checkPC()){
-    //      $api.rmEvt(els, 'click', onenShare);
-    //     }else{
-    //       $api.rmEvt(els, 'tap',onenShare );
-    //     }
-    //   })
+    link_list.map(function(els,index){
+      if(checkPC()){
+         $api.rmEvt(els, 'click', onenShare);
+        }else{
+          $api.rmEvt(els, 'tap',onenShare );
+        }
+      })
     function showPlay(d) {
         // document.getElementById('showPlay').style.display = 'none';
         // document.getElementById(userData[page].uid).play();
