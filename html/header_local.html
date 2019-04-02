@@ -446,8 +446,8 @@
                     if (this.finger == null) {
                         if (document.getElementById(userData[this.page].uid).paused) {
                             document.getElementById(userData[this.page].uid).play();
-                            document.getElementById(userData[this.page].uid).pause();
-                            document.getElementById(userData[this.page].uid).play();
+                            // document.getElementById(userData[this.page].uid).pause();
+                            // document.getElementById(userData[this.page].uid).play();
                             document.getElementById(userData[this.page].uid).muted = false;
                             $api.removeCls(pages[this.page].querySelector('.play-video'), 'show-video');
                             $api.addCls(pages[this.page].querySelector('.play-video'), 'hide-video');
