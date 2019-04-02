@@ -334,7 +334,7 @@
         // fix_message.style.top = 15 + (i * 35) + 'em';
         fix_message_in.innerHTML = '<div style="background:url(' + v.imageUrl + ') 40% 45%" class="userimg"></div><span class="alink_s"><span class="alink_s_action">+</span></span>'
         fix_message_alink.className = "link";
-        fix_message_alink.innerHTML = "<span class='icon iconfont icon-fenxiang8 in_ac'></span>"
+        fix_message_alink.innerHTML = "<span class='icon iconfont icon-fenxiang11 in_ac'></span>"
         // fix_message_alink.setAttribute('onclick','onenShare()')
         fix_message.appendChild(fix_message_in)
         fix_message.appendChild(fix_message_alink)
@@ -391,6 +391,7 @@
             var header = $api.byId('aui-header');
             $api.fixStatusBar(header)
             var link_list = $api.domAll('.link');
+            console.log(JSON.stringify(link_list));
             link_list.map(function(els,index){
               if(checkPC()){
                  $api.rmEvt(els, 'click', onenShare);

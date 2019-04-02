@@ -25,7 +25,7 @@
 <script src="script/api.js"></script>
 <script>
   apiready = function(){
-    // api.parseTapmode();
+    api.parseTapmode();
     // var main = $api.byId('main');
     // console.log(JSON.stringify(main));
     var demo = api.require('scrollVideo');
@@ -62,6 +62,9 @@
     // console.log(JSON.stringify(ret)+"   "+JSON.stringify(err))
       // alert(JSON.stringify(ret)+"   "+JSON.stringify(err));
   });
+  demo.addEventListener(function(ret, err){
+    console.log(JSON.stringify(ret))
+  })
   demo.pause(function(ret,err){
     // console.log(JSON.stringify(ret,err));
 });
