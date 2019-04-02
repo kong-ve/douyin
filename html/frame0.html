@@ -61,16 +61,22 @@
   },function(ret, err){
     // console.log(JSON.stringify(ret)+"   "+JSON.stringify(err))
       // alert(JSON.stringify(ret)+"   "+JSON.stringify(err));
+      demo.showScrollVideo(function(ret,err){
+          console.log(JSON.stringify(ret,err));
+      });
+      demo.play(function(ret,err){
+        console.log(JSON.stringify(ret,err));
+      });
   });
-  demo.addEventListener(function(ret, err){
-    console.log(JSON.stringify(ret))
-  })
-  demo.pause(function(ret,err){
-    // console.log(JSON.stringify(ret,err));
-});
-demo.play(function(ret,err){
-  // console.log(JSON.stringify(ret,err));
-});
+  // demo.addEventListener(function(ret, err){
+  //   console.log(JSON.stringify(ret))
+  // })
+//   demo.pause(function(ret,err){
+//     // console.log(JSON.stringify(ret,err));
+// });
+// demo.play(function(ret,err){
+//   // console.log(JSON.stringify(ret,err));
+// });
 
   }
 

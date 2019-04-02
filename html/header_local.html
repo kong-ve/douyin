@@ -221,6 +221,14 @@
           #share>ul li{
             float: left;
           }
+          .img_max{
+            position: absolute;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 98;
+            display: block;
+          }
     </style>
 
 </head>
@@ -284,7 +292,7 @@
     var moveIsTrue = false;
     var userData = [{
         uid: new Date().getTime() + 1,
-        imageUrl: 'http://7z2dc9.com1.z0.glb.clouddn.com/apicloud/bc281dfcaf750de7acd9c8e9224e237b.png',
+        imageUrl: '../image/suipai/suipai1.png',
         videoUrl: 'http://7z2dc9.com1.z0.glb.clouddn.com/apicloud/abb9595e74647defe21d748e12f7a7c9.mp4',
     }, {
         uid: new Date().getTime() + 2,
@@ -317,6 +325,7 @@
         el_child.poster = v.imageUrl;
         el_child.autoplay = true;
         el_child.loop = true;
+        el_child.type='video/mp4';
         // el_child.setAttribute('onclick','showPlay(this)');
         el_child.muted  = true;
         el_child.setAttribute('playsinline', 'true');
@@ -331,14 +340,19 @@
         el_child.className = 'video_max';
         fix_message.id = "fixmessage_info";
         fix_message_in.className = "username";
+        el_child.codecs="avc1.42E01E, mp4a.40.2"
         // fix_message.style.top = 15 + (i * 35) + 'em';
         fix_message_in.innerHTML = '<div style="background:url(' + v.imageUrl + ') 40% 45%" class="userimg"></div><span class="alink_s"><span class="alink_s_action">+</span></span>'
         fix_message_alink.className = "link";
         fix_message_alink.innerHTML = "<span class='icon iconfont icon-fenxiang11 in_ac'></span>"
         // fix_message_alink.setAttribute('onclick','onenShare()')
+        // var img = document.createElement('img');
+        // img.id = 'imgs';
+        // img.className = 'img_max';
         fix_message.appendChild(fix_message_in)
         fix_message.appendChild(fix_message_alink)
         fix_message.appendChild(fix_message_repick)
+        // el.appendChild(img);
         el.appendChild(el_child);
         var i_el = document.createElement('i');
         i_el.className = 'play-video hide-video icon iconfont icon-play';
@@ -351,7 +365,10 @@
     })
     pages = document.querySelectorAll('.swipe-box');
     // console.log(JSON.stringify(pages[0].querySelector('#fixmessage_info').getElementsByTagName('div').length))
-    document.getElementById(userData[0].uid).muted = false;
+    document.getElementById(userData[0].uid).play();
+    document.getElementById(userData[this.page].uid).muted = false;
+    // document.getElementById(userData[this.page].uid).play();
+    // setTimeout(function(){pages[0].querySelector('.img_max').style.display = 'none'},2000);
     // setTimeout(function(){document.getElementById(userData[0].uid).pause()},40);
     // setTimeout(function(){document.getElementById(userData[0].uid).play()},60);
     slip = Slip(container, 'y').webapp(pages);
@@ -398,7 +415,7 @@
             api.parseTapmode();
             var header = $api.byId('aui-header');
             $api.fixStatusBar(header);
-
+            // slip._onTouchEnd();
 
             // cocoVideo = api.require('cocoVideo');
             // cocoVideo.config(params, function(ret) {
@@ -429,6 +446,8 @@
                     if (this.finger == null) {
                         if (document.getElementById(userData[this.page].uid).paused) {
                             document.getElementById(userData[this.page].uid).play();
+                            document.getElementById(userData[this.page].uid).pause();
+                            document.getElementById(userData[this.page].uid).play();
                             document.getElementById(userData[this.page].uid).muted = false;
                             $api.removeCls(pages[this.page].querySelector('.play-video'), 'show-video');
                             $api.addCls(pages[this.page].querySelector('.play-video'), 'hide-video');
@@ -443,10 +462,10 @@
                     } else {
                         document.getElementById(userData[page].uid).pause();
                         page = this.page;
-                        document.getElementById(userData[this.page].uid).play();
-                        document.getElementById(userData[this.page].uid).muted = false;
-                        // document.getElementById(userData[this.page].uid).pause();
                         // document.getElementById(userData[this.page].uid).play();
+                        document.getElementById(userData[this.page].uid).muted = false;
+                        document.getElementById(userData[this.page].uid).pause();
+                        document.getElementById(userData[this.page].uid).play();
 
                     }
 
