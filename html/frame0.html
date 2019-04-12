@@ -22,7 +22,7 @@
     </div>
 </body>
 </html>
-<script src="script/api.js"></script>
+<script src="../script/api.js"></script>
 <script>
   apiready = function(){
     api.parseTapmode();
@@ -77,7 +77,14 @@
 // demo.play(function(ret,err){
 //   // console.log(JSON.stringify(ret,err));
 // });
+api.openFrame({
+  name:'videomsg',
+  url: 'html/video_msg.html',
+  rect: {
+      x: api.frameWidth - 50,
 
+  },
+})
   }
 
 </script>

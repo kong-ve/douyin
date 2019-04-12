@@ -9,6 +9,7 @@
     <link rel="stylesheet" type="text/css" href="../css/api.css" />
     <link rel="stylesheet" type="text/css" href="../css/style.css" />
     <link rel="stylesheet" type="text/css" href="../css/aui.css" />
+
     <link rel="stylesheet" type="text/css" href="../feature/fonts/iconfont.css" />
     <style>
         * {
@@ -67,13 +68,14 @@
         }
 
         .swipe-box>#fixmessage_info {
-            width: 3em;
             position: relative;
             right: 0;
             float: right;
-            top: -22em;
-            z-index: 3;
+            top: -9.5rem;
+            z-index: 10;
             height: 15em;
+            width: 100%;
+            color: #fff;
         }
 
         .swipe-box>#fixmessage_info>.username {
@@ -82,6 +84,9 @@
             margin-right: 0.25em;
             margin-bottom: 2em;
             right: 0;
+            z-index: 11;
+            width: 100%;
+            height: 100%;
             position: absolute;
         }
 
@@ -192,7 +197,7 @@
             z-index: 4;
             background: rgba(0, 0, 0, 0.3);
             width: 100%;
-            font-size: 10em;
+            font-size: 3rem !important;
         }
 
         .hide-video {
@@ -205,8 +210,8 @@
 
         .icon-play:before {
             position: absolute;
-            top: 1em;
-            left: .6em;
+            top: 17rem;
+            left: 7rem;
         }
         #share{
           position: fixed;
@@ -229,6 +234,30 @@
             z-index: 98;
             display: block;
           }
+.sample_content {
+    position: absolute;
+    background: rgba(0, 0, 0, 0.1);
+    bottom: 2.72rem
+}
+.sample_content .ui-text{
+  display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    overflow: hidden;
+}
+.btnbox{
+  background-color:#45ddd2;
+  color:#fff;
+  width:48px;
+  height:48px;
+  border-radius:50%;
+  line-height:48px;
+  text-align:center;
+  visibility:inherit;
+}
+.icon{
+  font-size: x-large;
+}
     </style>
 
 </head>
@@ -254,6 +283,16 @@
     <div id="showPlay" style="display:none" onclick="showPlay()">
         <span class="iconfont icon-douyinkuaishou"></span>
     </div>
+    <div id="shareBtn" style="z-index:1000;position: fixed !important;right:10px;bottom:17rem"onclick="shareStart()">
+             <div class="btnbox" >
+               <i class="icon iconfont icon-fenxiang9" color="#fff" size="24"></i>
+             </div>
+           </div>
+ <div id="sellBtn" style="z-index:999;position: fixed !important;right:10px;bottom:21rem">
+     <div class="btnbox">
+       <i class="icon iconfont icon-daifukuan" size="24"></i>
+     </div>
+ </div>
     <div class="swipe-wrap" id="slip">
         <article class="swipe">
 
@@ -286,327 +325,298 @@
 <script type="text/javascript" src="../script/api.js"></script>
 <script type="text/javascript" src="../script/slip.js"></script>
 <script type="text/javascript">
-    var container = document.getElementById('slip');
-    var pages;
-    var slip;
-    var moveIsTrue = false;
-    var userData = [{
-        uid: new Date().getTime() + 1,
-        imageUrl: '../image/suipai/suipai1.png',
-        videoUrl: 'http://7z2dc9.com1.z0.glb.clouddn.com/apicloud/abb9595e74647defe21d748e12f7a7c9.mp4',
-    }, {
-        uid: new Date().getTime() + 2,
-        imageUrl: 'http://7z2dc9.com1.z0.glb.clouddn.com/apicloud/1a73dd6a90a52b2aad1aafefbf977e4c.png',
-        videoUrl: 'http://7z2dc9.com1.z0.glb.clouddn.com/apicloud/00b2141bff87cfaa75498f66214aeb9e.mp4',
-    }, {
-        uid: new Date().getTime() + 3,
-        imageUrl: 'http://7z2dc9.com1.z0.glb.clouddn.com/apicloud/ec65083dbdc6bb18a6318591ac6c15a5.png',
-        videoUrl: 'http://7z2dc9.com1.z0.glb.clouddn.com/apicloud/9d9906ba474152307d7edca6bd72fbe2.mp4',
-    }, {
-        uid: new Date().getTime() + 4,
-        imageUrl: 'http://7z2dc9.com1.z0.glb.clouddn.com/apicloud/51fc1ddde9790c96a6986b74342a15e3.png',
-        videoUrl: 'http://7z2dc9.com1.z0.glb.clouddn.com/apicloud/dc811d2c4d88b409063c7ea2065fe6a0.mp4',
-    }, {
-        uid: new Date().getTime() + 5,
-        imageUrl: 'http://7z2dc9.com1.z0.glb.clouddn.com/apicloud/51fc1ddde9790c96a6986b74342a15e3.png',
-        videoUrl: '../res/src/test.mp4',
-    }];
-    var page = 0;
-    userData.map(function(v, i) {
-        var el = document.createElement('div');
-        var el_child = document.createElement('video');
-        var fix_message = document.createElement('ul');
-        var fix_message_in = document.createElement('li');
-        var fix_message_alink = document.createElement('div');
-        var fix_message_repick = document.createElement('div');
-        el.className = 'swipe-box';
-        el_child.src = v.videoUrl;
-        el_child.id = v.uid;
-        el_child.poster = v.imageUrl;
-        el_child.autoplay = true;
-        el_child.loop = true;
-        el_child.type='video/mp4';
-        // el_child.setAttribute('onclick','showPlay(this)');
-        el_child.muted  = true;
-        el_child.setAttribute('playsinline', 'true');
-        el_child.setAttribute('webkit-playsinline', 'true');
-        el_child.setAttribute('x5-video-player-type',"h5")
-         el_child.setAttribute('x5-video-player-fullscreen',"portraint")
-         el_child.setAttribute('webkit-playsinline',"true")
-         el_child.setAttribute('playsinline',"true" )
-         el_child.setAttribute('raw-controls',"true")
-          el_child.setAttribute('x-webkit-airplay',"true")
-           el_child.setAttribute('x5-video-orientation',"portraint")
-        el_child.className = 'video_max';
-        fix_message.id = "fixmessage_info";
-        fix_message_in.className = "username";
-        el_child.codecs="avc1.42E01E, mp4a.40.2"
-        // fix_message.style.top = 15 + (i * 35) + 'em';
-        fix_message_in.innerHTML = '<div style="background:url(' + v.imageUrl + ') 40% 45%" class="userimg"></div><span class="alink_s"><span class="alink_s_action">+</span></span>'
-        fix_message_alink.className = "link";
-        fix_message_alink.innerHTML = "<span class='icon iconfont icon-fenxiang11 in_ac'></span>"
-        // fix_message_alink.setAttribute('onclick','onenShare()')
-        // var img = document.createElement('img');
-        // img.id = 'imgs';
-        // img.className = 'img_max';
-        fix_message.appendChild(fix_message_in)
-        fix_message.appendChild(fix_message_alink)
-        fix_message.appendChild(fix_message_repick)
-        // el.appendChild(img);
-        el.appendChild(el_child);
-        var i_el = document.createElement('i');
-        i_el.className = 'play-video hide-video icon iconfont icon-play';
-        el.appendChild(fix_message);
-        el.appendChild(i_el);
-        // el_child.onclick='this.paused = !this.paused';
-        // el_child.onclick='showC(this)';
-        // el.onclick='showC(this)';
-        container.querySelector('.swipe').appendChild(el);
-    })
-    pages = document.querySelectorAll('.swipe-box');
-    // console.log(JSON.stringify(pages[0].querySelector('#fixmessage_info').getElementsByTagName('div').length))
-    document.getElementById(userData[0].uid).play();
-    document.getElementById(userData[this.page].uid).muted = false;
-    // document.getElementById(userData[this.page].uid).play();
-    // setTimeout(function(){pages[0].querySelector('.img_max').style.display = 'none'},2000);
-    // setTimeout(function(){document.getElementById(userData[0].uid).pause()},40);
-    // setTimeout(function(){document.getElementById(userData[0].uid).play()},60);
-    slip = Slip(container, 'y').webapp(pages);
-    var link_list = document.querySelectorAll('.link');
-    console.log(JSON.stringify(link_list));
-    link_list.map(function(els,index){
-      if(checkPC()){
-         $api.rmEvt(els, 'click', onenShare);
-        }else{
-          $api.rmEvt(els, 'tap',onenShare );
-        }
-      })
-    function showPlay(d) {
-        // document.getElementById('showPlay').style.display = 'none';
-        // document.getElementById(userData[page].uid).play();
-        if (!d.paused) {
-            d.pause();
-            d.nextSibling.className.replace('hide-video', 'show-video');
-        } else {
-            d.play();
-            d.nextSibling.className.replace('show-video', 'hide-video');
-        }
+var container = document.getElementById('slip');
+var pages;
+var slip;
+var moveIsTrue = false;
+var userData = [{
+    uid: new Date().getTime() + 1,
+    imageUrl: 'http://7z2dc9.com1.z0.glb.clouddn.com/apicloud/bc281dfcaf750de7acd9c8e9224e237b.png',
+    videoUrl: 'http://7z2dc9.com1.z0.glb.clouddn.com/apicloud/abb9595e74647defe21d748e12f7a7c9.mp4',
+}, {
+    uid: new Date().getTime() + 2,
+    imageUrl: 'http://7z2dc9.com1.z0.glb.clouddn.com/apicloud/1a73dd6a90a52b2aad1aafefbf977e4c.png',
+    videoUrl: 'http://7z2dc9.com1.z0.glb.clouddn.com/apicloud/00b2141bff87cfaa75498f66214aeb9e.mp4',
+},{
+  uid:new Date().getTime(),
+  imageUrl:'http://media.anaf.cn/1080P.png',
+  videoUrl:'http://media.anaf.cn/video/1/2019/0225/325270.mp4',
+}, {
+    uid: new Date().getTime() + 3,
+    imageUrl: 'http://7z2dc9.com1.z0.glb.clouddn.com/apicloud/ec65083dbdc6bb18a6318591ac6c15a5.png',
+    videoUrl: 'http://7z2dc9.com1.z0.glb.clouddn.com/apicloud/9d9906ba474152307d7edca6bd72fbe2.mp4',
+}, {
+    uid: new Date().getTime() + 4,
+    imageUrl: 'http://7z2dc9.com1.z0.glb.clouddn.com/apicloud/51fc1ddde9790c96a6986b74342a15e3.png',
+    videoUrl: 'http://7z2dc9.com1.z0.glb.clouddn.com/apicloud/dc811d2c4d88b409063c7ea2065fe6a0.mp4',
+}, {
+    uid: new Date().getTime() + 5,
+    imageUrl: 'http://7z2dc9.com1.z0.glb.clouddn.com/apicloud/51fc1ddde9790c96a6986b74342a15e3.png',
+    videoUrl: '../res/src/test.mp4',
+}];
+var page = 0;
+userData.map(function(v, i) {
+    var el = document.createElement('div');
+    var el_child = document.createElement('video');
+    var fix_message = document.createElement('div');
+    var fix_message_in = document.createElement('li');
+
+    el.className = 'swipe-box';
+    el_child.src = v.videoUrl;
+    el_child.id = v.uid;
+    el_child.poster = v.imageUrl;
+    el_child.autoplay = false;
+    el_child.loop = true;
+    el_child.type='video/mp4';
+    // el_child.setAttribute('onclick','showPlay(this)');
+    el_child.muted  = true;
+    el_child.setAttribute('playsinline', 'true');
+    el_child.setAttribute('webkit-playsinline', 'true');
+    el_child.setAttribute('x5-video-player-type',"h5")
+     el_child.setAttribute('x5-video-player-fullscreen',"portraint")
+     el_child.setAttribute('webkit-playsinline',"true")
+     el_child.setAttribute('playsinline',"true" )
+     el_child.setAttribute('raw-controls',"true")
+      el_child.setAttribute('x-webkit-airplay',"true")
+       el_child.setAttribute('x5-video-orientation',"portraint")
+    el_child.className = 'video_max';
+    fix_message.id = "fixmessage_info";
+    fix_message_in.className = "username";
+    el_child.codecs="avc1.42E01E, mp4a.40.2"
+    // fix_message.style.top = 15 + (i * 35) + 'em';
+    fix_message_in.innerHTML = '<div class="sample_content ui-view"><span class="ui-text" style="display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 3; overflow: hidden;">一对好基友孟云（韩庚 饰）和余飞（郑恺 饰）跟女友都因为一点小事宣告分手，并且“拒绝挽回，死不认错”。两人在夜店、派对与交友软件上放飞人生第二春，大肆庆祝“黄金单身期”，从而引发了一系列好笑的故事。孟云与女友同甘共苦却难逃“五年之痒”，余飞与女友则棋逢敌手相爱相杀无绝期。然而现实的“打脸”却来得猝不及防：一对推拉纠结零往来，一对纠缠互怼全交代。两对恋人都将面对最终的选择：是再次相见？还是再也不见？</span></div>'
+
+    fix_message.appendChild(fix_message_in)
+    el.appendChild(el_child);
+    var i_el = document.createElement('i');
+    i_el.className = 'play-video hide-video icon iconfont icon-play';
+    el.appendChild(fix_message);
+    el.appendChild(i_el);
+
+    container.querySelector('.swipe').appendChild(el);
+})
+pages = document.querySelectorAll('.swipe-box');
+// console.log(JSON.stringify(pages[0].querySelector('#fixmessage_info').getElementsByTagName('div').length))
+function shareStart(){
+  var mobSharePlus = api.require('mobSharePlus');
+mobSharePlus.share({
+    title: '北京新鲜事',
+    titleUrl: userData[page].videoUrl,
+    url: 'http://www.apicloud.com',
+    text: '这里是测试的内容',
+    imgPaths: [userData[page].imageUrl],
+    // url: ,
+}, function(ret, err) {
+    console.log(JSON.stringify(ret))
+    console.log(JSON.stringify(err))
+    if (ret.status) {
+
+        api.alert({ msg: JSON.stringify(ret) });
     }
-    var cocoVideo;
-    var params = {
-        mode: 'all',
-        min_time: '1',
-        max_time: '15',
-        img_num: '1'
-    };
-    function checkPC() {
-  var userAgentInfo=navigator.userAgent;
-  var Agents =new Array("Android","iPhone","SymbianOS","Windows Phone","iPad","iPod");
-  var flag=true;
-  for(var v=0;v<Agents.length;v++) {
-     if(userAgentInfo.indexOf(Agents[v])>0) {
-       flag=false;
-       break;
-     }
-   }
-   return flag;
+});
+}
+
+// setTimeout(function () {
+//   userData.map(function(v, i) {
+//     document.getElementById(v.uid).paused();
+//   })
+
+  document.getElementById(userData[0].uid).play();
+  // document.getElementById(userData[0].uid).currentTime = 0;
+// },2000)
+userData.map(function(v, i) {
+  if(i != 0)
+  document.getElementById(v.uid).play();
+})
+//
+//
+document.getElementById(userData[0].uid).muted = false;
+slip = Slip(container, 'y').webapp(pages);
+var link_list = document.querySelectorAll('.link');
+console.log(JSON.stringify(link_list));
+for(var i = 0;i<link_list.length;i++){
+  if(checkPC()){
+     link_list[i].addEventListener('click', onenShare);
+    }else{
+      link_list[i].addEventListener('touchend',onenShare );
+    }
   }
-    apiready = function() {
-            api.parseTapmode();
-            var header = $api.byId('aui-header');
-            $api.fixStatusBar(header);
-            // slip._onTouchEnd();
 
-            // cocoVideo = api.require('cocoVideo');
-            // cocoVideo.config(params, function(ret) {
-            //     if (ret.status == 'error') {
-            //         alert(ret.msg);
-            //     }
-            // });
-            slip.start(function(event) {
-                    // console.log('start');
-                    // console.log(JSON.stringify(this));
-                    page = this.page;
-                    // 事件对象
-                    moveIsTrue = false;
-                    // 当前坐标值
-                    // console.log(JSON.stringify(userData[this.page]));
-                    // if (!document.getElementById(userData[this.page].uid).paused)
-                    // document.getElementById(userData[this.page].uid).pause();
-                })
-                .move(function(event) {
-                    // console.log('move');
-                    moveIsTrue = true;
-                    // console.log(JSON.stringify(this));
-                })
-                .end(function() {
+var cocoVideo;
+var params = {
+    mode: 'all',
+    min_time: '1',
+    max_time: '15',
+    img_num: '1'
+};
+function checkPC() {
+var userAgentInfo=navigator.userAgent;
+var Agents =new Array("Android","iPhone","SymbianOS","Windows Phone","iPad","iPod");
+var flag=true;
+for(var v=0;v<Agents.length;v++) {
+ if(userAgentInfo.indexOf(Agents[v])>0) {
+   flag=false;
+   break;
+ }
+}
+return flag;
+}
+apiready = function() {
+        api.parseTapmode();
+        var header = $api.byId('aui-header');
+        $api.fixStatusBar(header);
 
-                    // console.log(JSON.stringify(this));
+        slip.start(function(event) {
 
-                    if (this.finger == null) {
-                        if (document.getElementById(userData[this.page].uid).paused) {
-                            document.getElementById(userData[this.page].uid).play();
-                            // document.getElementById(userData[this.page].uid).pause();
-                            // document.getElementById(userData[this.page].uid).play();
-                            document.getElementById(userData[this.page].uid).muted = false;
-                            $api.removeCls(pages[this.page].querySelector('.play-video'), 'show-video');
-                            $api.addCls(pages[this.page].querySelector('.play-video'), 'hide-video');
-                        } else {
-                            document.getElementById(userData[this.page].uid).pause();
-                            console.log(JSON.stringify($api.hasCls(pages[this.page].querySelector('.play-video'), 'hide-video')));
-                            $api.removeCls(pages[this.page].querySelector('.play-video'), 'hide-video');
-                            $api.addCls(pages[this.page].querySelector('.play-video'), 'show-video');
-                            console.log(JSON.stringify($api.hasCls(pages[this.page].querySelector('.play-video'), 'hide-video')));
-                        }
-                        return false;
-                    } else {
-                        document.getElementById(userData[page].uid).pause();
-                        page = this.page;
+                page = this.page;
+                // 事件对象
+                moveIsTrue = false;
+                // 当前坐标值
+
+            })
+            .move(function(event) {
+                // console.log('move');
+                moveIsTrue = true;
+                // console.log(JSON.stringify(this));
+            })
+            .end(function() {
+
+                // console.log(JSON.stringify(this));
+
+                if (this.finger == null) {
+                    if (document.getElementById(userData[this.page].uid).paused) {
+                        document.getElementById(userData[this.page].uid).play();
+                        // document.getElementById(userData[this.page].uid).currentTime = 0;
+                        // document.getElementById(userData[this.page].uid).pause();
                         // document.getElementById(userData[this.page].uid).play();
                         document.getElementById(userData[this.page].uid).muted = false;
+                        $api.removeCls(pages[this.page].querySelector('.play-video'), 'show-video');
+                        $api.addCls(pages[this.page].querySelector('.play-video'), 'hide-video');
+                    } else {
                         document.getElementById(userData[this.page].uid).pause();
-                        document.getElementById(userData[this.page].uid).play();
-
+                        console.log(JSON.stringify($api.hasCls(pages[this.page].querySelector('.play-video'), 'hide-video')));
+                        $api.removeCls(pages[this.page].querySelector('.play-video'), 'hide-video');
+                        $api.addCls(pages[this.page].querySelector('.play-video'), 'show-video');
+                        console.log(JSON.stringify($api.hasCls(pages[this.page].querySelector('.play-video'), 'hide-video')));
                     }
+                    return false;
+                } else {
+                    document.getElementById(userData[page].uid).pause();
+                    page = this.page;
 
-                    // console.log('end');
-                    // console.log(JSON.stringify(this.page));
-                    // if (document.getElementById(userData[this.page].uid).paused) {
-                    //     document.getElementById(userData[this.page].uid).play();
-                    // }else{
-                    //   document.getElementById(userData[this.page].uid).pause();
-                    // }
-                    // 滑动方向
-                    // console.log(this.orient);
-                });
-            // api.addEventListener({
-            //     name: 'tap'
-            // }, function(ret, err) {
-            //     // console.log(JSON.stringify(document.getElementById(userData[page].uid)))
-            //
-            //     if (document.getElementById(userData[page].uid).paused) {
-            //         document.getElementById(userData[page].uid).controls = false;
-            //         document.getElementById(userData[page].uid).play();
-            //         //  document.getElementById('showPlay').style.display = 'none';
-            //     } else {
-            //       console.error(JSON.stringify(!document.getElementById(userData[page].uid).paused));
-            //         document.getElementById(userData[page].uid).controls = true;
-            //         document.getElementById(userData[page].uid).pause();
-            //         //  document.getElementById('showPlay').style.display = 'block';
-            //
-            //     }
-            // });
-        }
-        // document.querySelector('.swipe-box').addEventListener('click',function(e){
-        //   console.log(JSON.stringify(e),JSON.stringify(this.children[0]));
-        //
-        // })
-    function showC(d) {
-        // console.log(d.childNode)
-        d.controls = true;
-        d.paused = !d.pasused;
+                    if(document.getElementById(userData[this.page].uid).muted == true)
+                      document.getElementById(userData[this.page].uid).currentTime = 0;
+                    // document.getElementById(userData[this.page].uid).pause();
+                    document.getElementById(userData[this.page].uid).muted = false;
+                    // document.getElementById(userData[this.page].uid).pause();
+                    document.getElementById(userData[this.page].uid).play();
+
+                }
+
+
+            });
+
     }
-    function onenShare(){
-      var share_d = document.getElementById('share_d');
-      var share = document.getElementById('share');
-      if(share_d.style.display == 'none'){
-        share_d.style.display = 'block';
-        share.style.display = 'block';
-      }else{
-        share_d.style.display="none";
-        share.style.display = 'none';
-      }
-    }
-    function switchLoading(obj, url, text) {
-        var frames = api.frames();
-        var header = $api.byId('aui-header');
-        var param = api.pageParam;
-        var headerPos = $api.offset(header);
-        var body_h = api.frameHeight;
-        var footer_h = param.height;
-        var headerAct = $api.dom(header, '.aui-active');
-        console.log(JSON.stringify(headerAct.length))
-        $api.removeCls(headerAct, 'aui-active');
-        $api.addCls(obj, 'aui-active');
-        for (var i = 0; i < frames.length; i++) {
-            if (frames[i].name == text) {
-                api.bringFrameToFront({
-                    from: text
-                });
-                return;
-            }
-        }
-        api.openFrame({
-            name: text,
-            url: url,
-            rect: {
-                x: 0,
-                y: 0,
-                w: 'auto',
-                h: body_h
-            },
-            pageParam: {
-                top: headerPos.h,
-                height: body_h - headerPos.h - footer_h,
-                name: text,
-                parentsname: api.pageParam.name
-            },
-            bounces: false,
-            bgColor: 'rgba(0,0,0,0)',
-            vScrollBarEnabled: true,
-            hScrollBarEnabled: true
-        });
-        setTimeout(function() {
-            var frames = api.frames();
-            console.log(JSON.stringify(frames))
-                // for (var i = 0; i < frames.length; i++) {
+
+
+function onenShare(){
+  var share_d = document.getElementById('share_d');
+  var share = document.getElementById('share');
+  if(share_d.style.display == 'none'){
+    share_d.style.display = 'block';
+    share.style.display = 'block';
+  }else{
+    share_d.style.display="none";
+    share.style.display = 'none';
+  }
+}
+function switchLoading(obj, url, text) {
+    var frames = api.frames();
+    var header = $api.byId('aui-header');
+    var param = api.pageParam;
+    var headerPos = $api.offset(header);
+    var body_h = api.frameHeight;
+    var footer_h = param.height;
+    var headerAct = $api.dom(header, '.aui-active');
+    console.log(JSON.stringify(headerAct.length))
+    $api.removeCls(headerAct, 'aui-active');
+    $api.addCls(obj, 'aui-active');
+    for (var i = 0; i < frames.length; i++) {
+        if (frames[i].name == text) {
             api.bringFrameToFront({
                 from: text
             });
-            // api.setFrameAttr({
-            //     // from: text,
-            //     name:api.pageParam.name,
-            //     hidden:true
-            // });
-            console.log(JSON.stringify(param.name))
-                // }
-        }, 1000)
+            return;
+        }
     }
-
-    function openCamera() {
-        var param = {
-            resolutionMode: 2,
-            ratioMode: 1,
-            recordMode: 3,
-            beautyStatus: true,
-            beautyLevel: 80,
-            isCameraBack: false,
-            isNeedClip: true,
-            minDuration: 2,
-            maxDuration: 30,
-            videoQuality: 2,
-            gop: 5,
-            frameRate: 25
-        };
-        var demo = api.require('quPaiModule');
-        demo.record(param, function(ret, err) {
-            console.log(JSON.stringify(ret))
-            if (ret) {
-                api.openWin({
-                    name: 'addmyinfo',
-                    url: './addMyimageInfo_win.html',
-                    pageParam: {
-                        img: ret.thumbnailPath,
-                        video: ret.videoPath
-                    }
-                });
-
-                ret.videoPath;
-                ret.image_path;
-            }
-            if (err) {
-                alert(err.msg);
-            }
+    api.openFrame({
+        name: text,
+        url: url,
+        rect: {
+            x: 0,
+            y: 0,
+            w: 'auto',
+            h: body_h
+        },
+        pageParam: {
+            top: headerPos.h,
+            height: body_h - headerPos.h - footer_h,
+            name: text,
+            parentsname: api.pageParam.name
+        },
+        bounces: false,
+        bgColor: 'rgba(0,0,0,0)',
+        vScrollBarEnabled: true,
+        hScrollBarEnabled: true
+    });
+    setTimeout(function() {
+        var frames = api.frames();
+        console.log(JSON.stringify(frames))
+            // for (var i = 0; i < frames.length; i++) {
+        api.bringFrameToFront({
+            from: text
         });
-      }
+
+        console.log(JSON.stringify(param.name))
+            // }
+    }, 1000)
+}
+
+function openCamera() {
+    var param = {
+        resolutionMode: 2,
+        ratioMode: 1,
+        recordMode: 3,
+        beautyStatus: true,
+        beautyLevel: 80,
+        isCameraBack: false,
+        isNeedClip: true,
+        minDuration: 2,
+        maxDuration: 30,
+        videoQuality: 2,
+        gop: 5,
+        frameRate: 25
+    };
+    var demo = api.require('quPaiModule');
+    demo.record(param, function(ret, err) {
+        console.log(JSON.stringify(ret))
+        if (ret) {
+            api.openWin({
+                name: 'addmyinfo',
+                url: './addMyimageInfo_win.html',
+                pageParam: {
+                    img: ret.thumbnailPath,
+                    video: ret.videoPath
+                }
+            });
+
+            ret.videoPath;
+            ret.image_path;
+        }
+        if (err) {
+            alert(err.msg);
+        }
+    });
+  }
+
 </script>

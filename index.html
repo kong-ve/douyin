@@ -92,11 +92,10 @@
 <script type="text/javascript" src="script/api.js"></script>
 <script type="text/javascript">
     apiready = function() {
-        // api.parseTapmode();
+        api.parseTapmode();
         // var header = $api.byId('aui-header');
         var footer = 　$api.byId('footer')
-          // $api.fixTabBar(footer);
-            // $api.fixStatusBar(header);
+            $api.fixTabBar(footer);
             // var headerPos = $api.offset(header);
         var body_h = api.winHeight;
         var footer_h = $api.offset(footer).h;

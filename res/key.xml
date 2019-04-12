@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+   <security>
+     <item name="mobSharePlus_facebook_apiKey" value="2260718420859070"/>
+     <item name="mobSharePlus_facebook_apiSecret" value="01c490483c34289ce857adbb6229e88e"/>
+     <item name="mobSharePlus_googlePlus_apiKey" value="Google+"/>
+     <item name="mobSharePlus_instagram_apiKey" value="Instagram"/>
+     <item name="mobSharePlus_twitter_apiKey" value="Twitter" />
+     <item name="mobSharePlus_whatsApp_apiKey" value="WhatsApp "/>
+   <item name="mobSharePlus_mail_apiKey" value="none"/>
+   <item name="mobSharePlus_sms_apiKey" value="none"/>
+   </security>
