@@ -441,7 +441,7 @@
                     </div>
                 </div>
             </div>
-            <div ui:for-index="index" class="column_content ui-view" style="animation-duration: 0.2s;">
+            <div ui:for-index="index" class="column_content ui-view" style="animation-duration: 0.2s;" onclick="shareTo('googlePlus')">
                 <div class="ui-view">
                     <div class="ui-view" style="background-color: rgb(65, 196, 81);"><i class="iconfont icon-IconGooglePlus" style="font-size: 30px; color: rgb(255, 255, 255);"></i></div>
                     <div class="ui-text">
@@ -451,17 +451,15 @@
                     </div>
                 </div>
             </div>
-            <div ui:for-index="index" class="column_content ui-view" style="animation-duration: 0.3s;">
+            <!-- <div ui:for-index="index" class="column_content ui-view" style="animation-duration: 0.3s;">
                 <div class="ui-view">
                     <div class="ui-view" style="background-color: rgb(39, 169, 238);"><i class="iconfont icon-gugo" style="font-size: 30px; color: rgb(255, 255, 255);"></i></div>
                     <div class="ui-text">
-                        <!---->
                         <span>google</span>
-                        <!---->
                     </div>
                 </div>
-            </div>
-            <div ui:for-index="index" class="column_content ui-view" style="animation-duration: 0.4s;">
+            </div> -->
+            <div ui:for-index="index" class="column_content ui-view" style="animation-duration: 0.4s;" onclick="shareTo('twitter')">
                 <div class="ui-view">
                     <div class="ui-view" style="background-color: rgb(245, 59, 67);"><i class="iconfont icon-twitter" style="font-size: 30px; color: rgb(255, 255, 255);"></i></div>
                     <div class="ui-text">
@@ -470,11 +468,11 @@
                     </div>
                 </div>
             </div>
-            <div ui:for-index="index" class="column_content ui-view" style="animation-duration: 0.5s;">
+            <div ui:for-index="index" class="column_content ui-view" style="animation-duration: 0.5s;"onclick="shareTo('instagram')">
                 <div class="ui-view">
                     <div class="ui-view" style="background-color: rgb(245, 59, 67);"><i class="iconfont icon-instagram" style="font-size: 30px; color: rgb(255, 255, 255);"></i></div>
                     <div class="ui-text">
-                        <!----><span>ins</span>
+                        <!----><span>instagram</span>
                         <!---->
                     </div>
                 </div>
@@ -700,7 +698,7 @@
         var mobSharePlus = api.require('mobSharePlus');
         console.log(id);
         mobSharePlus.shareTo({
-            target: id,
+            target: 'twitter',
             title: '北京新鲜事',
             titleUrl: 'http://www.apicloud.com',
             text: '这里是测试的内容',

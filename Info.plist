@@ -6,30 +6,5 @@
     <string>2aac6573a8248</string>
     <key>MOBAppSecret</key>
     <string>ce4c8eaca4542b6578b04c6fc6886c02</string>
-    <key>LSApplicationQueriesSchemes</key>
-<array>
-    <!-- Google+ Scheme 白名单-->
-      <string>googlechrome</string>
-  <string>googlechrome-x-callback</string>
-  <string>hasgplus4</string>
-  <string>com.google.gppconsent</string>
-  <string>com.google.gppconsent.2.2.0</string>
-  <string>com.google.gppconsent.2.3.0</string>
-  <string>com.google.gppconsent.2.4.0</string>
-  <string>com.google.gppconsent.2.4.1</string>
-    <!-- Facebook Scheme 白名单-->
-    <string>fbauth2</string>
-    <string>fbauth</string>
-      <!-- Instagram Scheme 白名单-->
-    <string>instagram</string>
-      <!-- Twitter Scheme 白名单-->
-    <string></string>
-    <!-- Line Scheme 白名单-->
-    <string>line</string>
-    <string>lineauth</string>
-    <string>line3rdp.$(PRODUCT_BUNDLE_IDENTIFIER)</string>
-      <!-- YouTube Scheme 白名单-->
-    <string>youtube</string>
-</array>
 </dict>
 </plist>
