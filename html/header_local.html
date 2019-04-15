@@ -213,51 +213,180 @@
             top: 17rem;
             left: 7rem;
         }
-        #share{
-          position: fixed;
-          width: 100%;
-          height: 5rem;
-          bottom: 0;
-          background: #fff;
-          color: #000;
-          z-index: 99;
-          display: none;
+
+        #share {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            bottom: 0;
+            background: #fff;
+            color: #000;
+            z-index: 99;
+            display: none;
         }
-          #share>ul li{
+
+        #share>ul li {
             float: left;
-          }
-          .img_max{
+        }
+
+        .img_max {
             position: absolute;
             top: 0;
             width: 100%;
             height: 100%;
             z-index: 98;
             display: block;
-          }
-.sample_content {
-    position: absolute;
-    background: rgba(0, 0, 0, 0.1);
-    bottom: 2.72rem
-}
-.sample_content .ui-text{
-  display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 3;
-    overflow: hidden;
-}
-.btnbox{
-  background-color:#45ddd2;
-  color:#fff;
-  width:48px;
-  height:48px;
-  border-radius:50%;
-  line-height:48px;
-  text-align:center;
-  visibility:inherit;
-}
-.icon{
-  font-size: x-large;
-}
+        }
+
+        .sample_content {
+            position: absolute;
+            background: rgba(0, 0, 0, 0.1);
+            bottom: 2.72rem
+        }
+
+        .sample_content .ui-text {
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 3;
+            overflow: hidden;
+        }
+
+        .btnbox {
+            background-color: #45ddd2;
+            color: #fff;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            line-height: 48px;
+            text-align: center;
+            visibility: inherit;
+        }
+
+        .icon {
+            font-size: x-large;
+        }
+
+        .ui-mask.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .ui-mask.blur-light-android {
+            background: rgba(255, 255, 255, 0.96);
+        }
+
+        .ui-mask.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .ui-mask.blur-light-android {
+            background: rgba(255, 255, 255, 0.96);
+        }
+
+        .ui-mask {
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            background: rgba(0, 0, 0, 0.5);
+            width: 100%;
+            visibility: hidden;
+            opacity: 0;
+            transition: opacity 0.25s ease-in;
+            -webkit-backface-visibility: hidden;
+            z-index: 700;
+        }
+
+        .ui-mask {
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            background: rgba(0, 0, 0, 0.5);
+            width: 100%;
+            visibility: hidden;
+            opacity: 0;
+            transition: opacity 0.25s ease-in;
+            -webkit-backface-visibility: hidden;
+            z-index: 700;
+        }
+
+        .page-e4cd19.share_mask .column_wrap {
+            display: -webkit-flex;
+            display: flex;
+            -webkit-flex-direction: row;
+            flex-direction: row;
+            -webkit-flex-wrap: wrap;
+            flex-wrap: wrap;
+            width: 100%;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            padding-bottom: 60px;
+        }
+
+        page-e4cd19.share_mask .column_wrap.active .column_content,
+        .page-e4cd19.share_mask .column_wrap.active .close {
+            -webkit-animation: showMove ease 1;
+            animation: showMove ease 1;
+            -webkit-transform: translate(0px, 0px);
+            transform: translate(0px, 0px);
+        }
+
+        .page-e4cd19.share_mask .column_wrap .column_content {
+            width: 25%;
+            height: 80px;
+            text-align: center;
+            margin-bottom: 20px;
+            display: -webkit-flex;
+            display: flex;
+            -webkit-align-items: center;
+            align-items: center;
+            -webkit-justify-content: center;
+            justify-content: center;
+        }
+
+        .page-e4cd19.share_mask .column_wrap .column_content>.ui-view {
+            width: 100%;
+        }
+
+        .page-e4cd19.share_mask .column_wrap .column_content>.ui-view .ui-view {
+            display: inline-block;
+            width: 50px;
+            height: 50px;
+            background-color: #41C451;
+            border-radius: 50%;
+            line-height: 50px;
+            text-align: center;
+            margin-bottom: 5px;
+        }
+
+        .page-e4cd19.share_mask .column_wrap .column_content>.ui-view .ui-text {
+            font-size: 14px;
+            color: #2C2C2C;
+        }
+
+        .page-e4cd19.share_mask .column_wrap.active .close {
+            -webkit-animation-duration: 0.6;
+            animation-duration: 0.6;
+        }
+
+        .page-e4cd19.share_mask .column_wrap.active .column_content,
+        .page-e4cd19.share_mask .column_wrap.active .close {
+            -webkit-animation: showMove ease 1;
+            animation: showMove ease 1;
+            -webkit-transform: translate(0px, 0px);
+            transform: translate(0px, 0px);
+        }
+
+        .page-e4cd19.share_mask .column_wrap .close {
+            margin-top: 20px;
+            width: 100%;
+            text-align: center;
+        }
     </style>
 
 </head>
@@ -283,16 +412,16 @@
     <div id="showPlay" style="display:none" onclick="showPlay()">
         <span class="iconfont icon-douyinkuaishou"></span>
     </div>
-    <div id="shareBtn" style="z-index:1000;position: fixed !important;right:10px;bottom:17rem"onclick="shareStart()">
-             <div class="btnbox" >
-               <i class="icon iconfont icon-fenxiang9" color="#fff" size="24"></i>
-             </div>
-           </div>
- <div id="sellBtn" style="z-index:999;position: fixed !important;right:10px;bottom:21rem">
-     <div class="btnbox">
-       <i class="icon iconfont icon-daifukuan" size="24"></i>
-     </div>
- </div>
+    <div id="shareBtn" style="z-index:1000;position: fixed !important;right:10px;bottom:17rem" onclick="openShare()">
+        <div class="btnbox">
+            <i class="icon iconfont icon-fenxiang11" color="#fff" size="24"></i>
+        </div>
+    </div>
+    <div id="sellBtn" style="z-index:999;position: fixed !important;right:10px;bottom:21rem">
+        <div class="btnbox">
+            <i class="icon iconfont icon-daifukuan" size="24"></i>
+        </div>
+    </div>
     <div class="swipe-wrap" id="slip">
         <article class="swipe">
 
@@ -300,168 +429,205 @@
 
         </article>
     </div>
-    <div id="share_d" style="background-color:rgba(0,0,0,0.1);width:100%;height:100%;z-index:98;position:relative;top:0;display:none"></div>
-<div id="share">
-<section class="aui-grid">
-            <div class="aui-row">
-                <div class="aui-col-xs-4">
-                    <i class="icon iconfont icon-facebook-logo"></i>
-                    <!-- <div class="aui-grid-label">首页</div> -->
-                </div>
-                <div class="aui-col-xs-4">
-                    <i class="icon iconfont icon-googleplus"></i>
-                    <!-- <div class="aui-grid-label">设置</div> -->
-                </div>
-                <div class="aui-col-xs-4">
-                    <i class="icon iconfont icon-twitter"></i>
-                    <!-- <div class="aui-grid-label">地图</div> -->
+    <div class="ui-transfer-dom ui-mask share_mask page-e4cd19 show blur-light-android" style="top: 0px; visibility: visible;display:none;" id="share">
+        <div class="column_wrap active ui-view" >
+            <div ui:for-index="index" class="column_content ui-view" style="animation-duration: 0.1s;" onclick="shareTo('facebook')">
+                <div class="ui-view">
+                    <div class="ui-view" style="background-color: rgb(65, 196, 81);"><i class="iconfont icon-facebook-logo" style="font-size: 30px; color: rgb(255, 255, 255);"></i></div>
+                    <div class="ui-text">
+                        <!---->
+                        <span>facebook</span>
+                        <!---->
+                    </div>
                 </div>
             </div>
-</section>
-</div>
+            <div ui:for-index="index" class="column_content ui-view" style="animation-duration: 0.2s;">
+                <div class="ui-view">
+                    <div class="ui-view" style="background-color: rgb(65, 196, 81);"><i class="iconfont icon-IconGooglePlus" style="font-size: 30px; color: rgb(255, 255, 255);"></i></div>
+                    <div class="ui-text">
+                        <!---->
+                        <span>google+</span>
+                        <!---->
+                    </div>
+                </div>
+            </div>
+            <div ui:for-index="index" class="column_content ui-view" style="animation-duration: 0.3s;">
+                <div class="ui-view">
+                    <div class="ui-view" style="background-color: rgb(39, 169, 238);"><i class="iconfont icon-gugo" style="font-size: 30px; color: rgb(255, 255, 255);"></i></div>
+                    <div class="ui-text">
+                        <!---->
+                        <span>google</span>
+                        <!---->
+                    </div>
+                </div>
+            </div>
+            <div ui:for-index="index" class="column_content ui-view" style="animation-duration: 0.4s;">
+                <div class="ui-view">
+                    <div class="ui-view" style="background-color: rgb(245, 59, 67);"><i class="iconfont icon-twitter" style="font-size: 30px; color: rgb(255, 255, 255);"></i></div>
+                    <div class="ui-text">
+                        <!----><span>twitter</span>
+                        <!---->
+                    </div>
+                </div>
+            </div>
+            <div ui:for-index="index" class="column_content ui-view" style="animation-duration: 0.5s;">
+                <div class="ui-view">
+                    <div class="ui-view" style="background-color: rgb(245, 59, 67);"><i class="iconfont icon-instagram" style="font-size: 30px; color: rgb(255, 255, 255);"></i></div>
+                    <div class="ui-text">
+                        <!----><span>ins</span>
+                        <!---->
+                    </div>
+                </div>
+            </div>
+            <div class="close ui-view" onclick="openShare()"><i class="iconfont icon-cancel" style="font-size: 20px; color: rgb(94, 94, 94);"></i></div>
+        </div>
+    </div>
 </body>
 
 </html>
 <script type="text/javascript" src="../script/api.js"></script>
 <script type="text/javascript" src="../script/slip.js"></script>
 <script type="text/javascript">
-var container = document.getElementById('slip');
-var pages;
-var slip;
-var moveIsTrue = false;
-var userData = [{
-    uid: new Date().getTime() + 1,
-    imageUrl: 'http://7z2dc9.com1.z0.glb.clouddn.com/apicloud/bc281dfcaf750de7acd9c8e9224e237b.png',
-    videoUrl: 'http://7z2dc9.com1.z0.glb.clouddn.com/apicloud/abb9595e74647defe21d748e12f7a7c9.mp4',
-}, {
-    uid: new Date().getTime() + 2,
-    imageUrl: 'http://7z2dc9.com1.z0.glb.clouddn.com/apicloud/1a73dd6a90a52b2aad1aafefbf977e4c.png',
-    videoUrl: 'http://7z2dc9.com1.z0.glb.clouddn.com/apicloud/00b2141bff87cfaa75498f66214aeb9e.mp4',
-},{
-  uid:new Date().getTime(),
-  imageUrl:'http://media.anaf.cn/1080P.png',
-  videoUrl:'http://media.anaf.cn/video/1/2019/0225/325270.mp4',
-}, {
-    uid: new Date().getTime() + 3,
-    imageUrl: 'http://7z2dc9.com1.z0.glb.clouddn.com/apicloud/ec65083dbdc6bb18a6318591ac6c15a5.png',
-    videoUrl: 'http://7z2dc9.com1.z0.glb.clouddn.com/apicloud/9d9906ba474152307d7edca6bd72fbe2.mp4',
-}, {
-    uid: new Date().getTime() + 4,
-    imageUrl: 'http://7z2dc9.com1.z0.glb.clouddn.com/apicloud/51fc1ddde9790c96a6986b74342a15e3.png',
-    videoUrl: 'http://7z2dc9.com1.z0.glb.clouddn.com/apicloud/dc811d2c4d88b409063c7ea2065fe6a0.mp4',
-}, {
-    uid: new Date().getTime() + 5,
-    imageUrl: 'http://7z2dc9.com1.z0.glb.clouddn.com/apicloud/51fc1ddde9790c96a6986b74342a15e3.png',
-    videoUrl: '../res/src/test.mp4',
-}];
-var page = 0;
-userData.map(function(v, i) {
-    var el = document.createElement('div');
-    var el_child = document.createElement('video');
-    var fix_message = document.createElement('div');
-    var fix_message_in = document.createElement('li');
+    var container = document.getElementById('slip');
+    var pages;
+    var slip;
+    var moveIsTrue = false;
+    var userData = [{
+        uid: new Date().getTime() + 1,
+        imageUrl: 'http://7z2dc9.com1.z0.glb.clouddn.com/apicloud/bc281dfcaf750de7acd9c8e9224e237b.png',
+        videoUrl: 'http://7z2dc9.com1.z0.glb.clouddn.com/apicloud/abb9595e74647defe21d748e12f7a7c9.mp4',
+    }, {
+        uid: new Date().getTime() + 2,
+        imageUrl: 'http://7z2dc9.com1.z0.glb.clouddn.com/apicloud/1a73dd6a90a52b2aad1aafefbf977e4c.png',
+        videoUrl: 'http://7z2dc9.com1.z0.glb.clouddn.com/apicloud/00b2141bff87cfaa75498f66214aeb9e.mp4',
+    }, {
+        uid: new Date().getTime(),
+        imageUrl: 'http://media.anaf.cn/1080P.png',
+        videoUrl: 'http://media.anaf.cn/video/1/2019/0225/325270.mp4',
+    }, {
+        uid: new Date().getTime() + 3,
+        imageUrl: 'http://7z2dc9.com1.z0.glb.clouddn.com/apicloud/ec65083dbdc6bb18a6318591ac6c15a5.png',
+        videoUrl: 'http://7z2dc9.com1.z0.glb.clouddn.com/apicloud/9d9906ba474152307d7edca6bd72fbe2.mp4',
+    }, {
+        uid: new Date().getTime() + 4,
+        imageUrl: 'http://7z2dc9.com1.z0.glb.clouddn.com/apicloud/51fc1ddde9790c96a6986b74342a15e3.png',
+        videoUrl: 'http://7z2dc9.com1.z0.glb.clouddn.com/apicloud/dc811d2c4d88b409063c7ea2065fe6a0.mp4',
+    }, {
+        uid: new Date().getTime() + 5,
+        imageUrl: 'http://7z2dc9.com1.z0.glb.clouddn.com/apicloud/51fc1ddde9790c96a6986b74342a15e3.png',
+        videoUrl: '../res/src/test.mp4',
+    }];
+    var page = 0;
+    userData.map(function(v, i) {
+        var el = document.createElement('div');
+        var el_child = document.createElement('video');
+        var fix_message = document.createElement('div');
+        var fix_message_in = document.createElement('li');
 
-    el.className = 'swipe-box';
-    el_child.src = v.videoUrl;
-    el_child.id = v.uid;
-    el_child.poster = v.imageUrl;
-    el_child.autoplay = false;
-    el_child.loop = true;
-    el_child.type='video/mp4';
-    // el_child.setAttribute('onclick','showPlay(this)');
-    el_child.muted  = true;
-    el_child.setAttribute('playsinline', 'true');
-    el_child.setAttribute('webkit-playsinline', 'true');
-    el_child.setAttribute('x5-video-player-type',"h5")
-     el_child.setAttribute('x5-video-player-fullscreen',"portraint")
-     el_child.setAttribute('webkit-playsinline',"true")
-     el_child.setAttribute('playsinline',"true" )
-     el_child.setAttribute('raw-controls',"true")
-      el_child.setAttribute('x-webkit-airplay',"true")
-       el_child.setAttribute('x5-video-orientation',"portraint")
-    el_child.className = 'video_max';
-    fix_message.id = "fixmessage_info";
-    fix_message_in.className = "username";
-    el_child.codecs="avc1.42E01E, mp4a.40.2"
-    // fix_message.style.top = 15 + (i * 35) + 'em';
-    fix_message_in.innerHTML = '<div class="sample_content ui-view"><span class="ui-text" style="display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 3; overflow: hidden;">一对好基友孟云（韩庚 饰）和余飞（郑恺 饰）跟女友都因为一点小事宣告分手，并且“拒绝挽回，死不认错”。两人在夜店、派对与交友软件上放飞人生第二春，大肆庆祝“黄金单身期”，从而引发了一系列好笑的故事。孟云与女友同甘共苦却难逃“五年之痒”，余飞与女友则棋逢敌手相爱相杀无绝期。然而现实的“打脸”却来得猝不及防：一对推拉纠结零往来，一对纠缠互怼全交代。两对恋人都将面对最终的选择：是再次相见？还是再也不见？</span></div>'
+        el.className = 'swipe-box';
+        el_child.src = v.videoUrl;
+        el_child.id = v.uid;
+        el_child.poster = v.imageUrl;
+        el_child.autoplay = false;
+        el_child.loop = true;
+        el_child.type = 'video/mp4';
+        // el_child.setAttribute('onclick','showPlay(this)');
+        el_child.muted = true;
+        el_child.setAttribute('playsinline', 'true');
+        el_child.setAttribute('webkit-playsinline', 'true');
+        el_child.setAttribute('x5-video-player-type', "h5")
+        el_child.setAttribute('x5-video-player-fullscreen', "portraint")
+        el_child.setAttribute('webkit-playsinline', "true")
+        el_child.setAttribute('playsinline', "true")
+        el_child.setAttribute('raw-controls', "true")
+        el_child.setAttribute('x-webkit-airplay', "true")
+        el_child.setAttribute('x5-video-orientation', "portraint")
+        el_child.className = 'video_max';
+        fix_message.id = "fixmessage_info";
+        fix_message_in.className = "username";
+        el_child.codecs = "avc1.42E01E, mp4a.40.2"
+            // fix_message.style.top = 15 + (i * 35) + 'em';
+        fix_message_in.innerHTML =
+            '<div class="sample_content ui-view"><span class="ui-text" style="display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 3; overflow: hidden;">一对好基友孟云（韩庚 饰）和余飞（郑恺 饰）跟女友都因为一点小事宣告分手，并且“拒绝挽回，死不认错”。两人在夜店、派对与交友软件上放飞人生第二春，大肆庆祝“黄金单身期”，从而引发了一系列好笑的故事。孟云与女友同甘共苦却难逃“五年之痒”，余飞与女友则棋逢敌手相爱相杀无绝期。然而现实的“打脸”却来得猝不及防：一对推拉纠结零往来，一对纠缠互怼全交代。两对恋人都将面对最终的选择：是再次相见？还是再也不见？</span></div>'
 
-    fix_message.appendChild(fix_message_in)
-    el.appendChild(el_child);
-    var i_el = document.createElement('i');
-    i_el.className = 'play-video hide-video icon iconfont icon-play';
-    el.appendChild(fix_message);
-    el.appendChild(i_el);
+        fix_message.appendChild(fix_message_in)
+        el.appendChild(el_child);
+        var i_el = document.createElement('i');
+        i_el.className = 'play-video hide-video icon iconfont icon-play';
+        el.appendChild(fix_message);
+        el.appendChild(i_el);
 
-    container.querySelector('.swipe').appendChild(el);
-})
-pages = document.querySelectorAll('.swipe-box');
-// console.log(JSON.stringify(pages[0].querySelector('#fixmessage_info').getElementsByTagName('div').length))
-function shareStart(){
-  var mobSharePlus = api.require('mobSharePlus');
-mobSharePlus.share({
-    title: '北京新鲜事',
-    titleUrl: userData[page].videoUrl,
-    url: 'http://www.apicloud.com',
-    text: '这里是测试的内容',
-    imgPaths: [userData[page].imageUrl],
-    // url: ,
-}, function(ret, err) {
-    console.log(JSON.stringify(ret))
-    console.log(JSON.stringify(err))
-    if (ret.status) {
+        container.querySelector('.swipe').appendChild(el);
+    })
+    pages = document.querySelectorAll('.swipe-box');
+    // console.log(JSON.stringify(pages[0].querySelector('#fixmessage_info').getElementsByTagName('div').length))
+    function shareStart() {
+        var mobSharePlus = api.require('mobSharePlus');
+        mobSharePlus.share({
+            title: '北京新鲜事',
+            titleUrl: userData[page].videoUrl,
+            url: 'http://www.apicloud.com',
+            text: '这里是测试的内容',
+            imgPaths: [userData[page].imageUrl],
+            // url: ,
+        }, function(ret, err) {
+            console.log(JSON.stringify(ret))
+            console.log(JSON.stringify(err))
+            if (ret.status) {
 
-        api.alert({ msg: JSON.stringify(ret) });
+                api.alert({
+                    msg: JSON.stringify(ret)
+                });
+            }
+        });
     }
-});
-}
 
-// setTimeout(function () {
-//   userData.map(function(v, i) {
-//     document.getElementById(v.uid).paused();
-//   })
+    // setTimeout(function () {
+    //   userData.map(function(v, i) {
+    //     document.getElementById(v.uid).paused();
+    //   })
 
-  document.getElementById(userData[0].uid).play();
-  // document.getElementById(userData[0].uid).currentTime = 0;
-// },2000)
-userData.map(function(v, i) {
-  if(i != 0)
-  document.getElementById(v.uid).play();
-})
-//
-//
-document.getElementById(userData[0].uid).muted = false;
-slip = Slip(container, 'y').webapp(pages);
-var link_list = document.querySelectorAll('.link');
-console.log(JSON.stringify(link_list));
-for(var i = 0;i<link_list.length;i++){
-  if(checkPC()){
-     link_list[i].addEventListener('click', onenShare);
-    }else{
-      link_list[i].addEventListener('touchend',onenShare );
+    document.getElementById(userData[0].uid).play();
+    console.log('playing');
+    // document.getElementById(userData[0].uid).currentTime = 0;
+    // },2000)
+    userData.map(function(v, i) {
+            if (i != 0)
+                document.getElementById(v.uid).play();
+        })
+        //
+        //
+    document.getElementById(userData[0].uid).muted = false;
+    slip = Slip(container, 'y').webapp(pages);
+
+    // if (checkPC()) {
+    //     document.getElementById('shareBtn').addEventListener('click', onenShare);
+    // } else {
+    //     document.getElementById('shareBtn').addEventListener('tap', onenShare);
+    // }
+
+
+    var cocoVideo;
+    var params = {
+        mode: 'all',
+        min_time: '1',
+        max_time: '15',
+        img_num: '1'
+    };
+
+    function checkPC() {
+        var userAgentInfo = navigator.userAgent;
+        var Agents = new Array("Android", "iPhone", "SymbianOS", "Windows Phone", "iPad", "iPod");
+        var flag = true;
+        for (var v = 0; v < Agents.length; v++) {
+            if (userAgentInfo.indexOf(Agents[v]) > 0) {
+                flag = false;
+                break;
+            }
+        }
+        return flag;
     }
-  }
-
-var cocoVideo;
-var params = {
-    mode: 'all',
-    min_time: '1',
-    max_time: '15',
-    img_num: '1'
-};
-function checkPC() {
-var userAgentInfo=navigator.userAgent;
-var Agents =new Array("Android","iPhone","SymbianOS","Windows Phone","iPad","iPod");
-var flag=true;
-for(var v=0;v<Agents.length;v++) {
- if(userAgentInfo.indexOf(Agents[v])>0) {
-   flag=false;
-   break;
- }
-}
-return flag;
-}
-apiready = function() {
+    apiready = function() {
         api.parseTapmode();
         var header = $api.byId('aui-header');
         $api.fixStatusBar(header);
@@ -504,8 +670,8 @@ apiready = function() {
                     document.getElementById(userData[page].uid).pause();
                     page = this.page;
 
-                    if(document.getElementById(userData[this.page].uid).muted == true)
-                      document.getElementById(userData[this.page].uid).currentTime = 0;
+                    if (document.getElementById(userData[this.page].uid).muted == true)
+                        document.getElementById(userData[this.page].uid).currentTime = 0;
                     // document.getElementById(userData[this.page].uid).pause();
                     document.getElementById(userData[this.page].uid).muted = false;
                     // document.getElementById(userData[this.page].uid).pause();
@@ -519,104 +685,123 @@ apiready = function() {
     }
 
 
-function onenShare(){
-  var share_d = document.getElementById('share_d');
-  var share = document.getElementById('share');
-  if(share_d.style.display == 'none'){
-    share_d.style.display = 'block';
-    share.style.display = 'block';
-  }else{
-    share_d.style.display="none";
-    share.style.display = 'none';
-  }
-}
-function switchLoading(obj, url, text) {
-    var frames = api.frames();
-    var header = $api.byId('aui-header');
-    var param = api.pageParam;
-    var headerPos = $api.offset(header);
-    var body_h = api.frameHeight;
-    var footer_h = param.height;
-    var headerAct = $api.dom(header, '.aui-active');
-    console.log(JSON.stringify(headerAct.length))
-    $api.removeCls(headerAct, 'aui-active');
-    $api.addCls(obj, 'aui-active');
-    for (var i = 0; i < frames.length; i++) {
-        if (frames[i].name == text) {
+    function openShare() {
+        // var share_d = document.getElementById('share_d');
+        var share = document.getElementById('share');
+        if (share.style.display == 'none') {
+            share.style.display = 'block';
+        } else {
+            share.style.display = 'none';
+        }
+    }
+
+    function shareTo(id) {debugger
+
+        var mobSharePlus = api.require('mobSharePlus');
+        console.log(id);
+        mobSharePlus.shareTo({
+            target: id,
+            title: '北京新鲜事',
+            titleUrl: 'http://www.apicloud.com',
+            text: '这里是测试的内容',
+            imgPaths: [userData[page].imageUrl],
+            url: 'http://www.apicloud.com',
+        }, function(ret, err) {
+            console.log(JSON.stringify(ret + ',' + err))
+            if (ret.status) {
+                api.alert({
+                    msg: JSON.stringify(ret)
+                });
+            }
+        })
+    }
+
+    function switchLoading(obj, url, text) {
+        var frames = api.frames();
+        var header = $api.byId('aui-header');
+        var param = api.pageParam;
+        var headerPos = $api.offset(header);
+        var body_h = api.frameHeight;
+        var footer_h = param.height;
+        var headerAct = $api.dom(header, '.aui-active');
+        console.log(JSON.stringify(headerAct.length))
+        $api.removeCls(headerAct, 'aui-active');
+        $api.addCls(obj, 'aui-active');
+        for (var i = 0; i < frames.length; i++) {
+            if (frames[i].name == text) {
+                api.bringFrameToFront({
+                    from: text
+                });
+                return;
+            }
+        }
+        api.openFrame({
+            name: text,
+            url: url,
+            rect: {
+                x: 0,
+                y: 0,
+                w: 'auto',
+                h: body_h
+            },
+            pageParam: {
+                top: headerPos.h,
+                height: body_h - headerPos.h - footer_h,
+                name: text,
+                parentsname: api.pageParam.name
+            },
+            bounces: false,
+            bgColor: 'rgba(0,0,0,0)',
+            vScrollBarEnabled: true,
+            hScrollBarEnabled: true
+        });
+        setTimeout(function() {
+            var frames = api.frames();
+            console.log(JSON.stringify(frames))
+                // for (var i = 0; i < frames.length; i++) {
             api.bringFrameToFront({
                 from: text
             });
-            return;
-        }
+
+            console.log(JSON.stringify(param.name))
+                // }
+        }, 1000)
     }
-    api.openFrame({
-        name: text,
-        url: url,
-        rect: {
-            x: 0,
-            y: 0,
-            w: 'auto',
-            h: body_h
-        },
-        pageParam: {
-            top: headerPos.h,
-            height: body_h - headerPos.h - footer_h,
-            name: text,
-            parentsname: api.pageParam.name
-        },
-        bounces: false,
-        bgColor: 'rgba(0,0,0,0)',
-        vScrollBarEnabled: true,
-        hScrollBarEnabled: true
-    });
-    setTimeout(function() {
-        var frames = api.frames();
-        console.log(JSON.stringify(frames))
-            // for (var i = 0; i < frames.length; i++) {
-        api.bringFrameToFront({
-            from: text
+
+    function openCamera() {
+        var param = {
+            resolutionMode: 2,
+            ratioMode: 1,
+            recordMode: 3,
+            beautyStatus: true,
+            beautyLevel: 80,
+            isCameraBack: false,
+            isNeedClip: true,
+            minDuration: 2,
+            maxDuration: 30,
+            videoQuality: 2,
+            gop: 5,
+            frameRate: 25
+        };
+        var demo = api.require('quPaiModule');
+        demo.record(param, function(ret, err) {
+            console.log(JSON.stringify(ret))
+            if (ret) {
+                api.openWin({
+                    name: 'addmyinfo',
+                    url: './addMyimageInfo_win.html',
+                    pageParam: {
+                        img: ret.thumbnailPath,
+                        video: ret.videoPath
+                    }
+                });
+
+                ret.videoPath;
+                ret.image_path;
+            }
+            if (err) {
+                alert(err.msg);
+            }
         });
-
-        console.log(JSON.stringify(param.name))
-            // }
-    }, 1000)
-}
-
-function openCamera() {
-    var param = {
-        resolutionMode: 2,
-        ratioMode: 1,
-        recordMode: 3,
-        beautyStatus: true,
-        beautyLevel: 80,
-        isCameraBack: false,
-        isNeedClip: true,
-        minDuration: 2,
-        maxDuration: 30,
-        videoQuality: 2,
-        gop: 5,
-        frameRate: 25
-    };
-    var demo = api.require('quPaiModule');
-    demo.record(param, function(ret, err) {
-        console.log(JSON.stringify(ret))
-        if (ret) {
-            api.openWin({
-                name: 'addmyinfo',
-                url: './addMyimageInfo_win.html',
-                pageParam: {
-                    img: ret.thumbnailPath,
-                    video: ret.videoPath
-                }
-            });
-
-            ret.videoPath;
-            ret.image_path;
-        }
-        if (err) {
-            alert(err.msg);
-        }
-    });
-  }
-
+    }
 </script>

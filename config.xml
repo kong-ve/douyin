@@ -32,11 +32,15 @@
 	<permission name="fileSystem" />
 	<permission name="internet" />
 	<permission name="bootCompleted" />
-	<permission name="hardware" />  <preference name="querySchemes" value="facebook,twitter,googlePlus,instagram,line"/>  <feature name="mobSharePlus">
+	<permission name="hardware" />  <preference name="querySchemes" value="facebook,twitter,googlePlus,instagram,line,google"/>  <feature name="mobSharePlus">
       <param name="android_api_key" value="2aac6573a8248"/>
       <param name="android_api_secret" value="ce4c8eaca4542b6578b04c6fc6886c02"/>
       <param name="ios_api_key" value="2aac6573a8248"/>
       <param name="ios_api_secret" value="ce4c8eaca4542b6578b04c6fc6886c02"/>
+      <param name="android_api_key" value="2aac6573a8248"/>
+      <param name="android_api_secret" value="ce4c8eaca4542b6578b04c6fc6886c02"/>
+      <param name="ApiKey" value="2aac6573a8248"/>
+      <param name="ApiSecret" value="ce4c8eaca4542b6578b04c6fc6886c02"/>
       <param name="urlScheme" value="fb2260718420859070"/>
       <param name="urlScheme" value="Google+"/>
       <param name="urlScheme" value="instagram"/>
