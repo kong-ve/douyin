@@ -51,13 +51,13 @@
 
     var param = api.pageParam;
     // console.log(JSON.stringify(param));
-UIScrollPlayer.open({
+UIScrollPlayer.show({
       rect : {
           x : 0,
           y : param.top,
           h : param.height
       },
-      userData : [{
+      videos  : [{
           // uid : new Date().getTime()+1,
           imageUrl :'http://7z2dc9.com1.z0.glb.clouddn.com/apicloud/bc281dfcaf750de7acd9c8e9224e237b.png',
           videoUrl : 'http://7z2dc9.com1.z0.glb.clouddn.com/apicloud/abb9595e74647defe21d748e12f7a7c9.mp4',
@@ -87,7 +87,7 @@ UIScrollPlayer.open({
       // });
 
   });
-  UIScrollPlayer.play();
+  // UIScrollPlayer.play();
   // demo.addEventListener(function(ret, err){
   //   console.log(JSON.stringify(ret))
   // })
