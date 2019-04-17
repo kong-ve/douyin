@@ -81,7 +81,6 @@
         .swipe-box>#fixmessage_info>.username {
             margin: 0;
             float: right;
-            margin-right: 0.25em;
             margin-bottom: 2em;
             right: 0;
             z-index: 11;
@@ -431,7 +430,7 @@
     </div>
     <div class="ui-transfer-dom ui-mask share_mask page-e4cd19 show blur-light-android" style="top: 0px; visibility: visible;display:none;" id="share">
         <div class="column_wrap active ui-view" >
-            <div ui:for-index="index" class="column_content ui-view" style="animation-duration: 0.1s;" onclick="shareTo('facebook')">
+            <div ui:for-index="index" class="column_content ui-view" style="animation-duration: 0.1s;"  onclick="shareTos('facebook')">
                 <div class="ui-view">
                     <div class="ui-view" style="background-color: rgb(65, 196, 81);"><i class="iconfont icon-facebook-logo" style="font-size: 30px; color: rgb(255, 255, 255);"></i></div>
                     <div class="ui-text">
@@ -441,7 +440,7 @@
                     </div>
                 </div>
             </div>
-            <div ui:for-index="index" class="column_content ui-view" style="animation-duration: 0.2s;" onclick="shareTo('googlePlus')">
+            <div ui:for-index="index" class="column_content ui-view" style="animation-duration: 0.2s;" onclick="shareTos('googlePlus')">
                 <div class="ui-view">
                     <div class="ui-view" style="background-color: rgb(65, 196, 81);"><i class="iconfont icon-IconGooglePlus" style="font-size: 30px; color: rgb(255, 255, 255);"></i></div>
                     <div class="ui-text">
@@ -459,7 +458,7 @@
                     </div>
                 </div>
             </div> -->
-            <div ui:for-index="index" class="column_content ui-view" style="animation-duration: 0.4s;" onclick="shareTo('twitter')">
+            <div ui:for-index="index" class="column_content ui-view" style="animation-duration: 0.4s;" onclick="shareTos('twitter')">
                 <div class="ui-view">
                     <div class="ui-view" style="background-color: rgb(245, 59, 67);"><i class="iconfont icon-twitter" style="font-size: 30px; color: rgb(255, 255, 255);"></i></div>
                     <div class="ui-text">
@@ -468,7 +467,7 @@
                     </div>
                 </div>
             </div>
-            <div ui:for-index="index" class="column_content ui-view" style="animation-duration: 0.5s;"onclick="shareTo('instagram')">
+            <div ui:for-index="index" class="column_content ui-view" style="animation-duration: 0.5s;"onclick="shareTos('instagram')">
                 <div class="ui-view">
                     <div class="ui-view" style="background-color: rgb(245, 59, 67);"><i class="iconfont icon-instagram" style="font-size: 30px; color: rgb(255, 255, 255);"></i></div>
                     <div class="ui-text">
@@ -514,7 +513,11 @@
         uid: new Date().getTime() + 5,
         imageUrl: 'http://7z2dc9.com1.z0.glb.clouddn.com/apicloud/51fc1ddde9790c96a6986b74342a15e3.png',
         videoUrl: '../res/src/test.mp4',
-    }];
+    },{
+            uid:new Date().getTime() + 6,
+            imageUrl:'',
+            videoUrl:'http://ppu6dk2m3.bkt.clouddn.com/test.mp4',
+          }];
     var page = 0;
     userData.map(function(v, i) {
         var el = document.createElement('div');
@@ -585,17 +588,7 @@
     //     document.getElementById(v.uid).paused();
     //   })
 
-    document.getElementById(userData[0].uid).play();
-    console.log('playing');
-    // document.getElementById(userData[0].uid).currentTime = 0;
-    // },2000)
-    userData.map(function(v, i) {
-            if (i != 0)
-                document.getElementById(v.uid).play();
-        })
-        //
-        //
-    document.getElementById(userData[0].uid).muted = false;
+
     slip = Slip(container, 'y').webapp(pages);
 
     // if (checkPC()) {
@@ -625,11 +618,18 @@
         }
         return flag;
     }
+    document.getElementById(userData[0].uid).play();
+    console.log('playing');
+            userData.map(function(v, i) {
+            if (i != 0)
+                document.getElementById(v.uid).play();
+        })
     apiready = function() {
         api.parseTapmode();
         var header = $api.byId('aui-header');
         $api.fixStatusBar(header);
 
+        document.getElementById(userData[0].uid).muted = false;
         slip.start(function(event) {
 
                 page = this.page;
@@ -668,15 +668,16 @@
                     document.getElementById(userData[page].uid).pause();
                     page = this.page;
 
-                    if (document.getElementById(userData[this.page].uid).muted == true)
+                    if (document.getElementById(userData[this.page].uid).muted == true){
                         document.getElementById(userData[this.page].uid).currentTime = 0;
+                        document.getElementById(userData[this.page].uid).muted = false;
+                      }
                     // document.getElementById(userData[this.page].uid).pause();
-                    document.getElementById(userData[this.page].uid).muted = false;
                     // document.getElementById(userData[this.page].uid).pause();
                     document.getElementById(userData[this.page].uid).play();
+                  pages[this.page].querySelector('.play-video').className = 'play-video hide-video icon iconfont icon-play';
 
-                }
-
+              }
 
             });
 
@@ -693,25 +694,28 @@
         }
     }
 
-    function shareTo(id) {debugger
-
+    function shareTos(id) {debugger
+  document.getElementById(userData[page].uid).pause();
         var mobSharePlus = api.require('mobSharePlus');
         console.log(id);
+        console.log(JSON.stringify(mobSharePlus))
         mobSharePlus.shareTo({
-            target: 'twitter',
+            target: id,
             title: '北京新鲜事',
-            titleUrl: 'http://www.apicloud.com',
+            titleUrl: 'https://www.apicloud.com',
             text: '这里是测试的内容',
             imgPaths: [userData[page].imageUrl],
-            url: 'http://www.apicloud.com',
+            url: 'https://www.apicloud.com',
         }, function(ret, err) {
-            console.log(JSON.stringify(ret + ',' + err))
+            console.log(JSON.stringify(ret))
+            console.log(JSON.stringify(err))
             if (ret.status) {
                 api.alert({
                     msg: JSON.stringify(ret)
                 });
             }
         })
+          document.getElementById(userData[page].uid).play();
     }
 
     function switchLoading(obj, url, text) {

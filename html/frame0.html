@@ -7,18 +7,37 @@
     <title>云API</title>
     <link rel="stylesheet" type="text/css" href="../css/api.css"/>
     <link rel="stylesheet" type="text/css" href="../css/style.css"/>
+    <link rel="stylesheet" type="text/css" href="../feature/fonts/iconfont.css" />
     <style>
         .empty{ text-align: center; padding: 120px 0; }
         #main{
           position: fixed;
           z-index:auto;
         }
+
+                .btnbox {
+                    background-color: #45ddd2;
+                    color: #fff;
+                    width: 48px;
+                    height: 48px;
+                    border-radius: 50%;
+                    line-height: 48px;
+                    text-align: center;
+                    visibility: inherit;
+                }
     </style>
 </head>
 <body>
     <!-- <div class="empty">云API</div> -->
-    <div id="main" class="flex-con">
-      <button class="action_tou">man</button>
+    <div id="shareBtn" style="z-index:1000;position: fixed !important;right:10px;bottom:17rem" onclick="openShare()">
+        <div class="btnbox">
+            <i class="icon iconfont icon-fenxiang11" color="#fff" size="24"></i>
+        </div>
+    </div>
+    <div id="sellBtn" style="z-index:999;position: fixed !important;right:10px;bottom:21rem">
+        <div class="btnbox">
+            <i class="icon iconfont icon-daifukuan" size="24"></i>
+        </div>
     </div>
 </body>
 </html>
@@ -28,10 +47,11 @@
     api.parseTapmode();
     // var main = $api.byId('main');
     // console.log(JSON.stringify(main));
-    var demo = api.require('scrollVideo');
+    var UIScrollPlayer = api.require('UIScrollPlayer');
+
     var param = api.pageParam;
     // console.log(JSON.stringify(param));
-  demo.openScrollVideo({
+UIScrollPlayer.open({
       rect : {
           x : 0,
           y : param.top,
@@ -41,50 +61,46 @@
           uid : new Date().getTime()+1,
           imageUrl :'http://7z2dc9.com1.z0.glb.clouddn.com/apicloud/bc281dfcaf750de7acd9c8e9224e237b.png',
           videoUrl : 'http://7z2dc9.com1.z0.glb.clouddn.com/apicloud/abb9595e74647defe21d748e12f7a7c9.mp4',
+          isLocalCache :true
       },{
           uid : new Date().getTime()+2,
           imageUrl :'http://7z2dc9.com1.z0.glb.clouddn.com/apicloud/1a73dd6a90a52b2aad1aafefbf977e4c.png',
           videoUrl : 'http://7z2dc9.com1.z0.glb.clouddn.com/apicloud/00b2141bff87cfaa75498f66214aeb9e.mp4',
+          isLocalCache :true
       },{
           uid : new Date().getTime()+3,
           imageUrl :'http://7z2dc9.com1.z0.glb.clouddn.com/apicloud/ec65083dbdc6bb18a6318591ac6c15a5.png',
           videoUrl : 'http://7z2dc9.com1.z0.glb.clouddn.com/apicloud/9d9906ba474152307d7edca6bd72fbe2.mp4',
+          isLocalCache :true
       },{
           uid : new Date().getTime()+4,
           imageUrl :'http://7z2dc9.com1.z0.glb.clouddn.com/apicloud/51fc1ddde9790c96a6986b74342a15e3.png',
           videoUrl : 'http://7z2dc9.com1.z0.glb.clouddn.com/apicloud/dc811d2c4d88b409063c7ea2065fe6a0.mp4',
+          isLocalCache :true
       },{
           uid : new Date().getTime()+5,
           imageUrl :'http://7z2dc9.com1.z0.glb.clouddn.com/apicloud/51fc1ddde9790c96a6986b74342a15e3.png',
           videoUrl : 'http://7z2dc9.com1.z0.glb.clouddn.com/apicloud/dc811d2c4d88b409063c7ea2065fe6a0.mp4',
+          isLocalCache :true
       }],
   },function(ret, err){
-    // console.log(JSON.stringify(ret)+"   "+JSON.stringify(err))
+    console.log(JSON.stringify(ret)+"   "+JSON.stringify(err))
       // alert(JSON.stringify(ret)+"   "+JSON.stringify(err));
-      demo.showScrollVideo(function(ret,err){
-          console.log(JSON.stringify(ret,err));
-      });
-      demo.play(function(ret,err){
-        console.log(JSON.stringify(ret,err));
-      });
+      // demo.showScrollVideo(function(ret,err){
+      //     console.log(JSON.stringify(ret,err));
+      // });
+
   });
+  UIScrollPlayer.play();
   // demo.addEventListener(function(ret, err){
   //   console.log(JSON.stringify(ret))
   // })
 //   demo.pause(function(ret,err){
 //     // console.log(JSON.stringify(ret,err));
 // });
-// demo.play(function(ret,err){
-//   // console.log(JSON.stringify(ret,err));
+// UIScrollPlayer.play(function(ret,err){
+//   console.log(JSON.stringify(ret,err));
 // });
-api.openFrame({
-  name:'videomsg',
-  url: 'html/video_msg.html',
-  rect: {
-      x: api.frameWidth - 50,
-
-  },
-})
   }
 
 </script>

@@ -33,14 +33,10 @@
 	<permission name="internet" />
 	<permission name="bootCompleted" />
 	<permission name="hardware" />  <preference name="querySchemes" value="facebook,twitter,googlePlus,instagram,line,google"/>  <feature name="mobSharePlus">
-      <param name="android_api_key" value="2aac6573a8248"/>
-      <param name="android_api_secret" value="ce4c8eaca4542b6578b04c6fc6886c02"/>
-      <param name="ios_api_key" value="2aac6573a8248"/>
-      <param name="ios_api_secret" value="ce4c8eaca4542b6578b04c6fc6886c02"/>
-      <param name="android_api_key" value="2aac6573a8248"/>
-      <param name="android_api_secret" value="ce4c8eaca4542b6578b04c6fc6886c02"/>
-      <param name="apiKey" value="2aac6573a8248"/>
-      <param name="apiSecret" value="ce4c8eaca4542b6578b04c6fc6886c02"/>
+      <param name="android_api_key" value="2ad9c4733ffa5"/>
+      <param name="android_api_secret" value="c3e6c7fbbdeb5d3b045e9ec738cf99b1"/>
+      <param name="ios_api_key" value="2ad9c4733ffa5"/>
+      <param name="ios_api_secret" value="c3e6c7fbbdeb5d3b045e9ec738cf99b1"/>
       <param name="urlScheme" value="fb2260718420859070"/>
       <!-- <param name="KAKAO_APP_KEY" value="48d3f524e4a636b08d81b3ceb50f1003"/> -->
       <!-- 如果使用Android QQ或QZone 还需要如下配置否则无法正确回调 其中tencent后面为appId-->

@@ -1,10 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
-<dict>
-    <key>MOBAppKey</key>
-    <string>2aac6573a8248</string>
-    <key>MOBAppSecret</key>
-    <string>ce4c8eaca4542b6578b04c6fc6886c02</string>
-</dict>
+    <dict>
+        <key>MOBAppKey</key>
+        <string>2ad9c4733ffa5</string>
+        <key>MOBAppSecret</key>
+        <string>c3e6c7fbbdeb5d3b045e9ec738cf99b1</string>
+        <key>Allow Arbitrary Loads</key>
+        <Boolean>YES</Boolean>
+        <key>LSApplicationQueriesSchemes</key>
+        <Array>
+            <!-- Google+ -->
+            <string >googlechrome</string>
+            <string >googlechrome-x-callback</string>
+            <string >hasgplus4</string>
+            <string >com.google.gppconsent</string>
+            <string >com.google.gppconsent.2.2.0</string>
+            <string >com.google.gppconsent.2.3.0</string>
+            <string >com.google.gppconsent.2.4.0</string>
+            <string >com.google.gppconsent.2.4.1</string>
+              <!-- facebook -->
+            <string >fbauth2</string>
+            <string >fbauth</string>
+              <!-- instagram -->
+            <string >instagram</string>
+            <!-- line -->
+            <string >line</string>
+            <string >lineauth</string>
+            <string >line3rdp.$(PRODUCT_BUNDLE_IDENTIFIER)</string>
+            <!-- youtube -->
+            <string >youtube</string>
+            <!-- whatsapp -->
+            <string >whatsapp</string>
+        </Array>
+    </dict>
 </plist>

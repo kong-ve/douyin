@@ -2,12 +2,13 @@
    <security>
      <item name="mobSharePlus_facebook_apiKey" value="2260718420859070"/>
      <item name="mobSharePlus_facebook_apiSecret" value="01c490483c34289ce857adbb6229e88e"/>
+     <item name="mobShare_facebook_registUrl" value="http://www.apicloud.com"/>
      <item name="mobSharePlus_googlePlus_apiKey" value=""/>
-     <item name="mobSharePlus_instagram_apiKey" value=""/>
+     <item name="mobSharePlus_instagram_apiKey" value="31892e26dd3c42e3b4566601e967c856"/>
      <item name="mobSharePlus_twitter_apiKey" value="" />
      <item name="mobSharePlus_whatsApp_apiKey" value=""/>
      <item name="mobSharePlus_googlePlus_apiSecre" value=""/>
-     <item name="mobSharePlus_instagram_apiSecre" value=""/>
+     <item name="mobSharePlus_instagram_apiSecre" value="cfdf4926c90d440591997817bde25fec "/>
      <item name="mobSharePlus_twitter_apiSecre" value="" />
      <item name="mobSharePlus_whatsApp_apiSecre" value=""/>
    <item name="mobSharePlus_mail_apiKey" value="none"/>
